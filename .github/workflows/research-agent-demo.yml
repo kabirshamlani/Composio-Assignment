@@ -1,0 +1,57 @@
+name: Research agent demo (one app, live)
+
+# Manually triggered demo: runs the actual research agent on one app ID with
+# live web search, validates the output against the schema and evidence
+# policy, and uploads the resulting JSON as an artifact. The run log is
+# public, so reviewers can watch the agent work end to end.
+#
+# Requires the ANTHROPIC_API_KEY repository secret. Without it, the run
+# explains what it would have done and still executes the deterministic
+# validation stages so the pipeline itself is demonstrated.
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_id:
+        description: "App ID to research (1-100)"
+        required: true
+        default: "60"
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Stage 0 — input gate
+        run: python3 src/validate_input.py
+      - name: Run the research agent on app ${{ inputs.app_id }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::notice::ANTHROPIC_API_KEY secret not set — skipping the live agent call."
+            echo "With a key, this step runs: python3 src/standalone_agent.py --ids ${{ inputs.app_id }}"
+            echo "It performs live web research of the app's official docs and writes"
+            echo "schema-validated JSON to data/first_pass/apps/, which the next steps validate."
+          else
+            python3 src/standalone_agent.py --ids "${{ inputs.app_id }}"
+          fi
+      - name: Validate agent output (schema + evidence policy + risk)
+        run: python3 src/validate_results.py
+      - name: Show the researched record
+        run: |
+          printf -v padded '%03d' "${{ inputs.app_id }}"
+          cat "data/first_pass/apps/${padded}.json"
+      - name: Upload researched record as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ inputs.app_id }}-research
+          path: data/first_pass/apps/*.json
+          retention-days: 30

@@ -1,0 +1,59 @@
+name: Rebuild case study & deploy to Pages
+
+# Every push publicly re-runs the deterministic pipeline (input gate, schema +
+# evidence validation, metrics) and re-renders the page from the data before
+# deploying — so the deployed HTML is provably reproducible from the repo.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Stage 0 — input gate (100 apps, hashed)
+        run: python3 src/validate_input.py
+      - name: Schema + evidence-policy validation over all rows
+        run: python3 src/validate_results.py
+      - name: Recompute every metric from the verified dataset
+        run: python3 src/metrics.py
+      - name: Render the page from template + data
+        run: python3 src/render.py
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
+          mkdir -p _site/web
+          cp web/index.html _site/web/index.html
+      - uses: actions/configure-pages@v4
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
