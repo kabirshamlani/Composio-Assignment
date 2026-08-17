@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Evidence-first research of 100 apps for agent toolkit buildability: auth, credential access, API surface, MCP availability — every claim cited, independently verified.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0e14'/%3E%3Cpath d='M8 22 L14 9 L20 22 M11.4 17 L16.6 17' stroke='%233fdc97' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='24' cy='11' r='3' fill='%236aa6ff'/%3E%3C/svg%3E">
 <title>Agent Toolkit Research — 100 Apps, Evidence-First</title>
 <style>
 :root{
@@ -74,6 +76,8 @@ nav a{color:var(--dim);font-size:13px}
 .controls input,.controls select{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 12px;font-size:13.5px;outline:none}
 .controls input{flex:1;min-width:220px}
 .controls input:focus,.controls select:focus{border-color:var(--blue)}
+.controls button{background:var(--panel);border:1px solid var(--line);color:var(--dim);border-radius:8px;padding:8px 14px;font-size:12.5px;font-family:var(--mono);cursor:pointer;white-space:nowrap}
+.controls button:hover{color:var(--text);border-color:var(--faint)}
 .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:1000px}
 thead th{position:sticky;top:0;background:var(--panel2);color:var(--dim);text-align:left;padding:10px 12px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
@@ -151,6 +155,8 @@ footer{padding:34px 0 60px;border-top:1px solid var(--line);color:var(--faint);f
     <select id="f-cat" aria-label="Filter by category"></select>
     <select id="f-bucket" aria-label="Filter by bucket"></select>
     <select id="f-auth" aria-label="Filter by primary auth"></select>
+    <button id="dl-json" title="Download the verified dataset (respects active filters)">↓ JSON</button>
+    <button id="dl-csv" title="Download a flat CSV (respects active filters)">↓ CSV</button>
   </div>
   <div class="count" id="rowcount"></div>
   <div class="tblwrap"><table id="tbl">
@@ -232,7 +238,7 @@ const stats = [
   {n:fb["READY — SELF-SERVE"]||0, l:"buildable now, self-serve credentials", c:"green"},
   {n:fb["READY — GATED"]||0, l:"technically ready, commercially gated", c:"amber"},
   {n:fb["PARTIAL"]||0, l:"partial: narrow or read-only APIs", c:"blue"},
-  {n:(fb["NOT BUILDABLE"]||0)+(fb["UNKNOWN"]||0)+(fb["READY — ACCESS UNKNOWN"]||0), l:"not buildable / needs more evidence", c:"red"},
+  {n:(fb["NOT BUILDABLE"]||0)+(fb["UNKNOWN"]||0)+(fb["READY — ACCESS UNKNOWN"]||0), l:"not buildable (local CLIs, no hosted API)", c:"red"},
 ];
 $("#statgrid").innerHTML = stats.map(s=>`<div class="stat ${s.c}"><div class="n">${s.n}</div><div class="l">${esc(s.l)}</div></div>`).join("");
 
@@ -286,8 +292,9 @@ $("#cluster-cards").innerHTML = CINFO.map(([k,c,t,d])=>{
 
 // table
 const fills = (sel,vals,label)=>{ $(sel).innerHTML = `<option value="">${label}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join(""); };
+const BUCKET_ORDER = ["READY — SELF-SERVE","READY — GATED","PARTIAL","NOT BUILDABLE","READY — ACCESS UNKNOWN","UNKNOWN"];
 fills("#f-cat",[...new Set(APPS.map(a=>a.category))],"All categories");
-fills("#f-bucket",[...new Set(APPS.map(a=>a.final_bucket))],"All buckets");
+fills("#f-bucket",BUCKET_ORDER.filter(b=>APPS.some(a=>a.final_bucket===b)),"All buckets");
 fills("#f-auth",[...new Set(APPS.map(a=>a.primary_auth))].sort(),"All auth");
 let sortK="app_id", sortDir=1;
 
@@ -345,6 +352,28 @@ document.querySelectorAll("thead th").forEach(th=>th.addEventListener("click",()
   const k=th.dataset.k; if(k==="mcp")return;
   if(sortK===k)sortDir*=-1; else {sortK=k;sortDir=1;} render();
 }));
+function filteredRows(){
+  const q=$("#q").value.toLowerCase(), fc=$("#f-cat").value, fbv=$("#f-bucket").value, fa=$("#f-auth").value;
+  return APPS.filter(a=>
+    (!fc||a.category===fc)&&(!fbv||a.final_bucket===fbv)&&(!fa||a.primary_auth===fa)&&
+    (!q||JSON.stringify(a).toLowerCase().includes(q)));
+}
+function download(name, mime, text){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type:mime})); a.download=name; a.click();
+  URL.revokeObjectURL(a.href);
+}
+$("#dl-json").addEventListener("click",()=>{
+  download("apps.verified.json","application/json",JSON.stringify(filteredRows(),null,1));
+});
+$("#dl-csv").addEventListener("click",()=>{
+  const cols=["app_id","name","category","description","primary_auth","auth_methods","access",
+    "api_breadth","api_protocols","mcp_status","supports_webhooks","technical_verdict",
+    "primary_blocker","final_bucket","confidence","verification_status"];
+  const cell=v=>{const s=Array.isArray(v)?v.join("; "):String(v??"");return /[",\n]/.test(s)?'"'+s.replaceAll('"','""')+'"':s;};
+  const csv=[cols.join(",")].concat(filteredRows().map(a=>cols.map(c=>cell(a[c])).join(","))).join("\n");
+  download("apps.verified.csv","text/csv",csv);
+});
 function jumpTo(id){
   ["#q","#f-cat","#f-bucket","#f-auth"].forEach(s=>$(s).value="");
   render();
