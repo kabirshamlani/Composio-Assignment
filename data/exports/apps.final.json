@@ -1936,7 +1936,8 @@
   "access_notes": "Pumble states the API is publicly available to anyone on any subscription, including the free plan. Developers create an app (via workspace settings or the Pumble CLI) to get an app key and client secret, then use OAuth2 to issue user/bot access tokens. A simpler API-key addon can be installed to generate workspace API keys via /api-keys generate.",
   "api_protocols": [
    "rest",
-   "websocket"
+   "websocket",
+   "mcp"
   ],
   "api_breadth": "medium",
   "supports_webhooks": true,
@@ -2302,7 +2303,8 @@
   "access": "self_serve_trial",
   "access_notes": "Free self-serve signup issues an API key + secret immediately; new accounts get a small free trial credit (usage restricted to verified test numbers until a payment method is added). Usage is billed per-request/pay-as-you-go for production. JWTs (signed with a Vonage Application's private key) are required for webhook-capable APIs like Messages and Verify V2; key+secret can be sent Base64-encoded via Basic auth on newer APIs.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": true,
@@ -2385,7 +2387,8 @@
   "access_notes": "Signup is self-serve but production is gated by developer-token access levels: a new token gets Test Account Access (test accounts only, 15k ops/day); many tokens are auto-granted Explorer Access (production, but capped at 2,880 ops/day and excluding planning tools, account creation, billing). Basic Access (full features, 15k ops/day) requires an application reviewed by Google (~5 business days); Standard Access (unlimited) is a further review (~10 days). Also requires an OAuth client from Google Cloud plus a manager (MCC) account to hold the developer token.",
   "api_protocols": [
    "rest",
-   "grpc"
+   "grpc",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": false,
@@ -2467,7 +2470,8 @@
   "access": "sandbox_self_serve_production_gated",
   "access_notes": "Creating a Meta app and calling the Marketing API against your own ad account is self-serve (standard access to ads_read/ads_management; new apps get the 'Limited Access' Marketing API tier by default, described as development access with heavy rate limits). Production/scale is gated: managing other people's ad accounts requires Advanced Access via App Review + business verification, and the 'Full Access' Marketing API tier requires 500+ successful API calls in the past 15 days with <15% error rate.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": true,
@@ -2706,7 +2710,8 @@
   "access": "self_serve_free",
   "access_notes": "Any Mailchimp account holder can generate API keys self-serve (Profile > Extras > API keys); a free plan exists so credentials cost nothing. API keys are used via HTTP Basic auth (any username, key as password). For multi-tenant integrations Mailchimp directs developers to OAuth 2 - app registration is self-serve in-account, no partner approval needed to obtain client_id/secret. What the API can do depends on the account's plan level.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": true,
@@ -3452,7 +3457,8 @@
   "access_notes": "Magento Open Source is free and self-hostable; admins mint admin/customer bearer tokens from the token service (POST /V1/integration/admin/token) or create Integrations in the Admin that yield OAuth 1.0a consumer key/secret + access token (HMAC-SHA256-signed requests). Adobe Commerce (incl. Adobe Commerce as a Cloud Service, which authenticates via Adobe IMS OAuth) is an enterprise-sales product. Integrating with a given store always requires that store's admin.",
   "api_protocols": [
    "rest",
-   "graphql"
+   "graphql",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": true,
@@ -3766,7 +3772,8 @@
   "access": "production_approval",
   "access_notes": "Developers must submit a developer profile (Solution Provider Portal or Seller Central) that Amazon reviews and approves before API access; restricted roles (PII) trigger a more rigorous audit. Public apps then use Login with Amazon OAuth per selling partner; private apps can self-authorize. A sandbox exists but production access is gated on the registration review.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": true,
@@ -3833,7 +3840,8 @@
   "access": "self_serve_free",
   "access_notes": "API keys are generated from the API Keys section of the Commas (fanbasis) seller dashboard; keys carry scopes (checkout-sessions, refunds, payments, webhooks, customers, subscriptions). A full sandbox environment (qa.dev-fan-basis.com) with test API keys is documented. No developer application process is mentioned in the docs.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "medium",
   "supports_webhooks": true,
@@ -3909,7 +3917,8 @@
   "access": "self_serve_trial",
   "access_notes": "Free account signup issues API login/password immediately (API Access tab in dashboard); a small trial credit (~$1, about 500 SERP Live Advanced calls) is included, then pay-as-you-go top-ups from the Billing tab. Basic Authentication is the only auth method.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": true,
@@ -3982,7 +3991,8 @@
   "access": "self_serve_trial",
   "access_notes": "A single API key (Authorization: Token <key>, or apikey query param) is generated in the account dashboard and 'included in every SE Ranking plan'; the vendor states the API can be tested in the free trial account. Data API usage is billed in credits (plan allowance, PAYG packs from $50, or standalone annual API plans); Project API endpoints require a Business/Enterprise-tier subscription (403 'Subscription required' otherwise).",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "broad",
   "supports_webhooks": null,
@@ -4031,6 +4041,20 @@
     ],
     "url": "https://seranking.com/api/integrations/mcp/",
     "note": "Official SE Ranking API documentation page for the MCP Server (setup instructions for connecting AI clients to the hosted vendor MCP)"
+   },
+   {
+    "claims": [
+     "access"
+    ],
+    "url": "https://seranking.com/api/how-to-get-api/",
+    "note": "verifier-supplied evidence: The access class is correct: self-serve free trial, no credit card, 'API access is included in every SE Ranking plan... You can even test it in the free trial account', and the trial now includes 100K"
+   },
+   {
+    "claims": [
+     "api"
+    ],
+    "url": "https://seranking.com/mcp.html",
+    "note": "verifier-supplied evidence: REST is confirmed (base https://api.seranking.com/v1, JSON responses, up to 10 req/s). But the list omits MCP even though the same draft asserts an official vendor-hosted MCP server, and sibling draft"
    }
   ],
   "final_bucket": "READY \u2014 SELF-SERVE",
@@ -4056,7 +4080,8 @@
   "access": "self_serve_paid",
   "access_notes": "API v3 requires a paid Ahrefs subscription (Lite/Standard/Advanced/Enterprise each include a monthly API-unit allowance; keys created self-serve in Account Settings > API Keys and sent as 'Authorization: Bearer'). Only Enterprise can buy extra units/overages. Building a public third-party integration via Ahrefs Connect uses OAuth 2.0 and requires an Enterprise plan to activate in production (free during development). Four free public endpoints exist without a subscription.",
   "api_protocols": [
-   "rest"
+   "rest",
+   "mcp"
   ],
   "api_breadth": "medium",
   "supports_webhooks": null,

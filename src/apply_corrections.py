@@ -48,9 +48,9 @@ def main() -> int:
                 stats["fields_partial"] += 1
             else:
                 stats["fields_other"] += 1
-            if (v == "PARTIALLY_SUPPORTED" and fr.get("replacement_evidence")
-                    and fr.get("corrected_value") is None):
-                # Value was right but under-evidenced: attach the verifier's URL.
+            if v == "PARTIALLY_SUPPORTED" and fr.get("replacement_evidence"):
+                # Value was right but under-evidenced or note-level imprecise:
+                # attach the verifier's URL (and its clarification via the note).
                 app["evidence"].append({
                     "claims": [fr["field"].split("_")[0] if fr["field"] != "technical_verdict" else "verdict"],
                     "url": fr["replacement_evidence"],
@@ -82,6 +82,16 @@ def main() -> int:
                     "note": f"verifier correction: {fr['reason'][:200]}",
                 })
 
+    # Normalize a cross-row invariant: a row claiming an official vendor MCP
+    # exposes MCP as a protocol. Researchers applied this inconsistently
+    # (70/81 rows did, 11 didn't); the value is derivable, so code owns it.
+    normalized = 0
+    for app in apps.values():
+        if ("official_vendor_mcp" in (app.get("mcp_status") or [])
+                and "mcp" not in (app.get("api_protocols") or [])):
+            app["api_protocols"] = (app.get("api_protocols") or []) + ["mcp"]
+            normalized += 1
+
     # Recompute derived fields on all rows (corrected or not).
     finals = []
     for app in apps.values():
@@ -102,6 +112,7 @@ def main() -> int:
     print(f"fields reviewed: {stats['fields_reviewed']}, supported: {stats['fields_supported']},"
           f" contradicted: {stats['fields_contradicted']}, partial: {stats['fields_partial']}")
     print(f"corrections applied: {len(ledger)}")
+    print(f"protocol invariant normalized (vendor MCP -> protocols include mcp): {normalized}")
     return 0
 
 
