@@ -109,6 +109,18 @@ ul.tight b{color:var(--text)}
 .acc .n{font-size:30px;font-weight:700;font-family:var(--mono)}
 .acc .l{font-size:12px;color:var(--dim)}
 .acc .d{font-size:11px;color:var(--faint);font-family:var(--mono)}
+.demo-form{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 12px}
+.demo-form input,.demo-form select{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:9px 12px;font-size:13.5px;outline:none}
+.demo-form input:focus,.demo-form select:focus{border-color:var(--blue)}
+.demo-form .key{flex:2;min-width:260px;font-family:var(--mono)}
+.demo-form button{background:var(--green);color:#08130d;border:0;border-radius:8px;padding:9px 20px;font-size:13.5px;font-weight:600;cursor:pointer}
+.demo-form button:disabled{opacity:.45;cursor:default}
+.console{background:#070a10;border:1px solid var(--line);border-radius:10px;padding:14px;font-family:var(--mono);font-size:12px;line-height:1.75;height:300px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;color:var(--dim)}
+.console .c-search{color:var(--blue)} .console .c-ok{color:var(--green)}
+.console .c-err{color:var(--red)} .console .c-txt{color:var(--text)}
+.demo-out{margin-top:14px;display:none}
+.demo-out pre{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:14px;font-family:var(--mono);font-size:12px;overflow-x:auto;max-height:340px;overflow-y:auto}
+.keynote{font-size:12.5px;color:var(--faint);margin-top:8px;max-width:820px}
 footer{padding:34px 0 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
 @media(max-width:720px){.bar .lbl{flex-basis:120px}}
 </style>
@@ -119,7 +131,7 @@ footer{padding:34px 0 60px;border-top:1px solid var(--line);color:var(--faint);f
   <div class="brand"><b>agent-toolkit research</b> · evidence-first pipeline · <span id="hdr-date"></span></div>
   <nav>
     <a href="#patterns">Patterns</a><a href="#clusters">Clusters</a><a href="#matrix">All apps</a>
-    <a href="#agent">The agent</a><a href="#verification">Verification</a><a href="#proof">Proof</a><a href="#method">Method</a>
+    <a href="#agent">The agent</a><a href="#verification">Verification</a><a href="#proof">Proof</a><a href="#demo">Live demo</a><a href="#method">Method</a>
   </nav>
 </header>
 
@@ -199,6 +211,26 @@ footer{padding:34px 0 60px;border-top:1px solid var(--line);color:var(--faint);f
     </div>
     <div class="card"><h3>What you can inspect right now</h3><ul class="tight" id="proof-artifacts"></ul></div>
   </div>
+</section>
+
+<section id="demo">
+  <div class="kicker">Live demo</div>
+  <h2>Watch the research agent work — in your browser</h2>
+  <p class="sub">Pick any of the 100 apps (or type your own), paste an Anthropic API key, and the actual research agent runs right here: live web search over official docs, then a schema-checked JSON record — the same task, prompt rules and taxonomy the pipeline used. This page has no backend: the key goes from your browser straight to <code>api.anthropic.com</code> and nowhere else. Nothing is stored.</p>
+  <div class="demo-form">
+    <input class="key" id="demo-key" type="password" placeholder="Anthropic API key (sk-ant-…) — never leaves your browser" autocomplete="off" spellcheck="false">
+    <select id="demo-app" aria-label="Choose an app to research"></select>
+    <input id="demo-custom" type="text" placeholder="Custom app name" style="display:none;min-width:180px">
+    <button id="demo-run">Run agent</button>
+  </div>
+  <div class="console" id="demo-console">— agent console: idle. Select an app, paste a key, hit Run. —</div>
+  <div class="demo-out" id="demo-out">
+    <h3 style="margin:14px 0 6px">Agent output <span class="badge" id="demo-schema"></span></h3>
+    <div id="demo-fields" style="margin:8px 0"></div>
+    <pre id="demo-json"></pre>
+    <p class="keynote">In the full pipeline this record would now pass the deterministic validators (schema, evidence policy), get a code-derived risk score and reviewer bucket, and — if risky — be re-researched by an independent adversarial verifier. The reviewer bucket is never chosen by the model.</p>
+  </div>
+  <p class="keynote">No key handy? The same agent runs as a public GitHub Actions workflow ("Research agent demo") in the source repo — trigger it with any app ID and read the run log — or clone the repo and use the commands above.</p>
 </section>
 
 <section id="method">
@@ -409,6 +441,134 @@ $("#misses").innerHTML = DATA.corrections.slice(0,50).map(c=>
 $("#proof-sub").innerHTML = N.proof_sub;
 $("#proof-cmd").textContent = N.proof_cmd;
 $("#proof-artifacts").innerHTML = N.proof_artifacts.map(x=>`<li>${x}</li>`).join("");
+
+// live demo — the browser calls api.anthropic.com directly (official CORS
+// header for browser use); the key is read from the input per run, never stored.
+const ENUMS = {
+  primary_auth:["oauth2_authorization_code","oauth2_client_credentials","oauth2_device_code","api_key","personal_access_token","bearer_token","basic_auth","jwt","service_account","hmac_signature","session_cookie","none","custom","unknown"],
+  access:["self_serve_free","self_serve_trial","self_serve_paid","sandbox_self_serve_production_gated","admin_gated","enterprise_gated","production_approval","partner_gated","contact_sales","invite_only","no_credentials_required","unknown"],
+  api_breadth:["broad","medium","narrow","none","unknown"],
+  mcp:["official_vendor_mcp","official_composio_toolkit","official_platform_or_partner_mcp","reputable_community_mcp","none_found","unknown"],
+  technical_verdict:["buildable_now","partially_buildable","not_buildable","unknown"],
+  confidence:["high","medium","low"],
+};
+const DEMO_PROMPT = `You are an evidence-first API research agent. Research the app below using web search over OFFICIAL sources (developer docs, auth docs, pricing/access pages, vendor blogs, official GitHub orgs). Rules: never guess — "unknown" is a valid value; sandbox signup is NOT production access; a community MCP repo is NOT a vendor MCP; negative claims need a search behind them; every non-unknown claim about auth/access/api/mcp needs a real evidence URL you actually found.
+
+Output ONLY one JSON object (no fences, no commentary) with exactly these fields:
+name, category, official_domain, description (one line),
+auth_methods (array of: ${ENUMS.primary_auth.join(", ")}),
+primary_auth (one of the same),
+access (one of: ${ENUMS.access.join(", ")}),
+access_notes (short),
+api_protocols (array, e.g. rest/graphql/grpc/mcp),
+api_breadth (one of: ${ENUMS.api_breadth.join(", ")}),
+supports_webhooks (true/false/null),
+mcp_status (array of: ${ENUMS.mcp.join(", ")}),
+mcp_notes (short),
+technical_verdict (one of: ${ENUMS.technical_verdict.join(", ")}),
+primary_blocker (short snake_case or null),
+confidence (high/medium/low),
+evidence (array of {claims:[auth|access|api|mcp], url, note} — 2 to 5 entries).`;
+
+const dsel = $("#demo-app");
+dsel.innerHTML = APPS.map(a=>`<option value="${a.app_id}">${esc(a.app_id+" · "+a.name)}</option>`).join("")
+  + `<option value="custom">Custom app…</option>`;
+dsel.value = "60";
+dsel.addEventListener("input",()=>{ $("#demo-custom").style.display = dsel.value==="custom"?"":"none"; });
+
+const cons = $("#demo-console");
+function clog(txt, cls){ const s=document.createElement("span"); s.className=cls||""; s.textContent=txt+"\n"; cons.appendChild(s); cons.scrollTop=cons.scrollHeight; return s; }
+
+async function runDemo(){
+  const key = $("#demo-key").value.trim();
+  if(!key){ clog("✗ paste an Anthropic API key first (it is only sent to api.anthropic.com)","c-err"); return; }
+  let subject;
+  if(dsel.value==="custom"){
+    const n=$("#demo-custom").value.trim();
+    if(!n){ clog("✗ type a custom app name","c-err"); return; }
+    subject = `name=${n} | category=(reviewer-supplied) | hint=(none — find the official developer docs)`;
+  } else {
+    const a = byId[+dsel.value];
+    subject = `name=${a.name} | category=${a.category} | official domain hint=${a.official_domain}`;
+  }
+  const btn=$("#demo-run"); btn.disabled=true; $("#demo-out").style.display="none";
+  cons.textContent=""; clog("▸ starting research agent (claude-sonnet-4-5, live web search, max 8 searches)…");
+  clog("▸ subject: "+subject);
+  let finalText="", blocks={};
+  try{
+    const resp = await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"x-api-key":key,"anthropic-version":"2023-06-01",
+        "anthropic-dangerous-direct-browser-access":"true","content-type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-5",max_tokens:4000,stream:true,
+        tools:[{type:"web_search_20250305",name:"web_search",max_uses:8}],
+        messages:[{role:"user",content:DEMO_PROMPT+"\n\n---\nYour assigned app:\n"+subject+"\nResearch it now, then output ONLY the JSON object."}]})});
+    if(!resp.ok){ const e=await resp.json().catch(()=>({})); throw new Error(resp.status+" "+(e.error?.message||resp.statusText)); }
+    const reader=resp.body.getReader(), dec=new TextDecoder(); let buf="";
+    let textEl=null;
+    while(true){
+      const {done,value}=await reader.read(); if(done)break;
+      buf+=dec.decode(value,{stream:true});
+      const lines=buf.split("\n"); buf=lines.pop();
+      for(const line of lines){
+        if(!line.startsWith("data: "))continue;
+        let ev; try{ ev=JSON.parse(line.slice(6)); }catch{ continue; }
+        if(ev.type==="content_block_start"){
+          const b=ev.content_block; blocks[ev.index]={type:b.type,json:""};
+          if(b.type==="server_tool_use") blocks[ev.index].tool=b.name;
+          if(b.type==="web_search_tool_result"){
+            const n=Array.isArray(b.content)?b.content.length:"?";
+            clog("  ← "+n+" search results received","c-ok");
+          }
+        } else if(ev.type==="content_block_delta"){
+          const d=ev.delta, blk=blocks[ev.index]||{};
+          if(d.type==="input_json_delta") blk.json+=d.partial_json;
+          if(d.type==="text_delta"){
+            finalText+=d.text;
+            if(!textEl){ clog("▸ agent is writing the record…"); textEl=clog("","c-txt"); }
+            textEl.textContent=(finalText.length>500?"…":"")+finalText.slice(-500);
+            cons.scrollTop=cons.scrollHeight;
+          }
+        } else if(ev.type==="content_block_stop"){
+          const blk=blocks[ev.index];
+          if(blk?.tool==="web_search"){
+            let q=""; try{ q=JSON.parse(blk.json).query; }catch{}
+            clog("  → web_search: \""+(q||"…")+"\"","c-search");
+          }
+        } else if(ev.type==="error"){ throw new Error(ev.error?.message||"stream error"); }
+      }
+    }
+    clog("▸ stream complete — validating against the pipeline schema…");
+    const s=finalText.indexOf("{"), e=finalText.lastIndexOf("}");
+    if(s<0||e<0) throw new Error("no JSON object found in the agent output");
+    const rec=JSON.parse(finalText.slice(s,e+1));
+    const problems=[];
+    for(const f of ["name","description","primary_auth","access","api_breadth","mcp_status","technical_verdict","confidence","evidence"])
+      if(rec[f]===undefined) problems.push("missing field: "+f);
+    for(const [f,allowed] of [["primary_auth",ENUMS.primary_auth],["access",ENUMS.access],["api_breadth",ENUMS.api_breadth],["technical_verdict",ENUMS.technical_verdict],["confidence",ENUMS.confidence]])
+      if(rec[f]!==undefined && !allowed.includes(rec[f])) problems.push(f+" not in taxonomy: "+JSON.stringify(rec[f]));
+    (rec.mcp_status||[]).forEach(m=>{ if(!ENUMS.mcp.includes(m)) problems.push("mcp_status not in taxonomy: "+m); });
+    if(!Array.isArray(rec.evidence)||rec.evidence.length<1) problems.push("no evidence entries");
+    const badge=$("#demo-schema");
+    badge.textContent = problems.length? "schema: "+problems.length+" problem(s)":"schema: valid";
+    badge.className = "badge "+(problems.length?"red":"green");
+    if(problems.length) problems.forEach(p=>clog("  ✗ "+p,"c-err")); else clog("  ✓ record passes the schema + taxonomy check","c-ok");
+    $("#demo-fields").innerHTML =
+      `<span class="badge blue">${esc(pretty(rec.primary_auth||"?"))}</span> `+
+      `<span class="badge ${["self_serve_free","self_serve_trial","self_serve_paid","no_credentials_required"].includes(rec.access)?"green":"amber"}">${esc(pretty(rec.access||"?"))}</span> `+
+      `<span class="badge">${esc(rec.api_breadth||"?")} api</span> `+
+      `<span class="badge purple">${esc((rec.mcp_status||[]).map(pretty).join(" · ")||"mcp: ?")}</span> `+
+      `<span class="badge ${rec.technical_verdict==="buildable_now"?"green":rec.technical_verdict==="not_buildable"?"red":"amber"}">${esc(pretty(rec.technical_verdict||"?"))}</span>`+
+      ((rec.evidence||[]).length?`<div style="margin-top:8px">${rec.evidence.map(ev=>`<div class="ev"><span class="claims">[${(ev.claims||[]).map(esc).join(",")}]</span> <a href="${esc(ev.url)}" target="_blank" rel="noopener">${esc(ev.url)}</a><br><span class="note">${esc(ev.note||"")}</span></div>`).join("")}</div>`:"");
+    $("#demo-json").textContent = JSON.stringify(rec,null,1);
+    $("#demo-out").style.display="";
+    clog("▸ done.","c-ok");
+  }catch(err){
+    clog("✗ "+err.message,"c-err");
+    clog("  (common causes: invalid/expired key, no credit, or a network block — the key is only ever sent to api.anthropic.com)","");
+  }finally{ btn.disabled=false; }
+}
+$("#demo-run").addEventListener("click",runDemo);
 
 // methodology
 $("#method-evidence").innerHTML = N.method_evidence.map(x=>`<li>${x}</li>`).join("");
