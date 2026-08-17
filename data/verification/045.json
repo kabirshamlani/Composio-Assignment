@@ -1,0 +1,28 @@
+{
+  "app_id": 45,
+  "name": "Magento (Adobe Commerce)",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "hmac_signature", "verdict": "SUPPORTED",
+     "reason": "Fetched developer.adobe.com/commerce/webapi/get-started/authentication/ directly: third-party integrations use OAuth 1.0a with HMAC-signed requests (consumer key/secret + access token generated on integration activation), which is the documented path for external integrations; token-based bearer auth is positioned for mobile/registered-user clients."},
+    {"field": "auth_methods", "draft_value": ["bearer_token", "hmac_signature", "oauth2_authorization_code"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "bearer_token (admin/customer token services) and hmac_signature (OAuth 1.0a integrations) are directly confirmed on the live authentication page. oauth2_authorization_code applies only to Adobe Commerce as a Cloud Service via Adobe IMS, where the page points primarily to a server-to-server integration guide (client-credentials style) alongside a user IMS-token guide; the core Magento Open Source / PaaS platform has no OAuth 2.0 at all. The entry is defensible for SaaS user flows but is the weakest of the three.",
+     "replacement_evidence": "https://developer.adobe.com/commerce/webapi/get-started/authentication/"},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Magento Open Source is free and self-hostable, and the authentication docs confirm store admins mint tokens/integrations themselves (System > Extensions > Integration); no vendor gate for OSS. Adobe Commerce being enterprise-sales is correctly relegated to notes."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Value is correct - the REST API reference documents 'all available REST API endpoints in Adobe Commerce and Magento Open Source' spanning admin, customer and guest operations (catalog, orders, customers, inventory, carts), plus a full GraphQL schema - but the draft carried no evidence URL for the api claim, so replacement evidence was found.",
+     "replacement_evidence": "https://developer.adobe.com/commerce/webapi/rest/reference/"},
+    {"field": "api_protocols", "draft_value": ["rest", "graphql"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Value is correct but the draft had no evidence URL for it. The official getting-started page confirms 'Support for GraphQL, REST (Representational State Transfer) and SOAP' across Adobe Commerce and Magento Open Source; SOAP also exists but is legacy and outside the protocol enum, as the draft's uncertainty notes already acknowledged.",
+     "replacement_evidence": "https://developer.adobe.com/commerce/webapi/get-started/"},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Two-part claim re-verified. (1) The npm package @adobe-commerce/commerce-extensibility-tools exists (latest 3.5.0, Apache-2.0, 'mcp' keyword, maintainers with adobe.com emails - ownership verified via registry.npmjs.org), a shipped official vendor MCP for App Builder extensibility development. (2) The flagship Commerce MCP was announced at Adobe Summit (business.adobe.com blog, 2026-04-20) but the Experience League overview page (fetched live, updated June 17 2026) still carries a 'Coming Soon' badge - exactly as the draft's notes disclosed. official_vendor_mcp stands on the shipped npm server."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Free self-hosted Open Source plus self-serve admin tokens/integrations means an integration is buildable today against any store whose admin cooperates."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No vendor-side gate for the open-source platform; the per-store admin requirement is inherent to self-hosted software, not an access blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Main assignment was finding real evidence for the api claim that shipped without a URL: confirmed REST+GraphQL (and legacy SOAP) at developer.adobe.com/commerce/webapi/get-started/ and the full REST reference at /commerce/webapi/rest/reference/ - PARTIALLY_SUPPORTED with replacement evidence rather than contradiction, since the draft values were correct. Also fetched the draft's authentication evidence URL live (exists, matches) and re-verified both MCP claims including npm package ownership (adobe.com maintainer emails) and the 'Coming Soon' status of the Summit-announced Commerce MCP."
+}

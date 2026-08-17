@@ -1,0 +1,25 @@
+{
+  "app_id": 20,
+  "name": "Gladly",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "basic_auth", "verdict": "SUPPORTED",
+     "reason": "developer.gladly.com/rest/ (fetched live): 'Gladly API uses token-based Basic Authentication', credentials are agent email as username and API token as password in the Authorization header, HTTPS required."},
+    {"field": "auth_methods", "draft_value": ["basic_auth", "api_key"], "verdict": "SUPPORTED",
+     "reason": "The only documented scheme is an API token carried over HTTP Basic; tokens are created in-app by users with the API User permission and 'can be used to perform any API request without restriction'. The api_key/basic_auth pairing correctly describes credential type plus transport. (Public Answers API is the one unauthenticated exception, public content only.)"},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Correct for the core platform: gladly.com/pricing has only 'Get a demo' CTAs, no published pricing, no trial; third-party comparisons confirm demo-led sales (~$180/seat, 10-seat minimum). However, in 2026 Gladly launched a self-serve Shopify app (apps.shopify.com/gladly) with a 30-day free trial, no credit card, so 'no self-serve signup or public free trial' is no longer strictly true for that SMB product. Whether the Shopify tier grants REST API token access is undocumented, so contact_sales remains the right class for API access."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST reference covers customers, conversations, agents, tasks and task comments, freeform topics, exports, public answers, lookup adaptor and webhook management, with a large webhook event catalog (agent status, contacts, conversations, customer profiles, exports, tasks...)."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "REST over HTTPS at https://{organization}.gladly.com with JSON payloads; no GraphQL, gRPC or vendor MCP surface documented on developer.gladly.com."},
+    {"field": "mcp_status", "draft_value": ["none_found", "official_platform_or_partner_mcp"], "verdict": "SUPPORTED",
+     "reason": "Re-searched independently: no MCP server anywhere on developer.gladly.com or gladly.com. docs.composio.dev/toolkits/gladly returns 404 (re-confirmed today). StackOne's hosted Gladly MCP server (stackone.com/connectors/gladly/mcp/, 65 actions, 'Built by StackOne') exists and is clearly partner/aggregator-hosted, not vendor-official, matching the draft's classification."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Once an org exists, API tokens are self-serve in-app, the REST API is fully documented publicly (no login wall), and webhooks are supported; the constraint is commercial access, not technical capability."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "Platform access is demo/sales-led with no published pricing; this is the binding constraint on getting credentials, consistent with access=contact_sales."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently fetched developer.gladly.com/rest/ (draft evidence URL, live and matching on Basic auth, API User permission, webhooks), confirmed the Composio toolkit 404, the StackOne partner MCP (65 actions), and the demo-only core platform. One update the draft predates or omits: Gladly's Shopify App Store listing now offers a self-serve 30-day free trial for an SMB-oriented AI product, so the access story has a narrow self-serve side door, though REST API access through it is unverified; hence access is PARTIALLY_SUPPORTED rather than contradicted."
+}

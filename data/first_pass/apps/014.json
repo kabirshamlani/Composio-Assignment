@@ -1,0 +1,27 @@
+{
+  "app_id": 14,
+  "name": "Front",
+  "category": "Support and Helpdesk",
+  "official_domain": "front.com",
+  "description": "Support and Helpdesk: shared-inbox customer communication platform combining email, messaging channels and team collaboration.",
+  "auth_methods": ["bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Self-serve product trial, plus free developer accounts offered via the developer portal for building/testing. API tokens are created self-serve in Settings > Developers. OAuth (authorization code, with refresh tokens) is required for public integrations distributed via the Front App Store; API tokens are fine for private integrations.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official first-party Front MCP server in open beta at https://mcp.frontapp.com/mcp (Streamable HTTP, OAuth 2.1 with PKCE, user-scoped permissions; Claude directory listing available; free during open beta). No Composio Front toolkit found: docs.composio.dev/toolkits/front and composio.dev/toolkits/frontapp return 404, and composio.dev/toolkits/front falls back to a category page.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Vendor MCP is open beta ('tool names subject to change', pricing subject to change after beta). Front's platform also includes Channel API, Plugin SDK and no-code Connectors beyond the Core REST API.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://dev.frontapp.com/docs/authentication", "note": "Core API uses Bearer tokens; two ways to get one: self-serve API tokens in settings or OAuth; OAuth required for public integrations."},
+    {"claims": ["auth"], "url": "https://dev.frontapp.com/docs/oauth", "note": "OAuth authorization-code flow at app.frontapp.com/oauth/authorize and /oauth/token; access tokens last 60 minutes, refresh tokens 6 months."},
+    {"claims": ["access"], "url": "https://dev.frontapp.com/docs/create-and-revoke-api-tokens", "note": "API tokens created self-serve under Settings > Developers > API Tokens; getting-started guide also points to free developer accounts."},
+    {"claims": ["mcp"], "url": "https://dev.frontapp.com/docs/mcp-server", "note": "Official Front MCP server (open beta) at mcp.frontapp.com/mcp; OAuth-authenticated, user-scoped authorization."},
+    {"claims": ["api", "description", "webhooks"], "url": "https://dev.frontapp.com/docs/welcome", "note": "Developer portal lists Core API (REST), MCP Server, Connectors, Plugin SDK and Channel API; Core API supports webhook-based event notifications via application webhooks and rules."}
+  ]
+}

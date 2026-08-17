@@ -1,0 +1,27 @@
+{
+  "app_id": 62,
+  "name": "Vercel",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "vercel.com",
+  "description": "Frontend cloud / deployment platform with a REST API for projects, deployments, domains, DNS, env vars, teams and analytics.",
+  "auth_methods": ["personal_access_token", "bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "personal_access_token",
+  "access": "self_serve_free",
+  "access_notes": "Free self-serve Hobby accounts; access tokens are created instantly on the Account Tokens page (or via API/CLI) and passed as Bearer tokens, scopable to account/team/project. Marketplace integrations use an OAuth2 code-for-token exchange (POST /v2/oauth/access_token).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor remote MCP at https://mcp.vercel.com with OAuth (MCP Authorization spec, Streamable HTTP); `vercel mcp` CLI configures clients. Composio VERCEL toolkit exists with 146 tools (API_KEY auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhooks: Vercel documents account/integration webhooks (vercel.com/docs/webhooks); not separately fetched this pass.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://vercel.com/docs/accounts/access-tokens", "note": "Access tokens created self-serve on the Account Tokens page (or via REST/CLI), passed as Bearer in Authorization header, scopable to account/team/project."},
+    {"claims": ["auth", "api"], "url": "https://vercel.com/docs/integrations/create-integration/vercel-api-integrations.md", "note": "Integrations use OAuth: exchange short-lived code at POST https://api.vercel.com/v2/oauth/access_token with client_id/client_secret."},
+    {"claims": ["mcp"], "url": "https://vercel.com/docs/agent-resources/vercel-mcp", "note": "'Vercel MCP is Vercel's official MCP server... remote MCP with OAuth... available at https://mcp.vercel.com'; tools for docs search, project/deployment management, analytics."},
+    {"claims": ["api"], "url": "https://vercel.com/docs/rest-api/authentication/create-an-auth-token", "note": "REST endpoint POST /v3/user/tokens mints auth tokens programmatically; api.vercel.com REST surface."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists Vercel: 146 tools, API_KEY auth."}
+  ]
+}

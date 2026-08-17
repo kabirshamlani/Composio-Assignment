@@ -1,0 +1,27 @@
+{
+  "app_id": 20,
+  "name": "Gladly",
+  "category": "Support and Helpdesk",
+  "official_domain": "gladly.com",
+  "description": "Support and helpdesk: people-centered customer service platform unifying voice, email, chat, SMS and social into one conversation per customer.",
+  "auth_methods": ["basic_auth", "api_key"],
+  "primary_auth": "basic_auth",
+  "access": "contact_sales",
+  "access_notes": "No self-serve signup or public free trial; access is via sales-led demo (gladly.ai only offers 'Get a demo'). Once a customer, API tokens are created self-serve in-app by users with the API User permission (email + token via HTTP Basic).",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found", "official_platform_or_partner_mcp"],
+  "mcp_notes": "No vendor MCP found on developer.gladly.com or gladly.ai (their blog discusses MCP conceptually only). No Composio toolkit (docs.composio.dev/toolkits/gladly.md returns 404). StackOne hosts a third-party Gladly MCP server with 65 actions.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "medium",
+  "uncertainty_notes": "Absence of free trial is corroborated by Gladly's own site (demo-only CTAs) and third-party sources (costbench.com, docs.runalloy.com); Gladly does not publish pricing. Searched 'Gladly MCP', 'gladly.ai MCP server', and Composio toolkit pages for MCP claims; only partner/aggregator MCPs found.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developer.gladly.com/rest/", "note": "REST API at https://{organization}.gladly.com; 'token-based Basic Authentication', curl -u user@org.com:$GLADLY_API_TOKEN; token created by users with API User permission."},
+    {"claims": ["auth", "webhooks", "access"], "url": "https://help.gladly.com/generate-api-tokens-and-create-webhooks", "note": "Admins create API tokens and webhooks in-app; tokens are per-user and per-environment (Sandbox vs Production)."},
+    {"claims": ["access"], "url": "https://www.gladly.ai/get-started/", "note": "Official site offers only 'Request a Demo' form — no self-serve signup or trial."},
+    {"claims": ["mcp"], "url": "https://www.stackone.com/connectors/gladly/mcp/", "note": "StackOne hosted Gladly MCP server (65 actions) — a partner/platform MCP, not vendor-official."},
+    {"claims": ["description", "api"], "url": "https://apis.io/providers/gladly/", "note": "Gladly developer surface: REST API, Chat SDK, App Platform, webhooks, Lookup API; enterprise CX brands as customers."}
+  ]
+}

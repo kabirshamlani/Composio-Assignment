@@ -1,0 +1,27 @@
+{
+  "app_id": 74,
+  "name": "Jira",
+  "category": "Productivity and Project Management",
+  "official_domain": "developer.atlassian.com",
+  "description": "Project management: Atlassian's issue tracking and agile project management platform for software and business teams.",
+  "auth_methods": ["oauth2_authorization_code", "basic_auth", "api_key", "bearer_token", "jwt"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Jira Cloud has a free plan; any Atlassian account can generate API tokens self-serve (id.atlassian.com) for basic auth, and OAuth 2.0 (3LO) apps are created self-serve in the Atlassian developer console. Connect/Forge apps use JWT and are also self-serve to develop (Marketplace listing has a review process).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Atlassian hosts the official Rovo MCP Server at https://mcp.atlassian.com/v1/mcp (OAuth 2.1 or API token) covering Jira, Confluence, JSM, Bitbucket, Compass; official GitHub repo atlassian/atlassian-mcp-server. Composio has a managed JIRA toolkit (docs.composio.dev/toolkits/jira).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Rovo MCP server is Atlassian Cloud only (no Server/Data Center).",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/", "note": "OAuth 2.0 (3LO) authorization_code flow for external apps; apps created and managed self-serve in the developer console; API calls via api.atlassian.com/ex/jira/{cloudid}."},
+    {"claims": ["auth", "access"], "url": "https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/", "note": "Basic auth with Atlassian account email + API token (passwords deprecated); tokens generated self-serve from the Atlassian account."},
+    {"claims": ["webhooks", "api"], "url": "https://developer.atlassian.com/cloud/jira/platform/webhooks/", "note": "Webhooks registerable via admin UI or REST API for Connect/OAuth 2.0 apps and other integrations."},
+    {"claims": ["mcp"], "url": "https://developer.atlassian.com/cloud/rovo-mcp/", "note": "Official cloud-hosted Atlassian Rovo MCP Server at mcp.atlassian.com; OAuth 2.1; search/create/edit/transition Jira issues."},
+    {"claims": ["mcp"], "url": "https://github.com/atlassian/atlassian-mcp-server", "note": "Official Atlassian GitHub org repo for the remote MCP server confirming vendor ownership."}
+  ]
+}

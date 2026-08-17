@@ -1,0 +1,26 @@
+{
+  "app_id": 83,
+  "name": "Binance",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Current official spot docs (github.com/binance/binance-spot-api-docs, mirrored on developers.binance.com) confirm API keys created on the account's API Management page, sent via X-MBX-APIKEY, with SIGNED endpoints adding a signature parameter."},
+    {"field": "auth_methods", "draft_value": ["api_key", "hmac_signature"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Both listed methods are real and currently work, but the official API key types FAQ now states 'HMAC keys are deprecated' and recommends migrating to asymmetric Ed25519 (recommended) or RSA keys; Ed25519/RSA signing appear only in the draft's access_notes, not the auth_methods array. Value is not wrong, but it foregrounds a deprecated signing method.",
+     "replacement_evidence": "https://github.com/binance/binance-spot-api-docs/blob/master/faqs/api_key_types.md"},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "API keys are self-serve from API Management for any verified account holder; no partner program, sales contact, or paid tier is required to call the API. Draft correctly caveats that account signup itself requires KYC in most regions. Public spot testnet also confirmed in official docs."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Spot market data, trading, account, wallet, margin, earn, sub-accounts, plus derivatives products on developers.binance.com; a community MCP wraps 478+ tools across the surface. Broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest", "websocket"], "verdict": "SUPPORTED",
+     "reason": "Official docs cover the REST API, WebSocket API and WebSocket streams (user data streams for account events, consistent with supports_webhooks=false). A FIX API also exists, but the draft does not claim its list is exhaustive and rest+websocket are the primary protocols."},
+    {"field": "mcp_status", "draft_value": ["reputable_community_mcp"], "verdict": "SUPPORTED",
+     "reason": "My own searches found no MCP server published by Binance on developers.binance.com or the binance GitHub org; only community servers exist (nirholas/Binance-MCP, danishashko/binance-mcp-server, ethancod1ng/binance-mcp-server). The draft's cited community repo exists. Composio has no Binance toolkit: docs.composio.dev/toolkits/binance returns 404. The community-vs-vendor trap was handled correctly."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve keys, extensive current public docs, and a free testnet: buildable today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No structural blocker for an account holder; KYC account requirement is a signup precondition, not an API gate, and is disclosed in access_notes."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Confirmed the draft researched the right product (global Binance.com API via binance/binance-spot-api-docs and developers.binance.com, not Binance.US, whose separate API is not referenced anywhere in the draft). Current-docs check: the GitHub spot-api-docs repo is the live official source; the draft's second evidence URL sits under developers.binance.com/legacy-docs/, which still serves content identical to the current repo, so nothing cited is substantively stale. One partial: auth_methods omits that HMAC is now officially deprecated in favor of Ed25519/RSA (faqs/api_key_types.md). No official vendor MCP exists; community MCP and Composio absence both re-confirmed."
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 90,
+  "name": "PitchBook",
+  "category": "Finance and Fintech",
+  "official_domain": "pitchbook.com",
+  "description": "Finance and Fintech: private and public capital markets data platform (companies, investors, deals, funds) with a contract-gated Direct Data REST API.",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "contact_sales",
+  "access_notes": "The PitchBook API belongs to the Direct Data product and 'requires a standalone contract agreement' separate from a platform subscription. There is no self-serve signup or developer portal; prospects contact the Direct Data team, and existing clients request access via Plugins & Apps in the platform. PitchBook then provisions 'an API key or authentication token'.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "PitchBook operates an official Premium MCP server at premium.mcp.pitchbook.com/mcp (OAuth login; ~11 read tools for companies, deals, funds, investors); an MCP gateway page is live on the official mcp-proxy-external.pitchbook.com domain. No Composio toolkit found (docs.composio.dev/toolkits/pitchbook.md returns 404).",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "medium",
+  "uncertainty_notes": "Full API reference (endpoint list, exact auth header, rate limits) is not publicly accessible; it sits behind client authentication, so breadth is estimated from official marketing/help pages (company, fund, deal entities; read-only data retrieval). Third-party sources describe 'Authorization: PB-Token {API_KEY}' but this is not confirmed on an official page. No webhook documentation found publicly. MCP endpoint is on the official pitchbook.com domain but the setup pages I could read are aggregators.",
+  "evidence": [
+    {"claims": ["access", "api", "auth"], "url": "https://pitchbook.com/help/PitchBook-api", "note": "Official help: RESTful API at api.pitchbook.com; 'a separate offering... that requires a standalone contract agreement'; access established 'through an API key or authentication token' via the Direct Data team."},
+    {"claims": ["api", "description"], "url": "https://pitchbook.com/blog/what-is-direct-data", "note": "Direct Data API is 'a RESTful JSON' interface for on-demand access to company, fund, and deal entities."},
+    {"claims": ["mcp"], "url": "https://mcp-proxy-external.pitchbook.com/", "note": "Live 'PitchBook MCP Gateway Production Environment' page on the official pitchbook.com domain with OAuth (Okta) login."},
+    {"claims": ["mcp"], "url": "https://www.tooljunction.io/mcp/pitchbook", "note": "Aggregator listing of the official PitchBook Premium MCP server at premium.mcp.pitchbook.com/mcp with 11 read tools (search, profiles, deals, funds, investors); author: PitchBook."}
+  ]
+}

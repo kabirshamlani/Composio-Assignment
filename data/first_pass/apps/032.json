@@ -1,0 +1,28 @@
+{
+  "app_id": 32,
+  "name": "Meta Ads",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "developers.facebook.com",
+  "description": "Meta's advertising platform; the Marketing API (Graph API) manages campaigns, ad sets, ads, audiences, creatives and insights across Facebook/Instagram.",
+  "auth_methods": ["oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Creating a Meta app and calling the Marketing API against your own ad account is self-serve (standard access to ads_read/ads_management; new apps get the 'Limited Access' Marketing API tier by default, described as development access with heavy rate limits). Production/scale is gated: managing other people's ad accounts requires Advanced Access via App Review + business verification, and the 'Full Access' Marketing API tier requires 500+ successful API calls in the past 15 days with <15% error rate.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Meta hosts an official Ads MCP server at https://mcp.facebook.com/ads (part of 'Meta ads AI connectors', open beta since April 2026) using Meta Business OAuth — no developer app registration needed, though rollout is phased per ad account. Composio catalog also lists a Meta Ads toolkit (METAADS, 53 tools, OAUTH2/API_KEY) plus a broader Facebook toolkit.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "Access tokens (user, system user, page) are OAuth-issued bearer tokens sent in the Authorization header — recorded as oauth2_authorization_code + bearer_token. Webhooks evidence is for leadgen (Page object) notifications documented inside the Marketing API lead-ads guides; general ad-object change webhooks are more limited. The hosted MCP server's phased rollout means some ad accounts see is_ads_mcp_enabled=false.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developers.facebook.com/docs/marketing-api/get-started/authorization/", "note": "Standard access to ads_read/ads_management suffices for managing your own ad account; advanced access (App Review) required to manage other people's ad accounts; Full Access tier requires 500+ calls/15 days and <15% error rate."},
+    {"claims": ["access", "api"], "url": "https://developers.facebook.com/docs/marketing-api/overview/rate-limiting/", "note": "New apps get Limited Access tier by default ('development access'); upgrade to Full Access via App Review for production rate-limit quota."},
+    {"claims": ["webhooks"], "url": "https://developers.facebook.com/docs/marketing-api/guides/lead-ads/quickstart/webhooks-integration/", "note": "Marketing API guide for real-time leadgen webhooks (subscribe Page object, leadgen field)."},
+    {"claims": ["mcp"], "url": "https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview", "note": "Official docs: 'ads MCP server is a Meta-hosted Model Context Protocol server... remote-hosted at https://mcp.facebook.com/ads'."},
+    {"claims": ["mcp"], "url": "https://www.facebook.com/business/help/1456422242197840", "note": "Meta Business Help Center page on managing ads from an AI agent via the ads MCP server and CLI."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Catalog lists Meta Ads toolkit (METAADS, 53 tools, OAUTH2/API_KEY)."}
+  ]
+}

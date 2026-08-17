@@ -1,0 +1,26 @@
+{
+  "app_id": 65,
+  "name": "Supabase",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "supabase.com",
+  "description": "Developer/data platform: open-source backend-as-a-service with Postgres database, auth, storage and realtime APIs, plus a Management API for projects.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "bearer_token", "api_key"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free tier sign-up; personal access tokens are self-generated from the dashboard account page, and OAuth2 apps for third-party integrations are created self-serve in the Supabase Dashboard.",
+  "api_protocols": ["rest", "graphql", "websocket", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted vendor MCP at https://mcp.supabase.com/mcp (docs at supabase.com/docs/guides/ai-tools/mcp, repo github.com/supabase/mcp) with OAuth via dynamic client registration. Composio also lists a SUPABASE toolkit with 129 tools and managed auth.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Project-level Data API (PostgREST/pg_graphql/realtime) uses project API keys/JWTs, while the account-level Management API uses PAT or OAuth2; both are self-serve. Database webhooks are a project feature enabled via the Management API.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://supabase.com/docs/reference/api/introduction", "note": "Management API: 'two ways to generate an access token' - personal access token (PAT) or OAuth2, sent as Bearer in Authorization header; REST base https://api.supabase.com/v1."},
+    {"claims": ["auth", "access"], "url": "https://supabase.com/docs/guides/integrations/build-a-supabase-oauth-integration", "note": "OAuth2 authorization-code flow with PKCE (authorize at api.supabase.com/v1/oauth/authorize) is the documented path for third-party apps acting on behalf of users; OAuth apps created self-serve in the dashboard."},
+    {"claims": ["mcp"], "url": "https://supabase.com/docs/guides/ai-tools/mcp", "note": "Official Supabase MCP Server docs: hosted at https://mcp.supabase.com/mcp, authenticates via OAuth dynamic client registration; repo github.com/supabase/mcp."},
+    {"claims": ["mcp", "webhooks"], "url": "https://docs.composio.dev/toolkits/supabase", "note": "Composio SUPABASE toolkit: 129 tools, OAUTH2/API_KEY auth, Composio managed app available; tool list includes 'Enable project database webhooks'."}
+  ]
+}

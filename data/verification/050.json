@@ -1,0 +1,29 @@
+{
+  "app_id": 50,
+  "name": "fanbasis",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Official Commas API reference (commasdocs.com) states every request must include the API key in the x-api-key header; 'There are no usernames or passwords — just your key.'"},
+    {"field": "auth_methods", "draft_value": ["api_key"], "verdict": "SUPPORTED",
+     "reason": "x-api-key is the only documented auth method for the public API. Scoped keys (checkout-sessions, refunds, payments, webhooks, customers, subscriptions) confirmed in the live docs. OAuth is mentioned only for the not-yet-deployed remote MCP endpoint."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Docs confirm self-serve key generation (dashboard -> Account -> API Keys) and a free sandbox (qa.dev-fan-basis.com) with test keys and test card numbers, with no developer application process. However, whether creating a seller account is itself free/ungated (payments platforms typically involve KYC onboarding) is not documented, as the draft's own uncertainty note admits.",
+     "replacement_evidence": "https://commasdocs.com/"},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "Live docs cover checkout sessions, products, discount codes, transactions/refunds, customers, subscribers, subscription proration, and webhook-subscription CRUD — a solid but single-domain payments surface; 'medium' is fair."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "REST confirmed (/public-api/ endpoints on www.fanbasis.com). But the vendor now also documents an MCP connector (see mcp_status), so ['rest','mcp'] would better match how sibling drafts record protocols. The remote Streamable HTTP MCP endpoint (fanbasis.com/mcp) is documented as 'coming soon'; the shipped form is a Claude Desktop extension, so 'rest' alone is defensible but incomplete.",
+     "replacement_evidence": "https://commasdocs.com/"},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "CONTRADICTED",
+     "reason": "The very docs site the draft cited as MCP evidence now has an 'AI Agent / Connect an AI Agent' section documenting the official Commas MCP Connector: a one-click Claude Desktop MCP extension (available now, authenticated with the seller's API key), 11+ read tools plus confirmation-gated write actions (charge, refund, discount management, subscription changes), and a planned remote endpoint at https://www.fanbasis.com/mcp for ChatGPT/Grok. There is also a vendor-authored commas-cli npm package (author otniel@fanbasis.com) that fronts a hosted Commas MCP server. The draft's none_found is wrong or stale. The absence of a Composio toolkit (composio.dev/toolkits/fanbasis 404) still holds.",
+     "corrected_value": ["official_vendor_mcp"],
+     "replacement_evidence": "https://commasdocs.com/"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Documented public REST API with self-serve keys, sandbox environment, webhooks, and official SDKs (npm @fanbasis/checkout-sdk confirmed) — buildable today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gate documented on API usage once a seller account exists; keys are dashboard-generated with no approval step."}
+  ],
+  "overall": "corrected",
+  "checked_at": "2026-08-17",
+  "notes": "Re-fetched commasdocs.com (full page) and independently searched for the fanbasis/Commas API. The public API, x-api-key auth, sandbox, webhooks and SDK all check out. Main correction: commasdocs.com now documents an official Commas MCP Connector (Claude Desktop extension live, remote fanbasis.com/mcp endpoint planned, write actions gated behind confirmations), contradicting mcp_status none_found — the draft either predates this section or missed it. access self_serve_free downgraded to partially supported because seller-onboarding gates for a payments platform remain unverified."
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 43,
+  "name": "BigCommerce",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Single-click apps use the OAuth 2.0 authorization code grant against login.bigcommerce.com/oauth2/token per docs.bigcommerce.com apps auth guide; API accounts doc confirms the OAuth-based account model."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "api_key", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "Store-level API accounts issue static access tokens created in the control panel (api_key-style), app-level accounts use the OAuth code grant, and all tokens are passed in the X-Auth-Token header (bearer-token-style usage)."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "SUPPORTED",
+     "reason": "Store-level API accounts can be created self-serve in any store's control panel including free-trial stores, and the Developer Portal (devtools.bigcommerce.com) is free for app-level credentials; a live store (trial or paid) is required, so self_serve_trial is the right value."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST Admin APIs plus GraphQL Admin and Storefront APIs cover catalog, orders, customers, checkout, carts and webhooks - broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest", "graphql", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST and GraphQL confirmed in BigCommerce docs; hosted per-store MCP server confirmed at docs.bigcommerce.com/developer/api-reference/mcp/overview."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "The official_vendor_mcp value is correct - the B2C Storefront MCP server is documented on docs.bigcommerce.com with store-specific hosted URLs enabled under Settings > Early access, available since April 28 2026, and the docs MCP server at docs.bigcommerce.com/_mcp/server also exists. However the draft's mcp_notes claim 'GA to all stores since April 2026' is inaccurate: the live docs and the May 7 2026 changelog both label the server Beta, enabled via an Early access opt-in with terms-of-service acceptance, with logged-in flows and the B2B server still 'coming soon'.",
+     "replacement_evidence": "https://docs.bigcommerce.com/developer/changelog/2026/5/7"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Trial store plus self-serve store-level API account allows immediate building; no review gate on API credentials."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No approval, paid-plan or partner gate on core API access; only needing a live store, which self_serve_trial already captures."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked the vendor MCP claim: BigCommerce Storefront MCP is genuinely official (hosted on docs.bigcommerce.com infrastructure, enabled per store) but is in Beta via Early access opt-in, not GA as the draft's notes stated - field value stands, note corrected. Draft evidence URL docs.bigcommerce.com/developer/api-reference/mcp/overview confirmed live. Auth model (store-level static tokens, app-level OAuth code grant, X-Auth-Token header) re-confirmed. No BigCommerce toolkit in the live Composio catalog (grepped 1183 entries)."
+}

@@ -1,0 +1,27 @@
+{
+  "app_id": 47,
+  "name": "Ecwid",
+  "category": "Ecommerce",
+  "official_domain": "ecwid.com",
+  "description": "Ecommerce: embeddable SaaS shopping-cart platform (Ecwid by Lightspeed) with a REST API for products, orders, customers, discounts and storefront settings.",
+  "auth_methods": ["oauth2_authorization_code", "api_key", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_paid",
+  "access_notes": "REST API is only available on paid plans (Venture, Business, Unlimited); Free-plan stores cannot use the API at all. For your own store, a custom app with static public/secret access tokens is auto-created in the admin app dashboard (used as Bearer tokens, no OAuth flow needed). Public/App-Market apps use OAuth2 authorization code (POST my.ecwid.com/api/oauth/token) yielding non-expiring bearer tokens. Ecwid offers free paid-plan upgrades to App Market developers on request.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No official Ecwid MCP server found in docs.ecwid.com or Ecwid announcements; no Composio Ecwid toolkit (composio.dev/toolkits/ecwid and docs.composio.dev/toolkits/ecwid return 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "high",
+  "uncertainty_notes": "Webhook setup for an app requires submitting the webhookUrl and event list to Ecwid via an application-update request (app settings are read-only for developers), which adds a manual step. Searches tried: 'Ecwid MCP server official', Composio toolkit URL probes.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://docs.ecwid.com/get-started/make-your-first-api-request", "note": "OAuth 2.0 for public apps; for your own store, copy the custom app's secret token from the app dashboard and use it as a Bearer token."},
+    {"claims": ["auth"], "url": "https://docs.ecwid.com/launch-apps/native-and-external-apps", "note": "OAuth2 authorization_code exchange at POST my.ecwid.com/api/oauth/token/{store_id}; token_type is always bearer."},
+    {"claims": ["access"], "url": "https://docs.ecwid.com/get-started/set-up-your-dev-environment-in-ecwid", "note": "'Only stores on paid plans can access API'; free paid-plan upgrades available for developers on request."},
+    {"claims": ["api"], "url": "https://docs.ecwid.com/api-reference", "note": "REST API manages 'any store data, payment and shipping methods, and storefront settings'; 600 req/min per token rate limit."},
+    {"claims": ["webhooks"], "url": "https://docs.ecwid.com/webhook-automations", "note": "Webhooks are real-time POST notifications to a self-hosted webhookUrl, signed with X-Ecwid-Webhook-Signature (HMAC SHA-256)."}
+  ]
+}

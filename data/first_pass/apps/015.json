@@ -1,0 +1,27 @@
+{
+  "app_id": 15,
+  "name": "Pylon",
+  "category": "Support and Helpdesk",
+  "official_domain": "usepylon.com",
+  "description": "Support and Helpdesk: B2B support platform unifying Slack, Teams, email and chat into one ticketing system with AI agents.",
+  "auth_methods": ["bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "bearer_token",
+  "access": "contact_sales",
+  "access_notes": "No self-serve free trial or free plan; access is via a sales-led 'Book a demo' flow (usepylon.com/get-started). Once a customer, Admin users generate API bearer tokens self-serve in Settings > API Tokens; the MCP server uses per-user OAuth 2.0 (AuthKit) and needs the 'MCP Access' role.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official hosted Pylon MCP Server at https://mcp.usepylon.com (streamable HTTP, OAuth 2.0 only — no API-key auth), enabled from Settings > AI Controls > MCP Server; tools for issues, accounts, contacts. No Composio Pylon toolkit found (composio.dev/toolkits/pylon returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "high",
+  "uncertainty_notes": "One pricing aggregator (pricingpagehub.com) claims a free trial exists, but the official site only offers a demo form and multiple independent reviews state there is no self-serve trial; recorded as contact_sales. OAuth applies to the MCP server (per-user), not the REST API, which is bearer-token only.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.usepylon.com/pylon-docs/developer/api/authentication", "note": "'The Pylon API uses Bearer authentication'; API tokens generated in the Pylon dashboard (Settings > API Tokens)."},
+    {"claims": ["auth", "access", "webhooks", "api"], "url": "https://www.usepylon.com/integrations/api-webhooks", "note": "Only Admin users can create API tokens; API covers accounts, contacts, issues, messages, tasks, knowledge base, custom objects etc.; webhooks configured via Settings > Webhooks and Triggers with 'Send webhook' actions."},
+    {"claims": ["mcp"], "url": "https://docs.usepylon.com/pylon-docs/integrations/pylon-mcp", "note": "Official Pylon MCP Server at https://mcp.usepylon.com, OAuth 2.0 (AuthKit), streamable HTTP, read/write tools for issues, accounts, contacts, scoped to the user's dashboard permissions."},
+    {"claims": ["access"], "url": "https://www.usepylon.com/get-started", "note": "Official get-started page is a 'Schedule a personalized 30-minute demo' form; no self-serve signup path."},
+    {"claims": ["api"], "url": "https://docs.usepylon.com/pylon-docs/developer/api", "note": "Official developer docs: REST API at api.usepylon.com with a full API reference across Pylon objects."}
+  ]
+}

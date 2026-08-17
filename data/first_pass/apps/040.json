@@ -1,0 +1,27 @@
+{
+  "app_id": 40,
+  "name": "SendGrid",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "sendgrid.com",
+  "description": "Twilio SendGrid email delivery platform: v3 REST API for transactional sending, templates, marketing contacts, stats and suppression management.",
+  "auth_methods": ["api_key", "basic_auth"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "Signup and API-key creation are fully self-serve (Settings > API Keys, scoped permissions, used as 'Authorization: Bearer <key>'). However, SendGrid retired its legacy free plans in May 2025; new accounts get a 60-day timed free trial (100 emails/day), after which a paid plan is required to keep sending. No OAuth for API access; Basic auth is supported for some services with username 'apikey'.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit"],
+  "mcp_notes": "Composio SENDGRID toolkit exists (364 tools, API key auth). No official SendGrid vendor MCP: Twilio's official alpha MCP (@twilio-alpha/mcp) covers Twilio's Public API, not the SendGrid v3 email API; a Twilio blog post about a SendGrid MCP is a community build-it-yourself tutorial.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "high",
+  "uncertainty_notes": "None significant. An earlier draft cited the Event Webhook page via a Twilio docs mirror host (live.docs.dev.twilio.com), since replaced with the canonical www.twilio.com URL, which was re-verified live and confirms the webhook claim.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://www.twilio.com/docs/sendgrid/api-reference/how-to-use-the-sendgrid-v3-api/authentication", "note": "v3 REST API authenticates with scoped API keys via 'Authorization: Bearer <YOUR_API_KEY>' header; keys created in the SendGrid console"},
+    {"claims": ["access"], "url": "https://www.twilio.com/en-us/changelog/sendgrid-free-plan", "note": "Official changelog: Free Email API and Free Marketing Campaigns plans retired starting May 27, 2025; paid plan required after 60-day transition"},
+    {"claims": ["access"], "url": "https://support.sendgrid.com/hc/en-us/articles/35270136965403-Twilio-SendGrid-Trial-Account-Plan", "note": "New accounts from March 25, 2025 get a 60-day timed free trial (100 emails/day); sending stops after trial unless upgraded to a paid plan"},
+    {"claims": ["webhooks"], "url": "https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook", "note": "Official Event Webhook docs: SendGrid POSTs email event data (delivery/engagement) to your URL, with Signature Verification and/or OAuth 2.0 verification"},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists SENDGRID: 364 tools, API_KEY auth"}
+  ]
+}

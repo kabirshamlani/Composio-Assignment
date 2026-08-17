@@ -1,0 +1,28 @@
+{
+  "app_id": 31,
+  "name": "Google Ads",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "developers.google.com",
+  "description": "Google's advertising platform; the Google Ads API manages campaigns, budgets, keywords and reporting via GAQL.",
+  "auth_methods": ["oauth2_authorization_code", "service_account"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Signup is self-serve but production is gated by developer-token access levels: a new token gets Test Account Access (test accounts only, 15k ops/day); many tokens are auto-granted Explorer Access (production, but capped at 2,880 ops/day and excluding planning tools, account creation, billing). Basic Access (full features, 15k ops/day) requires an application reviewed by Google (~5 business days); Standard Access (unlimited) is a further review (~10 days). Also requires an OAuth client from Google Cloud plus a manager (MCC) account to hold the developer token.",
+  "api_protocols": ["rest", "grpc"],
+  "api_breadth": "broad",
+  "supports_webhooks": false,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Google maintains an official, read-only Google Ads MCP server (github.com/googleads/google-ads-mcp; developer guide on developers.google.com) exposing list_accessible_customers, search (GAQL) and resource-metadata tools; mutations are deliberately excluded. Composio catalog lists a Google Ads toolkit (GOOGLEADS, 22 tools, OAUTH2).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "supports_webhooks=false refers to the core Ads API, which has no push/webhook mechanism (reporting is pull-based); lead form webhook delivery exists as a separate advertiser feature. The mandatory developer-token header is an extra credential on top of OAuth, not a standalone auth method. Explorer Access auto-grant means limited production reads may work without review, but full production capability requires Basic Access approval.",
+  "evidence": [
+    {"claims": ["access"], "url": "https://developers.google.com/google-ads/api/docs/access-levels", "note": "Table of Test Account / Explorer / Basic / Standard access levels: Basic requires application with ~5 business day review; new tokens start at Test Account Access."},
+    {"claims": ["access", "auth"], "url": "https://developers.google.com/google-ads/api/docs/api-policy/developer-token", "note": "Developer token from a Google Ads manager account API Center; access level controls daily calls and test-vs-production environment."},
+    {"claims": ["auth", "api"], "url": "https://developers.google.com/google-ads/api/docs/get-started/make-first-call", "note": "Quick start: developer token + OAuth credentials; service accounts supported by granting them access to the Google Ads customer account."},
+    {"claims": ["mcp"], "url": "https://developers.google.com/google-ads/api/docs/developer-toolkit/mcp-server", "note": "Official Google Ads MCP server developer guide: read-only, Python, stdio, OAuth 2.0 or service account auth."},
+    {"claims": ["mcp"], "url": "https://github.com/googleads/google-ads-mcp", "note": "Official googleads GitHub org repo for the MCP server (tools + discovery/metrics/segments resources)."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Catalog lists Google Ads toolkit (GOOGLEADS, 22 tools, OAUTH2)."}
+  ]
+}

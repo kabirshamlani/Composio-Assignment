@@ -1,0 +1,27 @@
+{
+  "app_id": 39,
+  "name": "Threads (Meta)",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "threads.com",
+  "description": "Meta's text-based social network; the Threads API supports publishing posts/replies, reading and managing replies, mentions, and insights.",
+  "auth_methods": ["oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Creating a Meta app with the Threads use case is self-serve and free; designated Threads testers can grant permissions immediately for development. To act on ordinary users' accounts, each permission (threads_basic, threads_content_publish, etc.) must pass Meta App Review (screencast, privacy policy, often business verification) and the app must be published/live.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No official Meta MCP for Threads found on developers.facebook.com, and the docs.composio.dev toolkit catalog contains no Threads toolkit. Searches tried: 'Threads API MCP', Composio catalog page grep for 'threads'.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "API is focused on publishing/replies/insights (no ads, no DMs), hence medium breadth. Long-lived tokens last 60 days and must be refreshed; private-profile permissions expire after 90 days.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developers.facebook.com/docs/threads/get-started/", "note": "OAuth 2.0 user access tokens; testers can grant permissions any time, but for non-tester users 'each permission must first be approved through the App Review process, and your app must be published'"},
+    {"claims": ["auth"], "url": "https://developers.facebook.com/docs/threads/get-started/get-access-tokens-and-permissions/", "note": "Authorization Window flow: authorization code exchanged at graph.threads.com/oauth/access_token for user access tokens with threads_* scopes"},
+    {"claims": ["api"], "url": "https://developers.facebook.com/docs/threads/posts/", "note": "Publishing endpoints: create media container then threads_publish for text/image/video/carousel posts"},
+    {"claims": ["webhooks"], "url": "https://developers.facebook.com/docs/threads/webhooks/", "note": "Webhooks for Threads: real-time notifications for replies, mentions, publish and delete topics"},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog contains no Threads toolkit (checked full catalog listing)"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "source_file": "apps.final.json",
+  "total_unique_urls": 485,
+  "reachable_2xx_3xx": 464,
+  "blocked_bot_protection": 21,
+  "dead_or_error": 0,
+  "dead_urls": {},
+  "note": "blocked = 403/429/405/999 anywhere, or 400 on domains known to reject non-browser clients (facebook.com, browser-verified)"
+}

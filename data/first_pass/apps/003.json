@@ -1,0 +1,27 @@
+{
+  "app_id": 3,
+  "name": "Pipedrive",
+  "category": "CRM and Sales",
+  "official_domain": "pipedrive.com",
+  "description": "CRM and Sales: pipeline-focused sales CRM for SMBs with deals, contacts, activities and a full REST API on every plan.",
+  "auth_methods": ["api_key", "oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Every Pipedrive plan includes an API token giving free REST API access; Pipedrive itself is a paid product with a self-serve free trial. Developers can also get a free developer sandbox account at developers.pipedrive.com and register apps in Developer Hub for OAuth credentials.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Pipedrive launched its native hosted MCP server (mcp.pipedrive.ai) on June 30, 2026, available on all plans via OAuth. Composio has a PIPEDRIVE toolkit (402 tools, 3 triggers, OAuth2/API key); Composio managed app listed as not available, so bring-your-own OAuth credentials.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API token is tied to a single user/company and only one can be active at a time. OAuth client_id/client_secret are sent via HTTP Basic auth only during token exchange, not as an API auth method.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://pipedrive.readme.io/docs/core-api-concepts-authentication", "note": "All requests need authentication: API token in x-api-token header for personal integrations, or OAuth 2.0 for apps."},
+    {"claims": ["auth", "access"], "url": "https://pipedrive.readme.io/docs/marketplace-oauth-api", "note": "OAuth 2.0 is the recommended protocol for Marketplace apps; step 1 is 'Get your developer sandbox account' at developers.pipedrive.com — self-serve."},
+    {"claims": ["api", "webhooks", "access"], "url": "https://www.pipedrive.com/en/features/crm-api", "note": "'Every Pipedrive plan comes with an API token that gives you access to our RESTful API for free... Access what you need via webhooks, API endpoints... hundreds of endpoints.'"},
+    {"claims": ["mcp"], "url": "https://www.pipedrive.com/en/newsroom/pipedrive-launches-native-mcp-server-bringing-crm-workflows-directly-into-ai-assistants", "note": "Official newsroom announcement (June 30, 2026): native hosted MCP server on all plans, OAuth connection, built and maintained by Pipedrive."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/pipedrive", "note": "Composio PIPEDRIVE toolkit page: OAUTH2/API_KEY, 402 tools, 3 triggers; Composio managed app not available."}
+  ]
+}

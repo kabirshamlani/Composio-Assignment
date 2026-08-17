@@ -1,0 +1,28 @@
+{
+  "app_id": 22,
+  "name": "Twilio",
+  "category": "Communications and Messaging",
+  "official_domain": "twilio.com",
+  "description": "Communications and messaging: CPaaS with REST APIs for SMS, voice, WhatsApp, email, verification and conversations across 30+ products.",
+  "auth_methods": ["basic_auth", "api_key", "jwt"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "Free 30-day trial, no credit card, with product-specific free units (e.g. 100 SMS); self-serve upgrade to pay-as-you-go. Auth is HTTP Basic with API Key SID/Secret (recommended) or Account SID/Auth Token; JWT access tokens for client-side SDKs. Some messaging capabilities (e.g. A2P sender registration) need extra compliance steps.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official hosted MCP server at https://mcp.twilio.com/docs (public beta, no auth, docs/spec search only — read-only). Twilio Labs also ships @twilio-alpha/mcp, an official local MCP server exposing Twilio APIs as tools using account credentials. No Composio Twilio toolkit found (docs.composio.dev/toolkits/twilio.md and composio.dev/toolkits/twilio both 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "The hosted vendor MCP covers documentation search only; account actions via MCP require the separate Twilio Labs alpha local server. WebSocket is used in specific products (e.g. Media Streams, Sync) but REST is the primary protocol.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://www.twilio.com/docs/usage/requests-to-twilio", "note": "HTTP Basic auth: API Key + Secret recommended for production; Account SID + Auth Token for local testing."},
+    {"claims": ["auth"], "url": "https://www.twilio.com/docs/iam/access-tokens", "note": "JWT access tokens (signed with API key) used for client-side SDKs like Conversations and Voice."},
+    {"claims": ["access"], "url": "https://www.twilio.com/docs/usage/trials", "note": "Free 30-day trial without credit card, product-specific free units, self-serve upgrade from Console."},
+    {"claims": ["mcp"], "url": "https://www.twilio.com/docs/ai/mcp", "note": "Official Twilio-hosted MCP server at mcp.twilio.com/docs; no authentication; indexes 1,800+ public API endpoints (docs retrieval)."},
+    {"claims": ["mcp"], "url": "https://github.com/twilio-labs/mcp", "note": "Official twilio-labs monorepo exposing Twilio public APIs as MCP tools via @twilio-alpha/mcp with account credentials."},
+    {"claims": ["webhooks", "api"], "url": "https://www.twilio.com/docs/usage/webhooks", "note": "Webhooks are core to Twilio: inbound messages/calls and status callbacks are delivered via HTTP callbacks."}
+  ]
+}

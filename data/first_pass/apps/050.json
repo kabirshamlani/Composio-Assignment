@@ -1,0 +1,24 @@
+{
+  "app_id": 50,
+  "name": "fanbasis",
+  "category": "Ecommerce",
+  "official_domain": "fanbasis.com",
+  "description": "Ecommerce: creator/digital-business payments platform (rebranded to Commas) with checkout sessions, products, subscriptions, customers, refunds and webhooks via a public API.",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "API keys are generated from the API Keys section of the Commas (fanbasis) seller dashboard; keys carry scopes (checkout-sessions, refunds, payments, webhooks, customers, subscriptions). A full sandbox environment (qa.dev-fan-basis.com) with test API keys is documented. No developer application process is mentioned in the docs.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No vendor MCP mentioned anywhere in the official API docs (commasdocs.com) or npm SDK; composio.dev/toolkits/fanbasis returns 404, so no Composio toolkit found.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "medium",
+  "uncertainty_notes": "fanbasis rebranded to Commas; API docs live at commasdocs.com and base URL remains www.fanbasis.com. Whether seller account creation involves payment/KYC onboarding gates was not verified, so 'self_serve_free' reflects documented dashboard key generation, not a tested signup. Searches tried: 'fanbasis API documentation developers', composio.dev/toolkits/fanbasis (404).",
+  "evidence": [
+    {"claims": ["auth", "api", "access", "webhooks", "mcp"], "url": "https://commasdocs.com/", "note": "Official Commas (fanbasis) API reference: x-api-key header auth, /public-api/ REST endpoints, webhook-subscriptions CRUD, keys generated in dashboard, sandbox at qa.dev-fan-basis.com; no MCP mentioned"},
+    {"claims": ["api"], "url": "https://www.npmjs.com/package/@fanbasis/checkout-sdk", "note": "Official TypeScript SDK for the Fanbasis Checkout REST API (Stainless-generated), api_key auth with production/sandbox environments"}
+  ]
+}

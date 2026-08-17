@@ -1,0 +1,26 @@
+{
+  "app_id": 5,
+  "name": "Twenty",
+  "category": "CRM and Sales",
+  "official_domain": "twenty.com",
+  "description": "CRM and Sales: open-source, self-hostable CRM ('open alternative to Salesforce') with schema-generated REST and GraphQL APIs and a built-in MCP server.",
+  "auth_methods": ["api_key", "oauth2_authorization_code", "oauth2_client_credentials"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Open-source and self-hostable for free via Docker Compose; Twenty Cloud workspaces are self-serve sign-up. API keys are generated in Settings -> API & Webhooks; OAuth clients register dynamically via RFC 7591 (no dashboard approval).",
+  "api_protocols": ["rest", "graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "reputable_community_mcp"],
+  "mcp_notes": "Vendor MCP server is built into the product at {workspace-url}/mcp (streamable-http, OAuth or API key). Several community MCP wrappers exist on npm/GitHub. No Composio toolkit found: docs.composio.dev/toolkits/twenty returns 404 and web search found no Composio Twenty toolkit page.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "primary_auth: API key is the documented default for scripts/integrations; OAuth (auth code + PKCE, client credentials) is recommended for external multi-user apps, so either could be considered primary. API is schema-per-tenant (no static reference). Searched for a Composio Twenty toolkit (docs.composio.dev/toolkits/twenty and web search) and found none.",
+  "evidence": [
+    {"claims": ["auth", "api", "webhooks"], "url": "https://docs.twenty.com/developers/extend/api", "note": "REST (/rest/) and GraphQL (/graphql/) core + metadata APIs generated from the workspace schema; auth via 'Authorization: Bearer YOUR_API_KEY' created in Settings -> API & Webhooks."},
+    {"claims": ["auth"], "url": "https://docs.twenty.com/developers/extend/oauth", "note": "OAuth 2.0 authorization code + PKCE for user-facing apps and client credentials for server-to-server, with dynamic client registration (RFC 7591)."},
+    {"claims": ["access", "description"], "url": "https://github.com/twentyhq/twenty", "note": "Official repo: '#1 Open-Source CRM', cloud sign-up at twenty.com or self-host with Docker Compose."},
+    {"claims": ["mcp"], "url": "https://docs.twenty.com/user-guide/ai/capabilities/mcp", "note": "Official docs: MCP server built in at https://{workspace-url}/mcp for cloud and self-hosted, with OAuth (recommended) or API key auth."}
+  ]
+}

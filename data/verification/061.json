@@ -1,0 +1,27 @@
+{
+  "app_id": 61,
+  "name": "GitHub",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "GitHub documents PATs, OAuth apps, and GitHub Apps (JWT -> installation tokens) for REST API auth; the OAuth/GitHub-App user authorization uses the authorization code (web application) flow, so listing it as the primary user-facing grant is reasonable, and the draft's uncertainty note about GitHub steering integrators to GitHub Apps is accurate."},
+    {"field": "auth_methods", "draft_value": ["personal_access_token", "oauth2_authorization_code", "oauth2_device_code", "jwt", "basic_auth", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "All documented: fine-grained/classic PATs, OAuth web flow, device flow, GitHub App JWTs, and basic auth (client_id/client_secret) on a few app-management endpoints, per docs.github.com REST authentication docs (draft evidence URL confirmed live via the About the REST API page linking directly to it)."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Free accounts can mint PATs, register OAuth Apps, and create GitHub Apps without any approval process — long-standing, confirmed by the getting-started/authentication docs."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Clearly correct — the REST API is organized into per-resource endpoint categories (issues, releases, actions, orgs, etc.) covering the whole platform — but the draft attached no evidence URL to the api claim. Replacement evidence found: the official About the REST API page describing endpoint categories and automation use cases.",
+     "replacement_evidence": "https://docs.github.com/en/rest/about-the-rest-api/about-the-rest-api"},
+    {"field": "api_protocols", "draft_value": ["rest", "graphql", "mcp"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Correct but previously unevidenced: REST confirmed at docs.github.com/en/rest; GraphQL confirmed via the official 'Comparing GitHub's REST API and GraphQL API' page linked from it (docs.github.com/en/graphql is the API guide); MCP via the official github/github-mcp-server remote server. Same replacement evidence as api_breadth.",
+     "replacement_evidence": "https://docs.github.com/en/rest/about-the-rest-api/about-the-rest-api"},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "github/github-mcp-server is the official GitHub-org-owned MCP server (remote hosted with OAuth 2.1 or PAT, plus local Docker image) — repo ownership under the github org verified. Composio GITHUB toolkit listing matches the draft's catalog citation."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Free self-serve accounts, instant tokens, broad documented API — nothing blocks building today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker; only standard rate limits apply."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently fetched the official About the REST API page (confirms REST endpoint breadth, links to the GraphQL comparison and the draft's authentication evidence URL) and the github/github-mcp-server repo ownership. The only draft gap was the missing evidence URL on the api claim (api_breadth/api_protocols); replacement evidence supplied. All values stand as drafted."
+}

@@ -1,0 +1,28 @@
+{
+  "app_id": 13,
+  "name": "Freshdesk",
+  "category": "Support and Helpdesk",
+  "official_domain": "freshdesk.com",
+  "description": "Support and Helpdesk: Freshworks' customer support helpdesk with ticketing, knowledge base and automations.",
+  "auth_methods": ["api_key", "basic_auth"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "Self-serve signup with free trial; a Free plan also exists. Each agent gets a personal API key from Profile Settings (revealed after captcha), used as the Basic-auth username with any dummy password. API access was not available on the legacy free 'Sprout' plan; availability on the current Free plan not confirmed from official docs.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit", "reputable_community_mcp"],
+  "mcp_notes": "Freshworks MCP server for Freshdesk is official but in Beta/Early Access Program limited to Enterprise plan customers (per support.freshdesk.com EAP article; part of the Freshworks MCP Gateway announced at Refresh 2026). Composio Freshdesk toolkit exists (composio.dev/toolkits/freshdesk, not composio-managed auth: bring your own API key). Multiple community MCP servers (e.g. freshdesk-mcp on npm with 194 tools).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "v2 API has no OAuth flow for standard server-to-server use (OAuth exists only for Freshworks Marketplace app scenarios). Official vendor MCP is gated behind Enterprise-plan EAP, but the REST API itself is self-serve. API availability on the current Free plan tier is unverified.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key", "note": "Official: API key retrieved self-serve from agent Profile Settings > View API key; activities via API follow the agent's role permissions."},
+    {"claims": ["auth", "api"], "url": "https://developers.freshdesk.com/api/", "note": "Official developer docs: REST API v2 at https://<domain>.freshdesk.com/api/v2/ using HTTP Basic Auth with the API key as username."},
+    {"claims": ["access"], "url": "https://support.freshdesk.com/support/solutions/articles/225435-where-can-i-find-my-api-key-", "note": "Official note: 'If your account is on the Sprout plan, the API key and the API functionality will NOT be available' — API access is plan-dependent."},
+    {"claims": ["mcp"], "url": "https://support.freshdesk.com/support/solutions/articles/50000012670-model-context-protocol-mcp-integration-in-freshdesk-eap-", "note": "Official Freshworks MCP server for Freshdesk, 'currently in Beta ... EAP for selected customers on the Enterprise plan'; tools include ticket, conversation and solution-article operations."},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/freshdesk", "note": "Composio Freshdesk toolkit page exists; requires user-provided Basic Auth credentials."},
+    {"claims": ["webhooks"], "url": "https://developers.freshdesk.com/api/#webhooks", "note": "Freshdesk supports webhooks triggered from automation rules, documented in the official developer docs."}
+  ]
+}

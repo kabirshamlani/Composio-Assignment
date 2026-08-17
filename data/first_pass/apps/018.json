@@ -1,0 +1,27 @@
+{
+  "app_id": 18,
+  "name": "Help Scout",
+  "category": "Support and Helpdesk",
+  "official_domain": "helpscout.com",
+  "description": "Support and helpdesk: shared-inbox customer support platform (conversations, customers, mailboxes/inboxes, Docs knowledge base).",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "api_key", "basic_auth"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Developers create an OAuth2 app self-serve under Your Profile > My Apps in any Help Scout account; Help Scout is a paid product with a free trial. No partner approval documented for API access.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit", "reputable_community_mcp", "none_found"],
+  "mcp_notes": "No official vendor MCP found on developer.helpscout.com. Composio HELP_SCOUT toolkit exists (129 tools, OAuth). Reputable community MCP: drewburchfield/help-scout-mcp-server on npm/GitHub.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "none_found in mcp_status refers specifically to a vendor-official MCP server; searched Help Scout developer docs and blog for MCP announcements and found none. Docs API (knowledge base) uses an API key via HTTP Basic auth, distinct from the OAuth2-only Inbox API 2.0.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.helpscout.com/mailbox-api/overview/authentication/", "note": "Inbox API 2.0 uses OAuth 2.0 with Authorization Code and Client Credentials flows; app created self-serve under Your Profile > My Apps."},
+    {"claims": ["api", "access", "webhooks"], "url": "https://developer.helpscout.com/llms.txt", "note": "REST API at api.helpscout.net/v2, HAL+JSON, POST /v2/webhooks for event subscriptions with HMAC-SHA1 signatures; Docs API uses API key as Basic auth username."},
+    {"claims": ["api", "description"], "url": "https://developer.helpscout.com/mailbox-api/", "note": "Inbox API 2.0: HTTPS-only JSON API covering conversations, customers, mailboxes, users, reports."},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/help_scout", "note": "Composio Help Scout toolkit with 129 tools; requires user-configured OAuth credentials."},
+    {"claims": ["mcp"], "url": "https://github.com/drewburchfield/help-scout-mcp-server", "note": "Community (not vendor-official) MCP server covering Mailbox and Docs API read operations plus opt-in writes."}
+  ]
+}

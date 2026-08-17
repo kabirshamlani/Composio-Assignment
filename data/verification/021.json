@@ -1,0 +1,25 @@
+{
+  "app_id": 21,
+  "name": "Slack",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "docs.slack.dev confirms Slack apps install via the v2 OAuth 2.0 authorization flow yielding scoped bot/user tokens; the MCP server likewise uses confidential OAuth with client_id/client_secret."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "OAuth v2 flow plus bearer-token authentication for Web API calls both confirmed in live Slack developer docs."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "App creation at api.slack.com/apps is self-serve and installable to a free workspace; note some workspaces require admin approval, and MCP specifically is restricted to directory-published or internal apps."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Web API spans messaging, channels, users, files, canvases, search, admin; plus Events API and Socket Mode."},
+    {"field": "api_protocols", "draft_value": ["rest", "websocket", "mcp"], "verdict": "SUPPORTED",
+     "reason": "HTTP Web API (rest), Socket Mode WebSocket delivery, and the official MCP server (JSON-RPC 2.0 over Streamable HTTP at https://mcp.slack.com/mcp) all confirmed live."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "Official Slack MCP server verified at docs.slack.dev/ai/slack-mcp-server (endpoint mcp.slack.com/mcp, confidential OAuth, tools for search/messaging/canvases/users, requires a registered Slack app; Marketplace-published or internal apps only). Composio SLACK toolkit page confirms 167 tools, 9 triggers, OAuth2, Composio-managed app."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve app registration and free workspaces; complete public docs."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker for standard API integration; the unlisted-app restriction applies only to the MCP surface, not the Web API."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-opened Slack's live MCP server docs (endpoint, JSON-RPC/Streamable HTTP, OAuth endpoints, scope tables), OAuth install docs, and the Composio SLACK toolkit page (167 tools/9 triggers). All eight fields supported as drafted. Minor nuance: Slack MCP is limited to Marketplace-published or internal apps — worth carrying into mcp_notes but not a field error."
+}

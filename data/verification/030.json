@@ -1,0 +1,26 @@
+{
+  "app_id": 30,
+  "name": "Vonage",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Live developer.vonage.com authentication concepts page: an API key and secret are created with every account and are the baseline credential; older APIs take them as request params, newer ones Base64-encoded via Basic auth."},
+    {"field": "auth_methods", "draft_value": ["api_key", "basic_auth", "jwt"], "verdict": "SUPPORTED",
+     "reason": "Auth docs confirm all three: API key+secret, Basic Authentication (Base64 key:secret header on newer APIs), and RS256 JWTs generated from an application's private key; JWT recommended for Messages/Verify since Basic auth there does not support webhooks or ACLs."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "SUPPORTED",
+     "reason": "Vonage getting-started docs confirm self-serve signup issues an API key and secret immediately with free trial credit; production usage is pay-as-you-go once a payment method is added."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "CPaaS surface spans SMS, Messages (WhatsApp/RCS), Voice, Verify, Video, Numbers, Applications, and Reports APIs on the developer portal."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "REST is the primary protocol, confirmed. However the draft lists official vendor MCP servers in mcp_status while omitting mcp from api_protocols, which is inconsistent with this batch's convention (Salesforce/Slack/Podio drafts include mcp in protocols when an official server exists). Value is defensible but incomplete; evidence for the MCP surface is the vendor's own MCP docs.",
+     "replacement_evidence": "https://developer.vonage.com/en/mcp-server/conceptual-guides/introduction-to-vonage-mcp"},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Vendor docs page (developer.vonage.com/en/mcp-server/...) confirms two official MCP servers: a Documentation MCP Server and the Server API Bindings (Tooling) MCP Server for managing apps, numbers, reports and sending messages. The npm package @vonage/vonage-mcp-server-api-bindings (latest 1.5.1) is maintained exclusively by vonage.com accounts — genuinely vendor-owned, not community."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Immediate self-serve credentials with trial credit; full public docs and SDKs."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gate; trial restrictions (verified test numbers until payment method added) are standard CPaaS anti-abuse limits, not an access blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-verified auth concepts page (API key/secret, Basic, RS256 JWT), the vendor MCP introduction page (Documentation + Server API Bindings servers), and confirmed npm package ownership via the registry (all maintainers @vonage.com). Only quibble: api_protocols omits mcp despite official vendor MCP servers, inconsistent with sibling drafts — flagged PARTIALLY_SUPPORTED rather than contradicted since rest genuinely is the primary API protocol and the MCP servers are developer tooling (docs search + account management) rather than a full API surface."
+}

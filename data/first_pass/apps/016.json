@@ -1,0 +1,27 @@
+{
+  "app_id": 16,
+  "name": "LiveAgent",
+  "category": "Support and Helpdesk",
+  "official_domain": "liveagent.com",
+  "description": "Support and Helpdesk: help desk software by Quality Unit with ticketing, live chat, call center and knowledge base.",
+  "auth_methods": ["api_key", "bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "30-day self-serve free trial, no credit card required; official pricing FAQ states 'API and integrations are included in each subscription without any additional costs'. Admins generate API v3 keys with per-key permissions under Configuration > System > API. The built-in MCP server uses per-agent Bearer tokens or OAuth 2.1 (Authorization Code + PKCE).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official built-in LiveAgent MCP server (shipped in v5.63, May 2026) at https://<account>/api/mcp, streamable HTTP, Bearer token or OAuth 2.1 auth, actions run under the agent's identity/permissions; admin-configurable tool subsets for AI agent connections. No Composio LiveAgent toolkit found (composio.dev/toolkits/liveagent returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhook support not confirmed from a dedicated official docs page: LiveAgent appears to deliver event callbacks via automation rules with HTTP-request actions rather than a formal webhooks API, so supports_webhooks is left null. API v1 is deprecated but still functional alongside the current API v3.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://support.liveagent.com/741982-API-key", "note": "Admins self-serve API keys at Configuration > System > API; API v3 keys support per-key permissions; key sent in 'apikey' request header."},
+    {"claims": ["api"], "url": "https://support.liveagent.com/802463-REST-API", "note": "Official REST API section covering API v1 (legacy) and API v3 (current) with documentation and examples."},
+    {"claims": ["mcp"], "url": "https://support.liveagent.com/647358-MCP-Integration-for-Agents", "note": "Official built-in MCP server at https://<account>/api/mcp, streamable HTTP, Bearer token or OAuth 2.1 (Authorization Code + PKCE), acting under the agent's identity."},
+    {"claims": ["mcp"], "url": "https://www.liveagent.com/blog/liveagent-may-2026-product-update/", "note": "Vendor blog: 'version 5.63 also comes with the integration of LiveAgent MCP' connecting Claude Desktop, Cursor, claude.ai, FlowHunt etc."},
+    {"claims": ["access", "description"], "url": "https://www.liveagent.com/pricing/", "note": "30-day free trial, no credit card; three per-agent subscription tiers; 'API and integrations are included in each subscription'."}
+  ]
+}

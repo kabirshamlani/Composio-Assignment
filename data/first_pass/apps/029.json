@@ -1,0 +1,26 @@
+{
+  "app_id": 29,
+  "name": "Aircall",
+  "category": "Communications and Messaging",
+  "official_domain": "aircall.io",
+  "description": "Cloud phone system / call center platform with a public REST API covering calls, contacts, users, numbers, messaging and conversation intelligence.",
+  "auth_methods": ["basic_auth", "oauth2_authorization_code"],
+  "primary_auth": "basic_auth",
+  "access": "self_serve_paid",
+  "access_notes": "Aircall customers self-serve API keys (api_id + api_token, used as HTTP Basic credentials) from Dashboard > Integrations > API keys; API access is bundled with paid plans (Essentials $30/user/mo, 3-user minimum, lists 'API access'). OAuth is reserved for approved Technology Partners building marketplace apps and requires manual onboarding via marketplace@aircall.io — no self-serve OAuth client registration.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_platform_or_partner_mcp", "reputable_community_mcp"],
+  "mcp_notes": "No official Aircall-vendor MCP server (Aircall's docs only give best practices for building MCP servers that its AIVA agent can call). Pipedream hosts an Aircall MCP server (mcp.pipedream.com/app/aircall); community servers exist (e.g. themobilefirstco/aircall-mcp-server, 73 tools, explicitly unofficial). No Aircall toolkit found in the Composio toolkits catalog.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "medium",
+  "uncertainty_notes": "Whether API keys can be generated during a free trial is not documented; Aircall does not publish which plan tiers gate specific API features or rate-limit thresholds. Multi-customer (OAuth) integrations are partner_gated even though own-account Basic Auth is self-serve. MCP searches tried: 'Aircall MCP server official', Composio catalog grep.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.aircall.io/docs/authentication", "note": "'Aircall supports two ways to authenticate with the REST API: Basic Authentication and OAuth'; OAuth for public integrations by approved tech partners."},
+    {"claims": ["auth", "access"], "url": "https://developer.aircall.io/docs/basic-authentication", "note": "Generate API ID + token from Aircall Dashboard; Base64 api_id:api_token in Authorization header; requires an Aircall (customer) account."},
+    {"claims": ["api", "auth", "webhooks"], "url": "https://developers.aircall.io/api-references", "note": "REST API at api.aircall.io/v1 covering calls, contacts, users, teams, numbers, messages, webhooks; OAuth client_id/secret obtained by contacting Aircall."},
+    {"claims": ["access", "webhooks"], "url": "https://support.aircall.io/en-gb/articles/10375355327517", "note": "Aircall help: OAuth for marketplace/partner apps, Basic Auth for customers building for their own account; webhooks available for real-time events."}
+  ]
+}

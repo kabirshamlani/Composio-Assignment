@@ -1,0 +1,28 @@
+{
+  "app_id": 86,
+  "name": "QuickBooks",
+  "category": "Finance and Fintech",
+  "official_domain": "developer.intuit.com",
+  "description": "Finance and Fintech: Intuit QuickBooks Online small-business accounting platform with REST APIs for invoices, customers, payments, bills and financial reports.",
+  "auth_methods": ["oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Creating an Intuit developer account and app is self-serve and immediately yields Development keys plus a sandbox QuickBooks Online company. Production credentials are only revealed after completing and passing Intuit's App Assessment Questionnaire (security/use-case compliance review), required even for private/unlisted apps.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Intuit publishes an official open-source local (stdio) MCP server, intuit/quickbooks-online-mcp-server, covering ~143 tools / 29 entities / 11 reports; Composio has a managed QUICKBOOKS toolkit (114 tools, OAUTH2).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0", "note": "OAuth 2.0 is the documented auth protocol; separate Development (sandbox) and Production keys under Keys & OAuth."},
+    {"claims": ["access"], "url": "https://developer.intuit.com/app/developer/qbo/docs/go-live/publish-app", "note": "'The Show Credentials switch appears only after the App Assessment Questionnaire is approved' — production keys are gated behind Intuit's assessment."},
+    {"claims": ["access", "api"], "url": "https://developer.intuit.com/app/developer/qbo/docs/get-started/start-developing-your-app", "note": "Self-serve developer account creation with automatic sandbox company and immediate development credentials; REST v3 endpoints (sandbox-quickbooks.api.intuit.com/v3)."},
+    {"claims": ["mcp"], "url": "https://github.com/intuit/quickbooks-online-mcp-server", "note": "Official Intuit MCP server repo: local stdio server exposing full CRUD for 29 entity types and 11 reports via OAuth 2.0."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/quickbooks", "note": "Composio managed QuickBooks toolkit: OAUTH2, 114 tools, slug QUICKBOOKS."},
+    {"claims": ["webhooks"], "url": "https://developer.intuit.com/app/developer/qbo/docs/develop/webhooks/configure-webhooks", "note": "Official webhooks docs: CloudEvents-format POST notifications for entities such as Customer, Invoice, CreditMemo with create/update/delete/merge operations."}
+  ]
+}

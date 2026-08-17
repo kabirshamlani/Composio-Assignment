@@ -1,0 +1,27 @@
+{
+  "app_id": 4,
+  "name": "Attio",
+  "category": "CRM and Sales",
+  "official_domain": "attio.com",
+  "description": "CRM and Sales: modern, data-model-flexible CRM for teams with a REST API, webhooks and a hosted MCP server on all plans.",
+  "auth_methods": ["oauth2_authorization_code", "api_key", "basic_auth"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free plan (up to 3 seats) includes API and webhook access; single-workspace API keys are generated self-serve in workspace developer settings, and OAuth apps are registered self-serve at build.attio.com. New workspaces get a 14-day Pro trial.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Attio hosts an official remote MCP server at https://mcp.attio.com/mcp (OAuth login, all plans, read auto-approved / writes need confirmation). Composio also has an ATTIO toolkit (108 tools, 0 triggers, OAuth2 managed app).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "HTTP Basic auth is supported only as an alternative way to pass the token (token as username); Bearer is recommended. Composio toolkit currently lists 0 triggers even though Attio's API supports webhooks.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.attio.com/rest-api/guides/authentication", "note": "Two ways to get an access token: OAuth 2.0 flow for multi-workspace apps, or a self-generated single-workspace API key; tokens passed as Authorization: Bearer (Basic auth also supported)."},
+    {"claims": ["access", "api"], "url": "https://attio.com/help/reference/workspace-settings-billing/attio-plans-and-features", "note": "'Apps in Attio's App Store and access to Attio's API are available on all Attio plans' — including the Free plan (up to 3 seats)."},
+    {"claims": ["webhooks"], "url": "https://docs.attio.com/rest-api/guides/webhooks", "note": "Webhooks can be created via settings or the API, with event subscriptions and filtering (V2 webhooks)."},
+    {"claims": ["mcp"], "url": "https://docs.attio.com/mcp/overview", "note": "Official docs for Attio MCP: hosted server at https://mcp.attio.com/mcp using OAuth, works with Claude, ChatGPT, Cursor."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/attio", "note": "Composio ATTIO toolkit page: OAuth2, 108 tools, Composio managed app available."}
+  ]
+}

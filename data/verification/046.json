@@ -1,0 +1,26 @@
+{
+  "app_id": 46,
+  "name": "Squarespace",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "developers.squarespace.com/commerce-apis/authentication-and-permissions confirms requests are authenticated with a generated API key or OAuth access token, with API keys generated under Settings > Advanced > Developer API Keys; api_key is the primary self-serve path."},
+    {"field": "auth_methods", "draft_value": ["api_key", "oauth2_authorization_code", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "API keys for custom apps, OAuth 2.0 for registered clients/Extensions (with an OAuth 2.0 guide), and both credentials sent as Authorization: Bearer - all three entries confirmed on the live auth and making-requests pages."},
+    {"field": "access", "draft_value": "self_serve_paid", "verdict": "SUPPORTED",
+     "reason": "Paid-plan gating re-checked as instructed: the live authentication page states custom-application API keys require 'Squarespace's Commerce Advanced plan', and the support KB confirms Orders/Inventory/Transactions APIs are limited to higher-tier plans (Core/Plus/Advanced/Commerce Advanced) with the Forms API needing Business+. No free API tier exists; key generation itself is self-serve. self_serve_paid is correct."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "Commerce API suite (Analytics, Contacts, Discounts, Inventory, Orders, Products, Profiles, Transactions, Webhook Subscriptions) plus a read-only Website API - commerce-focused rather than full site management, so medium is fair."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "Official overview: 'All Commerce APIs are built on HTTPS and designed with REST principles in mind'; no GraphQL or vendor MCP endpoint exists."},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Value is correct but the draft carried no evidence URL for it. Independent searches found no official Squarespace MCP: the developer platform homepage lists only Commerce APIs, Reseller APIs and the custom code spec, and the MCP servers that exist for Squarespace are community projects (e.g. The1Studio/squarespace-mcp on GitHub, StackOne, timncox), confirming none_found for vendor/Composio options. The live Composio catalog (1183 toolkits, grepped) has no Squarespace toolkit.",
+     "replacement_evidence": "https://developers.squarespace.com/"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "With a qualifying paid plan, API keys are self-serve and the REST APIs are fully documented; nothing else blocks building."},
+    {"field": "primary_blocker", "draft_value": "paid_plan_required", "verdict": "SUPPORTED",
+     "reason": "The Commerce Advanced (or equivalent higher-tier) plan requirement for API keys is the operative gate; no review process otherwise."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Two assigned checks completed: (1) the evidence-less mcp claim - none_found confirmed via independent searches (only community MCP servers exist; official developer platform lists no MCP), marked PARTIALLY_SUPPORTED with replacement evidence per instructions; (2) paid-plan gating of the API - confirmed live that custom-app API keys require the Commerce Advanced plan and Commerce APIs are limited to higher-tier plans. Draft evidence URL developers.squarespace.com/commerce-apis/authentication-and-permissions confirmed live and matching."
+}

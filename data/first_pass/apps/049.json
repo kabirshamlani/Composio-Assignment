@@ -1,0 +1,26 @@
+{
+  "app_id": 49,
+  "name": "Amazon Selling Partner",
+  "category": "Ecommerce",
+  "official_domain": "developer-docs.amazon.com",
+  "description": "Ecommerce: Amazon's Selling Partner API (SP-API) for sellers/vendors covering orders, listings, feeds, reports, fulfillment, pricing and notifications.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "production_approval",
+  "access_notes": "Developers must submit a developer profile (Solution Provider Portal or Seller Central) that Amazon reviews and approves before API access; restricted roles (PII) trigger a more rigorous audit. Public apps then use Login with Amazon OAuth per selling partner; private apps can self-authorize. A sandbox exists but production access is gated on the registration review.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Amazon ships an official local MCP package @amazon-sp-api-release/sp-api-dev-mcp (dev-assistant + workflow servers) in the amzn/selling-partner-api-samples repo. No SP-API-specific Composio toolkit found (composio.dev/toolkits/amazon-selling-partner and /amazon_selling_partner return 404; Composio's generic 'amazon' toolkit is not SP-API).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "supports_webhooks refers to the SP-API Notifications API, which pushes events to Amazon SQS/EventBridge destinations rather than arbitrary HTTPS endpoints. Grantless operations use an LWA client_credentials-style grant.",
+  "evidence": [
+    {"claims": ["access"], "url": "https://developer-docs.amazon.com/sp-api/docs/register-as-a-public-developer", "note": "Developer profile form with security-controls questions; Amazon reviews and approves/denies registration, with extra audit for restricted (PII) roles"},
+    {"claims": ["auth"], "url": "https://developer-docs.amazon.com/sp-api/docs/authorize-public-applications", "note": "Public apps must use Login with Amazon (Amazon's OAuth 2.0) authorization-code flow; refresh tokens exchanged for access tokens at runtime"},
+    {"claims": ["auth", "api", "access"], "url": "https://developer-docs.amazon.com/sp-api/docs/onboarding-step-6-set-up-the-authorization-workflow", "note": "Sandbox available for exploration; production requires full LWA OAuth authorization; private apps can self-authorize (max 10 authorizations)"},
+    {"claims": ["mcp"], "url": "https://www.npmjs.com/package/@amazon-sp-api-release/sp-api-dev-mcp", "note": "Official Amazon npm package bundling sp-api-dev-assistant and sp-api-workflow MCP servers, including live sp_api_execute tool"}
+  ]
+}

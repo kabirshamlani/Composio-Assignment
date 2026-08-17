@@ -1,0 +1,25 @@
+{
+  "app_id": 99,
+  "name": "YouTube Transcript",
+  "category": "AI, Research and Media-native",
+  "official_domain": "transcriptapi.com",
+  "description": "Third-party hosted REST API (TranscriptAPI.com) for extracting YouTube video transcripts plus search, channel and playlist data; not YouTube's official API.",
+  "auth_methods": ["api_key", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "Self-serve signup at transcriptapi.com grants 100 free credits with no credit card; ongoing use requires a paid subscription from $5/month for 1,000 credits (1 credit per successful request, some endpoints free).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "narrow",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Vendor advertises a native YouTube MCP server; 'MCP Access' is included in all paid plans on the pricing page. No Composio toolkit for TranscriptAPI found (docs.composio.dev/toolkits/youtube_transcript returns 404; Composio's YouTube toolkit targets Google's official YouTube API, a different service).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API is read-only by nature (transcript/search/channel/playlist retrieval), which is the product's entire scope, so verdict is buildable_now despite narrow breadth. No webhook documentation found in the API reference; left null. Researched transcriptapi.com per the assignment hint, not YouTube's official Data API.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://transcriptapi.com/docs/api/", "note": "'The API uses Bearer token authentication. Include your API key in the Authorization header'; endpoint table: /youtube/transcript, /search, /channel/*, /playlist/videos under api/v2"},
+    {"claims": ["access", "mcp", "description"], "url": "https://transcriptapi.com/", "note": "'Get transcripts, search videos, browse channels, and extract playlists via REST API or YouTube MCP'; plans from $5/month with MCP Access and API Access; free API key at signup"},
+    {"claims": ["access"], "url": "https://transcriptapi.com/blog/extract-youtube-transcripts-programmatically", "note": "Vendor tutorial: 'the free tier gives you 100 credits'; sign up, grab API key from dashboard, Bearer header"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 85,
+  "name": "iPayX",
+  "category": "Finance and Fintech",
+  "official_domain": "ipayx.ai",
+  "description": "Finance and Fintech: FINTRAC-registered Canadian FX forensic audit platform (iPayX Protocol) that scores foreign-exchange transactions against live mid-market rates via REST API and a native MCP server.",
+  "auth_methods": ["api_key", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "Self-serve signup; free tier includes 5 lifetime audits and a no-signup public sandbox. Sustained API usage is paid (Developer $99/mo for 100 audits/mo up to Enterprise). API auth is a production API key passed as 'Authorization: Bearer ipx_live_...'; some MCP tools (rate check, limited audits) work without a key.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "narrow",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Vendor-hosted MCP server at https://mcp.ipayx.ai/mcp (SSE/streamable HTTP, listed on the MCP Registry per vendor site) plus vendor-published GitHub/npm package @ipayx/mcp-fx-audit. No iPayX toolkit found in the Composio toolkits index.",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "api_too_narrow",
+  "confidence": "medium",
+  "uncertainty_notes": "Young product with docs on the marketing site: ipayx.ai/docs returns 404 while ipayx.ai/developers hosts the API reference; the documented API base URL is currently a Supabase Functions URL (custom domain 'coming soon'). API surface is a single domain (FX audit: POST /v1/audit plus score-config CRUD), hence 'narrow'. Company verified as iPayX Protocol Inc. (11850091 Canada Inc., FINTRAC MSB C10001283).",
+  "evidence": [
+    {"claims": ["auth", "api", "webhooks", "access"], "url": "https://www.ipayx.ai/developers", "note": "Official developer docs: 'Authorization: Bearer ipx_live_your_key', REST endpoints (POST /v1/audit, /v1/score-config), webhooks (audit.completed, alert.triggered), pricing tiers Developer $99/mo to Enterprise, sandbox available."},
+    {"claims": ["mcp"], "url": "https://www.ipayx.ai/developers", "note": "Vendor MCP server URL https://mcp.ipayx.ai/mcp with tools check_fx_rate, audit_transaction, full_forensic_report; 'Officially listed on the MCP Registry (v1.3.3)'."},
+    {"claims": ["access", "description"], "url": "https://www.ipayx.ai", "note": "Homepage: free audit with no signup, 'Five free audits. Then transparent usage-based pricing'; FINTRAC MSB C10001283; REST API + SDKs + MCP + test sandbox sections."},
+    {"claims": ["mcp"], "url": "https://github.com/ipayx-technologies/mcp-fx-audit", "note": "Vendor GitHub org iPAYX-Technologies publishes the MCP server; README links ipayx.ai and app.ipayx.ai dashboards."}
+  ]
+}

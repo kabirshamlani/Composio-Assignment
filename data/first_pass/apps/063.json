@@ -1,0 +1,26 @@
+{
+  "app_id": 63,
+  "name": "Netlify",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "netlify.com",
+  "description": "Web hosting / deployment platform with an OpenAPI-documented REST API for sites, deploys, forms, DNS, env vars and hooks.",
+  "auth_methods": ["oauth2_authorization_code", "personal_access_token", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free self-serve accounts; PATs generated instantly in User settings > Applications > Personal access tokens and sent as 'Authorization: Bearer <PAT>'. Public integrations 'must use OAuth2' - register an OAuth app self-serve at app.netlify.com/applications (authorize endpoint https://app.netlify.com/authorize).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP server @netlify/mcp (github.com/netlify/netlify-mcp, documented at docs.netlify.com 'Netlify MCP Server'); local npx server using CLI auth or NETLIFY_PERSONAL_ACCESS_TOKEN. No Netlify toolkit found in the docs.composio.dev/toolkits catalog.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhooks: Netlify's OpenAPI reference includes hooks/deploy-notification endpoints and outgoing webhook notifications; specific webhook docs page not fetched this pass. Composio absence based on grep of the current docs.composio.dev/toolkits catalog page.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/", "note": "'Netlify uses OAuth2 for authentication'; PAT self-serve in user settings, used as Authorization: Bearer; public integrations must use OAuth2 with app registered at app.netlify.com/applications."},
+    {"claims": ["api"], "url": "https://open-api.netlify.com/", "note": "Official OpenAPI reference: 'REST-style API that uses JSON... OAuth 2 for authentication' covering deploys, sites, forms, snippets, hooks and more."},
+    {"claims": ["mcp", "auth"], "url": "https://github.com/netlify/netlify-mcp", "note": "Official Netlify MCP Server enabling agents to use the Netlify API/CLI; auth via CLI login or NETLIFY_PERSONAL_ACCESS_TOKEN env var."},
+    {"claims": ["mcp"], "url": "https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/", "note": "Vendor docs page for the Netlify MCP Server (linked as canonical docs from the official repo)."}
+  ]
+}

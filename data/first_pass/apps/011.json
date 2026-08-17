@@ -1,0 +1,28 @@
+{
+  "app_id": 11,
+  "name": "Zendesk",
+  "category": "Support and Helpdesk",
+  "official_domain": "zendesk.com",
+  "description": "Support and Helpdesk: customer service platform with ticketing, help center, messaging and AI agents.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "api_key", "basic_auth", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Self-serve free trial of Zendesk Suite (no permanent free plan). API tokens are generated in Admin Center by admins; OAuth clients are registered per instance. Zendesk is pushing existing API-token users to migrate to OAuth. Global OAuth clients (for multi-customer apps) require a request to Zendesk.",
+  "api_protocols": ["rest", "graphql", "websocket", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit", "reputable_community_mcp"],
+  "mcp_notes": "Zendesk announced both an MCP client (GA) and a first-party Zendesk MCP Server (early access, per-tenant at <subdomain>.zendesk.com/api/mcp with OAuth) at Relate 2026. Composio Zendesk toolkit exists at docs.composio.dev/toolkits/zendesk. Multiple community MCP servers also exist (e.g. fruggr/zendesk-mcp-server).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "The vendor MCP Server was in early access ('early access this summer', Relate 2026 newsroom); GA status not confirmed on an official page. GraphQL/websocket apply to specific surfaces (e.g. Chat/streaming APIs); the core Support API is REST.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.zendesk.com/api-reference/introduction/security-and-auth/", "note": "OAuth access tokens (Bearer) recommended; legacy API tokens use Basic auth with {email}/token:{api_token}; existing token users must migrate to OAuth."},
+    {"claims": ["auth"], "url": "https://developer.zendesk.com/documentation/authentication/api-tokens-to-oauth/", "note": "Zendesk supports two OAuth flows: authorization code (per-user) and client credentials (server-to-server)."},
+    {"claims": ["access", "api"], "url": "https://developer.zendesk.com/documentation/authentication/oauth-vs-api-tokens/", "note": "API tokens created self-serve in Admin Center; OAuth clients registered per instance; permissions scoped by user role and OAuth scopes."},
+    {"claims": ["mcp"], "url": "https://www.zendesk.com/newsroom/articles/relate-2026/", "note": "Official announcement of Zendesk MCP Client and Zendesk MCP Server ('connect Zendesk tickets, knowledge, and other data to external AI systems'), server in early access."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/zendesk", "note": "Composio Zendesk toolkit page exists (fetched successfully)."},
+    {"claims": ["webhooks"], "url": "https://developer.zendesk.com/api-reference/webhooks/introduction/", "note": "Zendesk webhooks API is a documented core feature for subscribing to ticket and other events."}
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "app_id": 60,
+  "name": "Clay",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "STALE_OR_AMBIGUOUS",
+     "reason": "OAuth (authorization code + PKCE with open DCR) is real but it is the MCP-client auth path. Clay has since launched a Public API at api.clay.com/public/v0 (developers.clay.com) where every request authenticates with a Clay API key in the clay-api-key header, created self-serve under Settings -> Account -> API keys (beta). For a direct API integration, api_key is now the primary auth; the draft reflects the pre-developer-platform state where MCP was the main programmatic surface.",
+     "corrected_value": "api_key",
+     "replacement_evidence": "https://developers.clay.com/public-api/authentication"},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "api_key", "custom"], "verdict": "SUPPORTED",
+     "reason": "All three confirmed live: OAuth 2.0 authorization code + PKCE with RFC 7591 DCR for the MCP server (university.clay.com/docs/connect-to-clay-mcp), Clay API keys for the Public API (clay-api-key header), and per-table inbound webhook URLs with optional auth token ('custom')."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Clay accounts are self-serve with a free tier; the new Public API even publishes Free-plan search limits (50 results/request, 100/month) alongside Paid (1M/year) and Enterprise (10M/year) on developers.clay.com/searches, and API keys are created self-serve in account settings. Enterprise gating applies only to the Tables query API and the legacy People & Company lookup API."},
+    {"field": "api_breadth", "draft_value": "narrow", "verdict": "CONTRADICTED",
+     "reason": "Since the draft, Clay launched a documented Public API with an OpenAPI spec (developers.clay.com/openapi.json): people/company Searches (structured filters + advanced query language), Routines execution (Clay-managed functions, custom functions, Workflows alpha) including async runs and JSONL batch runs with presigned uploads, Tables structured query (Enterprise), outbound webhooks for run completion, pagination, rate limits and error contracts, plus a CLI and agent plugin. That is materially broader than 'narrow' (which was premised on 'no public versioned REST API or OpenAPI spec' — no longer true).",
+     "corrected_value": "medium",
+     "replacement_evidence": "https://developers.clay.com/"},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST Public API (api.clay.com/public/v0) and official MCP server (api.clay.com/v3/mcp, streamable HTTP) both confirmed live."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Ownership verified: the MCP server is hosted on Clay's own domain (https://api.clay.com/v3/mcp), OAuth issuer api.clay.com, authorization at app.clay.com/oauth/authorize, and it is documented on Clay's official docs site (university.clay.com/docs/connect-to-clay-mcp) with open Dynamic Client Registration and workspace-admin 'Allowed MCP clients' controls. This is a genuine first-party vendor MCP, not a community server. No Clay toolkit found in the Composio catalog, matching the draft."},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "CONTRADICTED",
+     "reason": "The premise ('general table CRUD / workflow control via a public API does not exist') is stale. The Public API now offers self-serve API keys, searches, routine/function execution, batch runs, table queries (Enterprise), completion webhooks and an OpenAPI spec — an integration can be built today against documented endpoints.",
+     "corrected_value": "buildable_now",
+     "replacement_evidence": "https://developers.clay.com/"},
+    {"field": "primary_blocker", "draft_value": "api_too_narrow", "verdict": "CONTRADICTED",
+     "reason": "With the Public API launched, the API is no longer the blocker. Remaining caveats are quota/plan-shaped, not access-shaped: free-plan search quota is tiny (100 results/month), the Tables API is Enterprise-only, and credit consumption applies — but a self-serve integration is unblocked, consistent with buildable_now.",
+     "corrected_value": null,
+     "replacement_evidence": "https://developers.clay.com/searches"}
+  ],
+  "overall": "corrected",
+  "checked_at": "2026-08-17",
+  "notes": "High-risk checks both resolved. (1) Official vendor MCP claim verified: api.clay.com/v3/mcp with OAuth+PKCE and open DCR, documented on Clay's own university.clay.com — genuinely first-party. (2) API access gating re-checked and the draft is now stale: Clay launched a public developer platform (developers.clay.com) with a documented Public API (clay-api-key auth, self-serve keys in app settings, OpenAPI spec, searches/routines/batch/tables/webhooks) available with plan-based limits including a small free tier. This contradicts api_breadth=narrow, technical_verdict=partially_buildable, and primary_blocker=api_too_narrow. The Enterprise-only People & Company lookup API and Growth+ HTTP-API-column gating the draft described still exist but are no longer the whole story."
+}

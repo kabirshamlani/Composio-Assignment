@@ -1,0 +1,27 @@
+{
+  "app_id": 67,
+  "name": "Snowflake",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "snowflake.com",
+  "description": "Developer/data platform: cloud data warehouse with a SQL API and REST APIs for executing SQL and managing account objects.",
+  "auth_methods": ["oauth2_authorization_code", "jwt", "personal_access_token", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Self-service 30-day free trial account; no permanent free tier. Key-pair JWTs, programmatic access tokens and OAuth integrations are all configurable by the account user/admin without vendor approval.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Snowflake-managed MCP server is a first-party hosted feature (CREATE MCP SERVER object, OAuth 2.0 auth, serves Cortex Analyst/Search/Agents and SQL execution as tools); Snowflake-Labs also publishes an open-source MCP server. Composio lists a SNOWFLAKE toolkit (own-credentials auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhooks: Snowflake has notification integrations but outbound webhook support was not verified on an official page, so left null. Key-pair (JWT), OAuth, and programmatic access tokens are all documented for the SQL API and REST APIs; managed MCP server does not support dynamic client registration.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://docs.snowflake.com/en/developer-guide/sql-api/authenticating", "note": "SQL API (REST) authenticates via OAuth, key-pair JWT, or programmatic access tokens, sent as Authorization: Bearer with X-Snowflake-Authorization-Token-Type KEYPAIR_JWT/OAUTH/PROGRAMMATIC_ACCESS_TOKEN."},
+    {"claims": ["auth", "api"], "url": "https://docs.snowflake.com/en/developer-guide/snowflake-rest-api/authentication", "note": "Snowflake REST APIs support key pair auth, OAuth, programmatic access tokens (PAT), and workload identity federation."},
+    {"claims": ["api", "description"], "url": "https://docs.snowflake.com/en/developer-guide/sql-api/index", "note": "'The Snowflake SQL API is a REST API that you can use to access and update data in a Snowflake database.'"},
+    {"claims": ["mcp"], "url": "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp", "note": "Official 'Snowflake-managed MCP server' docs: first-party hosted MCP with OAuth 2.0, exposing Cortex tools and SQL execution."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/managed-auth", "note": "Composio toolkit list includes Snowflake (slug SNOWFLAKE) under toolkits requiring your own credentials."}
+  ]
+}

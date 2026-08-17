@@ -1,0 +1,27 @@
+{
+  "app_id": 52,
+  "name": "SE Ranking",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "seranking.com",
+  "description": "Data, SEO and Scraping: SEO platform with a Data API (keywords, backlinks, domain analytics, audits, AI visibility) and a Project API (rank tracking, project management).",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "A single API key (Authorization: Token <key>, or apikey query param) is generated in the account dashboard and 'included in every SE Ranking plan'; the vendor states the API can be tested in the free trial account. Data API usage is billed in credits (plan allowance, PAYG packs from $50, or standalone annual API plans); Project API endpoints require a Business/Enterprise-tier subscription (403 'Subscription required' otherwise).",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP: centrally hosted remote server (seranking.com/mcp.html, 180+ tools, also a ChatGPT connector), with setup docs at seranking.com/api/integrations/mcp/. A previously cited open-source repo (github.com/seranking/seo-data-api-mcp-server) is no longer publicly available (GitHub 404; not in the seranking org's public repo list). No Composio toolkit found (composio.dev/toolkits/seranking and /se_ranking return 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhook support was not determined from the pages reviewed. Sustained production use requires a paid subscription or credit purchases even though trial access is self-serve. The open-source MCP repo cited in an earlier draft has since been removed or made private on GitHub; the official MCP claim rests on the vendor-hosted remote server, which is live and documented.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://seranking.com/api/how-to-get-api/", "note": "One API key for both APIs, sent as 'Authorization: Token'; Data API billed in credits with PAYG from $50, Project API uses subscription limits"},
+    {"claims": ["auth", "api"], "url": "https://seranking.com/api/data/getting-started/", "note": "REST base https://api.seranking.com/v1 with Authorization header (recommended) or apikey query param; credit costs per endpoint"},
+    {"claims": ["access"], "url": "https://seranking.com/api.html", "note": "'API access is included in every SE Ranking plan... You can even test it in the free trial account'"},
+    {"claims": ["mcp"], "url": "https://seranking.com/mcp.html", "note": "Official hosted SE Ranking MCP server, 'centrally hosted and managed by SE Ranking', 180+ SEO/GEO tools"},
+    {"claims": ["mcp"], "url": "https://seranking.com/api/integrations/mcp/", "note": "Official SE Ranking API documentation page for the MCP Server (setup instructions for connecting AI clients to the hosted vendor MCP)"}
+  ]
+}

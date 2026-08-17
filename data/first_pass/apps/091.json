@@ -1,0 +1,27 @@
+{
+  "app_id": 91,
+  "name": "NotebookLM",
+  "category": "AI, Research and Media-native",
+  "official_domain": "notebooklm.google",
+  "description": "AI, Research and Media-native: Google's source-grounded AI research notebook (renamed Gemini Notebook in July 2026) for document Q&A, summaries and audio overviews.",
+  "auth_methods": ["oauth2_authorization_code", "service_account", "bearer_token"],
+  "primary_auth": "service_account",
+  "access": "enterprise_gated",
+  "access_notes": "No public consumer API exists. Programmatic access is only via the Gemini Notebook Enterprise (formerly NotebookLM Enterprise) API on Google Cloud (google.cloud.notebooklm.v1alpha, served through *-discoveryengine.googleapis.com), which requires a Google Cloud project plus a Gemini Enterprise or Gemini Education Premium license and admin setup. Standard Google Cloud auth: OAuth bearer tokens (gcloud auth print-access-token), discoveryengine OAuth scopes and IAM permissions; service accounts are the standard server-side pattern.",
+  "api_protocols": ["rest", "grpc"],
+  "api_breadth": "narrow",
+  "supports_webhooks": null,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No official Google MCP server for NotebookLM found in Google Cloud or NotebookLM docs. Community open-source projects (e.g. notebooklm-mcp-cli mentioned in third-party blogs) exist but are unofficial and unverified. No Composio toolkit (docs.composio.dev/toolkits/notebooklm.md returns 404).",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "enterprise_license_required",
+  "confidence": "high",
+  "uncertainty_notes": "API is v1alpha and covers notebook CRUD, source management, sharing and audio-overview generation for the Enterprise product only; the consumer NotebookLM app (notebooklm.google) has no API. Searches tried for MCP: 'NotebookLM MCP server official', Composio toolkit slugs notebooklm. Webhooks: no eventing/webhook docs found for the notebooklm.v1alpha surface.",
+  "evidence": [
+    {"claims": ["api", "access", "auth"], "url": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/docs/api-notebooks", "note": "Official Gemini Notebook Enterprise API docs: notebooks.create/get/listRecentlyViewed/batchDelete/share via curl with 'Authorization: Bearer $(gcloud auth print-access-token)'."},
+    {"claims": ["auth", "api"], "url": "https://docs.cloud.google.com/gemini/enterprise/docs/reference/rpc/google.cloud.notebooklm.v1alpha", "note": "RPC reference (google.cloud.notebooklm.v1alpha): requires OAuth scopes cloud-platform/discoveryengine.readwrite and discoveryengine.notebooks.* IAM permissions."},
+    {"claims": ["api"], "url": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/docs/api-notebooks-sources", "note": "Source management API: notebooks.sources.batchCreate, uploadFile, get on discoveryengine.googleapis.com."},
+    {"claims": ["description"], "url": "https://notebooklm.google/", "note": "'NotebookLM is now Gemini Notebook as of July 2026' — same source-grounded research product."},
+    {"claims": ["access"], "url": "https://notebookclipper.com/blog/gemini-notebook-api", "note": "Third-party lead corroborating no public consumer API; enterprise API needs a Google Cloud project and Gemini Enterprise/Education Premium license (matches official docs)."}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 28,
+  "name": "WhatsApp Business",
+  "category": "Communications and Messaging",
+  "official_domain": "developers.facebook.com",
+  "description": "Business messaging platform; the Meta-hosted WhatsApp Cloud API (Graph API) sends/receives WhatsApp messages, templates and media for businesses.",
+  "auth_methods": ["bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "bearer_token",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Any Meta developer can self-serve a test WABA + test phone number and a temporary (~24h) access token, and message up to a handful of opted-in test recipients for free. Production requires a permanent System User token from Business Settings, a published app, a dedicated registered business phone number, and Meta business verification to scale past the base messaging tier; conversations/messages are billed.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit"],
+  "mcp_notes": "Composio catalog lists a WhatsApp toolkit (WHATSAPP, 57 tools, OAUTH2/API_KEY, triggers). No official Meta/WhatsApp MCP server found in Meta developer docs during research.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "OAuth2 (Facebook Login for Business / Embedded Signup) is the flow Meta pushes for multi-tenant Tech Provider integrations; single-business integrations typically use long-lived System User bearer tokens. API breadth is deep for messaging (messages, templates, media, phone numbers, WABA management) but centered on the messaging use case, hence medium.",
+  "evidence": [
+    {"claims": ["auth", "access", "api"], "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/", "note": "Self-serve: create Meta app, generate temporary access token, send test message from test number; permanent token requires a System User in Business Settings with whatsapp_business_messaging/management permissions."},
+    {"claims": ["auth"], "url": "https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/", "note": "Cloud API uses 'Authorization: Bearer <token>'; temporary token expires <24h, System User token is the permanent credential."},
+    {"claims": ["access"], "url": "https://developers.facebook.com/docs/whatsapp/overview/business-accounts/", "note": "Test WABA/test number from get-started; API Setup panel adds a production business phone number; business_verification_status tracked on the WABA."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Catalog lists WhatsApp toolkit (WHATSAPP, 57 tools, OAUTH2/API_KEY)."}
+  ]
+}

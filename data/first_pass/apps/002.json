@@ -1,0 +1,28 @@
+{
+  "app_id": 2,
+  "name": "HubSpot",
+  "category": "CRM and Sales",
+  "official_domain": "hubspot.com",
+  "description": "CRM and Sales: inbound marketing, sales and service platform with a free CRM tier and extensive CRM object APIs.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free HubSpot CRM accounts and free developer accounts are self-serve. OAuth apps are required for multi-account distribution; private apps issue a static bearer access token for a single account (super admin required to create one).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "HubSpot offers two official MCP servers: a remote hosted CRM MCP server at https://mcp.hubspot.com (OAuth 2.1 + PKCE via an MCP auth app) and a local developer MCP server via the HubSpot CLI / @hubspot/mcp-server npm package. Composio also has a HUBSPOT toolkit (245 tools, 2 triggers).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Private app access tokens are 'implemented on top of OAuth' and sent as Bearer tokens; classified as bearer_token. Some API scopes/endpoints are gated by paid account tiers, but core CRM objects work on the free tier.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview", "note": "Authentication overview: OAuth required for multi-account apps; static auth access tokens (private apps) for single-account installs."},
+    {"claims": ["auth", "access"], "url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/oauth/working-with-oauth", "note": "OAuth 2.0 authorization code flow with client ID/secret and scopes; app creation is self-serve in a developer account."},
+    {"claims": ["auth", "api"], "url": "https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview", "note": "Private app access tokens used as 'Authorization: Bearer [YOUR_TOKEN]' against HubSpot REST API endpoints (e.g. Contacts API)."},
+    {"claims": ["mcp"], "url": "https://developers.hubspot.com/ai-tools/mcp", "note": "Official page describing HubSpot's two MCP servers: remote CRM MCP server at mcp.hubspot.com and the local developer MCP server."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/hubspot", "note": "Composio HUBSPOT toolkit page: OAUTH2/API_KEY, 245 tools, 2 triggers, Composio managed app available."},
+    {"claims": ["webhooks", "auth"], "url": "https://developers.hubspot.com/docs/api/webhooks", "note": "Webhooks journal and management APIs (v4) for subscribing to real-time CRM events; also documents OAuth client-credentials tokens for app-level auth."}
+  ]
+}

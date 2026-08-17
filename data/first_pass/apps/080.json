@@ -1,0 +1,27 @@
+{
+  "app_id": 80,
+  "name": "Harvest",
+  "category": "Productivity and Project Management",
+  "official_domain": "harvestapp.com",
+  "description": "Productivity and project management: time tracking, invoicing, expenses and project budget reporting tool.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Personal access tokens and OAuth2 applications are created self-serve from the Developers section of Harvest ID (id.getharvest.com/developers); Harvest offers a free plan and 30-day free trial. Every request needs a Harvest-Account-Id and User-Agent header alongside the Bearer token.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": false,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit", "reputable_community_mcp"],
+  "mcp_notes": "Official vendor-hosted remote MCP at https://api.harvestapp.com/mcp documented in the Harvest Help Center (time entries, timers, projects, budgets). Composio has a managed HARVEST toolkit (OAuth2, 57 tools). Multiple community MCP servers also exist on GitHub (unofficial).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "No webhooks section exists anywhere in the Harvest API v2 documentation index (Clients, Invoices, Estimates, Expenses, Tasks, Timesheets, Projects, Roles, Users, Reports), so supports_webhooks is recorded as false; event notifications require polling or third-party connectors like Zapier.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://help.getharvest.com/api-v2/authentication-api/authentication/authentication/", "note": "V2 API supports Personal Access Tokens (created self-serve in Harvest ID Developers section) and full OAuth2 authorization_code flow via id.getharvest.com/oauth2/authorize."},
+    {"claims": ["api"], "url": "https://help.getharvest.com/api-v2/introduction/overview/general/", "note": "REST API at api.harvestapp.com/v2 with Bearer token, Harvest-Account-Id and required User-Agent headers; supports GET/POST/PATCH/DELETE."},
+    {"claims": ["api", "webhooks"], "url": "https://help.getharvest.com/api-v2/", "note": "API v2 doc index covers Clients, Invoices, Estimates, Expenses, Tasks, Timesheets, Projects, Roles, Users and Reports (read+write); no webhooks API is listed."},
+    {"claims": ["mcp"], "url": "https://support.getharvest.com/hc/en-us/articles/46293697226381-Harvest-MCP", "note": "Official Harvest Help Center article: remote MCP server at https://api.harvestapp.com/mcp for timers, time entries and project budgets."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists HARVEST: 57 tools, OAuth2, Composio-managed."}
+  ]
+}

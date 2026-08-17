@@ -1,0 +1,28 @@
+{
+  "app_id": 57,
+  "name": "Bright Data",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "brightdata.com",
+  "description": "Web data / scraping platform offering proxy networks, Web Unlocker, SERP API, Web Scraper APIs and dataset marketplace via REST.",
+  "auth_methods": ["api_key", "bearer_token", "custom"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Self-serve signup; a default API key is auto-created on account creation and managed in Account settings (admin role needed to mint new keys). Every new account includes a free tier of 5,000 requests/month (shared pool, runs on Web Unlocker API); paid usage-based plans beyond that.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor Web MCP: hosted remote endpoint https://mcp.brightdata.com/mcp?token=API_TOKEN plus self-hosted @brightdata/mcp npm package (github.com/brightdata/brightdata-mcp). Composio toolkit BRIGHTDATA exists with 10 tools (API_KEY auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "auth 'custom' = Native proxy access via proxy-protocol username/password credentials (documented alternative to REST API key). Webhook/callback delivery for scraper results not verified this pass, left null.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.brightdata.com/api-reference/authentication", "note": "Two methods: API key as 'Authorization: Bearer <token>' for REST, or Native proxy username/password; default API key auto-created on account creation, admins manage keys in Account settings."},
+    {"claims": ["api", "auth"], "url": "https://docs.brightdata.com/api-reference/proxy/proxy_api_auth", "note": "REST API at api.brightdata.com; API key is 'full compliant with REST API', proxy user/pass for native 3rd-party tool access."},
+    {"claims": ["mcp", "access"], "url": "https://docs.brightdata.com/ai/mcp-server/overview", "note": "Official Bright Data MCP server (remote managed or self-hosted); every new account includes 5,000 free requests per month."},
+    {"claims": ["mcp"], "url": "https://github.com/brightdata/brightdata-mcp", "note": "Official vendor repo for @brightdata/mcp; hosted endpoint mcp.brightdata.com/mcp with API token; 5,000 free credits/month, no card needed."},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/brightdata", "note": "Composio Brightdata toolkit page: 10 tools (Web Unlocker, SERP Search, Trigger Site Crawl, datasets etc.), connected via user's Bright Data API key."},
+    {"claims": ["api", "description"], "url": "https://docs.brightdata.com/scraping-automation/web-unlocker/send-your-first-request", "note": "Single RESTful endpoint https://api.brightdata.com/request with Bearer API key; shows scraping/unlocker workflow."}
+  ]
+}

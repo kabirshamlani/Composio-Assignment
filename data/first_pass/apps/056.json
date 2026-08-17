@@ -1,0 +1,26 @@
+{
+  "app_id": 56,
+  "name": "Firecrawl",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "firecrawl.dev",
+  "description": "Data, SEO and Scraping: web scraping/crawling API that turns websites into LLM-ready data (scrape, crawl, map, search, extract, parse).",
+  "auth_methods": ["api_key", "bearer_token", "none"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Free self-serve account with API key from firecrawl.dev/app/api-keys, sent as 'Authorization: Bearer <FIRECRAWL_API_KEY>'. A keyless tier even allows rate-limited scrape/search/parse calls with no account at all (both direct API and hosted MCP); an API key or OAuth sign-in unlocks the full tool surface and higher limits.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted vendor MCP at https://mcp.firecrawl.dev/v2/mcp (keyless, OAuth sign-in, or Bearer API key; open-source firecrawl-mcp-server on GitHub). Composio toolkit exists at composio.dev/toolkits/firecrawl with 29 tools.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "supports_webhooks=true based on Firecrawl's documented webhooks for crawl/batch job events in docs.firecrawl.dev; that specific page was not fetched this pass. 'none' auth applies only to the rate-limited keyless tier.",
+  "evidence": [
+    {"claims": ["auth", "access", "api"], "url": "https://docs.firecrawl.dev/introduction", "note": "REST API at api.firecrawl.dev; scrape works with no API key to start, free account/API key for higher limits — 'add -H Authorization: Bearer $FIRECRAWL_API_KEY'"},
+    {"claims": ["auth", "mcp", "access"], "url": "https://docs.firecrawl.dev/mcp-server", "note": "Official hosted MCP at mcp.firecrawl.dev/v2/mcp with keyless, OAuth sign-in, or API-key (Bearer) auth paths"},
+    {"claims": ["mcp"], "url": "https://github.com/firecrawl/firecrawl-mcp-server", "note": "Official open-source Firecrawl MCP server repo under the firecrawl GitHub org; keyless free tier exposes scrape/search/parse"},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/firecrawl", "note": "Composio Firecrawl toolkit page listing 29 tools (scrape, batch scrape, crawl, credit usage, etc.)"}
+  ]
+}

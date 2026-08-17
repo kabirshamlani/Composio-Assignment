@@ -1,0 +1,25 @@
+{
+  "app_id": 75,
+  "name": "Asana",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "developers.asana.com/docs/authentication: OAuth 'is the best choice if multiple users need to sign in to your app'; PAT is positioned as the quick-start option. OAuth authorization-code as primary for a multi-user integration is correct."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "personal_access_token", "bearer_token", "service_account"], "verdict": "SUPPORTED",
+     "reason": "Official authentication page lists PATs, Service Accounts (Enterprise-tier, super-admin created), OAuth, and OpenID Connect; all tokens are sent as Authorization: Bearer. Draft omits OIDC but that is login/SSO, not API auth, so the list is accurate. Enterprise-only nature of service accounts is correctly disclosed in access_notes."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "PATs are 'generated in the developer console' (app.asana.com/0/my-apps) self-serve, OAuth apps and MCP apps are created there too with no approval gate, and Asana offers a free Personal tier. Only Service Accounts require an Enterprise plan, which the draft already notes."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST API at app.asana.com/api/1.0 covers tasks, projects, portfolios, goals, sections, tags, custom fields, memberships, attachments, status updates, audit logs, webhooks, etc. Composio alone wraps 153 distinct Asana tools — clearly broad."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST API plus the official Asana MCP server at https://mcp.asana.com/v2/mcp (Streamable HTTP with Bearer token) documented on developers.asana.com."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "developers.asana.com/docs/integrating-with-asanas-mcp-server (updated 2026-07-23): 'The Asana V2 MCP server is generally available and uses OAuth' with pre-registration in the developer console; 'Dynamic client registration is not supported'; V1 https://mcp.asana.com/sse deprecated with shutdown Wed 5 Aug 2026. Composio ASANA toolkit confirmed at docs.composio.dev/toolkits/asana: OAUTH2, Composio managed: Yes, 153 tools, 6 triggers. All draft mcp_notes claims verified verbatim."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve free PAT/OAuth access, public docs, broad read/write REST API with webhooks, GA vendor MCP, and a managed Composio toolkit. Nothing blocks building today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker: no partner program, approval queue, or paid plan required for PAT/OAuth API access. The only gated feature (Service Accounts, Enterprise) is optional."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently re-opened developers.asana.com/docs/authentication and docs/integrating-with-asanas-mcp-server, and confirmed the Composio ASANA toolkit page via fresh search. Auth options (PAT/OAuth/Service Account/OIDC), self-serve free access, V2 MCP GA at mcp.asana.com/v2/mcp with OAuth pre-registration and no DCR, V1 /sse deprecation (shutdown 2026-08-05), and Composio toolkit counts (153 tools, 6 triggers, OAuth2, managed) all match the draft exactly. No contradictions."
+}

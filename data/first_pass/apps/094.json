@@ -1,0 +1,25 @@
+{
+  "app_id": 94,
+  "name": "Consensus",
+  "category": "AI, Research and Media-native",
+  "official_domain": "consensus.app",
+  "description": "AI, Research and Media-native: AI academic search engine over peer-reviewed papers, with an application-gated search API and an official OAuth MCP server.",
+  "auth_methods": ["api_key", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "contact_sales",
+  "access_notes": "A public API does exist (documented at docs.consensus.app, e.g. GET /v1/quick_search with x-api-key header), but 'The Consensus API is available by application only' with custom quotes (baseline $0.10/call plus platform fee) — no self-serve key generation. The MCP server, by contrast, is self-serve for Consensus users via OAuth; enterprise MCP access uses an API key as a Bearer token.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "narrow",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP server at https://mcp.consensus.app/mcp documented at docs.consensus.app/docs/mcp; OAuth in Claude/ChatGPT/Cursor/Codex, Bearer API key for enterprise clients. No Composio toolkit found (docs.composio.dev/toolkits/consensus.md returns 404).",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "high",
+  "uncertainty_notes": "The documented REST surface is essentially paper search (quick_search) — read-only and narrow. OAuth is only used for the MCP connector, not the REST API. No webhook documentation found. The hint 'OAuth requested' matches the MCP OAuth flow; direct API remains application-gated.",
+  "evidence": [
+    {"claims": ["access"], "url": "https://consensus.app/home/api/", "note": "'The Consensus API is available by application only. Our baseline pricing starts at $0.10 per call, plus a platform fee. Apply today to receive a custom quote.'"},
+    {"claims": ["api", "auth"], "url": "https://docs.consensus.app/reference/v1_quick_search", "note": "OpenAPI reference for GET /v1/quick_search secured with XApiKeyHeader (x-api-key)."},
+    {"claims": ["mcp", "auth"], "url": "https://docs.consensus.app/docs/mcp", "note": "Official MCP server URL https://mcp.consensus.app/mcp; OAuth supported in Claude/ChatGPT/Cursor/Codex; enterprise access via 'Authorization: Bearer YOUR_API_KEY'."}
+  ]
+}

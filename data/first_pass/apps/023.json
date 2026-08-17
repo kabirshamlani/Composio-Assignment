@@ -1,0 +1,27 @@
+{
+  "app_id": 23,
+  "name": "Zoho Cliq",
+  "category": "Communications and Messaging",
+  "official_domain": "zoho.com/cliq",
+  "description": "Communications and messaging: Zoho's team chat platform with channels, bots, and a REST API covering messages, users, teams and files.",
+  "auth_methods": ["oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free plan exists (includes up to 100 bots per org); OAuth clients are registered self-serve in the Zoho API Console. Tokens sent as 'Authorization: Zoho-oauthtoken {token}'. Bot incoming webhooks use separate per-user webhook tokens (zapikey).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official Zoho MCP server (configured at mcp.zoho.com) exposes Cliq tools for channels, messages, users, bots, files, calls, etc. No Composio Zoho Cliq toolkit found (docs.composio.dev/toolkits/zoho_cliq.md, /cliq.md and composio.dev/toolkits/zoho_cliq all 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Zoho OAuth also supports 'self client' registration for server-to-server scripts, still under the OAuth 2.0 umbrella. Webhook support is via bot 'Webhook bots' (execution_url receiving POSTs) and incoming webhook handlers rather than a standalone webhooks product.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://www.zoho.com/cliq/help/restapi/v3/oauth/", "note": "OAuth 2.0: register app in Zoho API Console, authorization-code flow via accounts.zoho.{dc}/oauth/v2/auth, bearer scheme with 'Zoho-oauthtoken' prefix."},
+    {"claims": ["api", "description"], "url": "https://www.zoho.com/cliq/help/restapi/v3/introduction/", "note": "REST API v3 (v2 still supported) enabling read/write operations similar to the web client."},
+    {"claims": ["access"], "url": "https://www.zoho.com/cliq/plan-comparison.html", "note": "Free plan available with bots (100/org) and platform features; paid tiers raise limits."},
+    {"claims": ["webhooks"], "url": "https://www.zoho.com/cliq/help/restapi/v3/bots/", "note": "Webhook bots: Cliq sends HTTP POST events to your execution_url; incoming webhook handlers let external services post into bots."},
+    {"claims": ["mcp"], "url": "https://www.zoho.com/cliq/help/platform/zoho-cliq-mcp.html", "note": "Official vendor MCP: 'Any AI model or agent can use our official MCP server to access your Cliq data'."}
+  ]
+}

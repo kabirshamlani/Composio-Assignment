@@ -1,0 +1,27 @@
+{
+  "app_id": 81,
+  "name": "Stripe",
+  "category": "Finance and Fintech",
+  "official_domain": "stripe.com",
+  "description": "Finance and Fintech: online payments infrastructure with APIs for payments, customers, subscriptions, billing and payouts.",
+  "auth_methods": ["api_key", "basic_auth", "bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Anyone can sign up and get test-mode (sandbox) secret keys immediately with unrestricted sandbox access; live-mode keys are issued after self-serve account activation (business details), not a manual partner review. OAuth is used for Connect platform integrations and for the MCP server.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Stripe hosts an official remote MCP server at https://mcp.stripe.com (OAuth or restricted-API-key bearer auth) plus a local @stripe/mcp package; Composio has a managed STRIPE toolkit with 432 tools.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.stripe.com/api/authentication", "note": "'The Stripe API uses API keys to authenticate requests' via HTTP Basic Auth (key as username) or Bearer header; keys managed in the Dashboard."},
+    {"claims": ["access", "auth"], "url": "https://docs.stripe.com/keys", "note": "'When you sign up for a Stripe account, we create three types of API keys for you'; test keys have unrestricted sandbox access, switching to live mode is done from the same API keys page."},
+    {"claims": ["mcp", "api"], "url": "https://docs.stripe.com/mcp", "note": "Official Stripe MCP server hosted at https://mcp.stripe.com; OAuth recommended, restricted API key as bearer token supported."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/stripe.md", "note": "Composio managed Stripe toolkit: Auth API_KEY/OAUTH2, 432 tools, 7 triggers, slug STRIPE."},
+    {"claims": ["webhooks"], "url": "https://docs.stripe.com/webhooks", "note": "'Receive Stripe events in your webhook endpoint' — register HTTPS endpoints (up to 16) for real-time event delivery."}
+  ]
+}

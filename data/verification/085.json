@@ -1,0 +1,25 @@
+{
+  "app_id": 85,
+  "name": "iPayX",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Live developer docs (ipayx.ai/developers) confirm 'Authenticate every request using your production API key in the Authorization header' as 'Authorization: Bearer ipx_live_your_key', generated self-serve from the dashboard."},
+    {"field": "auth_methods", "draft_value": ["api_key", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "API key over Bearer header is the only documented auth for REST and for the keyed MCP tools; two public MCP tools (check_fx_rate, audit_transaction) work without a key, matching the draft's access_notes."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "SUPPORTED",
+     "reason": "Self-serve confirmed: 'Create your account... generate your production API key', a public sandbox (ipayx.ai/developers/sandbox), rate-limited free public MCP audits (10/IP/7d), and paid tiers for sustained use (Developer $99/mo for 100 audits/mo through Enterprise) all on the live developers page. self_serve_trial is the right label since sustained API usage is paid."},
+    {"field": "api_breadth", "draft_value": "narrow", "verdict": "SUPPORTED",
+     "reason": "The live endpoint summary lists exactly one functional domain: POST /v1/audit plus GET/PUT/DELETE /v1/score-config. Single-purpose FX-audit API; narrow is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST API confirmed (currently served from a Supabase Functions base URL with 'custom domain api.ipayx.ai coming soon', exactly as the draft's uncertainty_notes state); vendor MCP server confirmed at https://mcp.ipayx.ai/mcp with documented tools check_fx_rate, audit_transaction, full_forensic_report."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "High-risk ownership claim verified: the MCP server is hosted on the vendor's own domain (mcp.ipayx.ai), documented on the vendor's own developer page and dedicated ipayx.ai/docs/mcp-server page, and the vendor GitHub org repo ipayx-technologies/mcp-fx-audit exists. This is a vendor-published MCP, not a community server. The 'Officially listed on the MCP Registry (v1.3.3)' line is vendor self-attestation but does not change the official_vendor_mcp classification. No iPayX Composio toolkit exists, consistent with the draft."},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "SUPPORTED",
+     "reason": "Everything is self-serve and technically usable today, but the API covers a single narrow FX-audit function, so partially_buildable with an api_too_narrow blocker is a defensible, internally consistent rating."},
+    {"field": "primary_blocker", "draft_value": "api_too_narrow", "verdict": "SUPPORTED",
+     "reason": "Confirmed by the live endpoint summary: one audit endpoint plus scoring-profile config is the entire API surface."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Right-product check (the key risk): the name iPayX historically also belonged to Internet Payment Exchange, Inc. (Toledo, Ohio, founded 1999), but that company was acquired by BillingTree in December 2017 and no longer operates standalone; the live product with a public API and MCP is iPayX Protocol at ipayx.ai, which is what the draft researched. Re-opened ipayx.ai/developers live and confirmed auth, endpoints, webhooks (audit.completed / alert.triggered / api_key.regenerated), pricing tiers, the Supabase base URL caveat, FINTRAC MSB C10001283 self-description, and the vendor GitHub org. Caveat carried forward from the draft's medium confidence: this is a very young, thinly-established product (vendor GitHub repo has 0 stars) and most claims rest on the vendor's own site, but nothing contradicts the drafted values."
+}

@@ -1,0 +1,27 @@
+{
+  "app_id": 19,
+  "name": "Gorgias",
+  "category": "Support and Helpdesk",
+  "official_domain": "gorgias.com",
+  "description": "Support and helpdesk: ecommerce-focused helpdesk (tickets, customers, macros, rules) with deep Shopify/BigCommerce/Magento integrations.",
+  "auth_methods": ["basic_auth", "api_key", "oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "7-day free trial, no credit card. REST API credentials (email + API key) are self-serve from Settings -> REST API and available on all Helpdesk plans; OAuth2 is mandatory for public apps. Vendor MCP requires a paid plan.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor MCP at https://mcp.gorgias.com/mcp (OAuth, open beta, included in paid plans). Composio GORGIAS toolkit exists (32 tools, Composio-managed auth with api_key and oauth2 options).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Private-app API key is used as the password in HTTP Basic auth (email:api_key base64-encoded), so basic_auth and api_key describe the same mechanism. Webhooks are delivered via the 'HTTP Integrations' feature rather than a dedicated webhooks product.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developers.gorgias.com/reference/authentication", "note": "Two auth methods: private app -> API key (HTTP Basic with email:api_key), public app -> OAuth2 (mandatory for public apps)."},
+    {"claims": ["auth", "access"], "url": "https://docs.gorgias.com/en-US/rest-api-208286", "note": "API keys 'available on all Helpdesk plans'; admins create keys self-serve under Settings -> REST API."},
+    {"claims": ["api", "webhooks"], "url": "https://docs.gorgias.com/en-US/connect-external-apps-to-gorgias-and-create-sidebar-widgets-81822", "note": "HTTP Integrations fire on ticket events (created/updated/message created etc.) with retries — Gorgias's webhook mechanism."},
+    {"claims": ["mcp"], "url": "https://docs.gorgias.com/en-US/connect-your-ai-assistant-to-the-gorgias-mcp-6310546", "note": "Official Gorgias MCP server at https://mcp.gorgias.com/mcp, OAuth login with Gorgias account."},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/gorgias", "note": "Composio Gorgias toolkit: 32 tools, Composio-managed auth."}
+  ]
+}

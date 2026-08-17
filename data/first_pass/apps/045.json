@@ -1,0 +1,28 @@
+{
+  "app_id": 45,
+  "name": "Magento (Adobe Commerce)",
+  "category": "Ecommerce",
+  "official_domain": "developer.adobe.com",
+  "description": "Ecommerce: open-source (Magento Open Source) and enterprise (Adobe Commerce) platform with REST and GraphQL web APIs for catalog, orders, customers and inventory.",
+  "auth_methods": ["bearer_token", "hmac_signature", "oauth2_authorization_code"],
+  "primary_auth": "hmac_signature",
+  "access": "self_serve_free",
+  "access_notes": "Magento Open Source is free and self-hostable; admins mint admin/customer bearer tokens from the token service (POST /V1/integration/admin/token) or create Integrations in the Admin that yield OAuth 1.0a consumer key/secret + access token (HMAC-SHA256-signed requests). Adobe Commerce (incl. Adobe Commerce as a Cloud Service, which authenticates via Adobe IMS OAuth) is an enterprise-sales product. Integrating with a given store always requires that store's admin.",
+  "api_protocols": ["rest", "graphql"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Adobe announced an official Commerce MCP server at Summit (April 2026) exposing catalog, cart, pricing, inventory, checkout and OMS to agents; Adobe's Experience League page still labels it 'Coming Soon' (updated June 2026). Adobe Commerce also publishes @adobe-commerce/commerce-extensibility-tools, an official MCP server for App Builder extension development. No Composio toolkit found (composio.dev/toolkits/magento returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhooks are an Adobe Commerce extensibility feature (System > Webhooks / webhooks.xml); Magento Open Source has no built-in outbound webhooks (community modules exist). SOAP API also exists but is legacy and not in the protocol enum. The Commerce MCP server's GA status for all customers is unclear ('Coming Soon' badge).",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.adobe.com/commerce/webapi/get-started/authentication/", "note": "Official auth overview: token-based (bearer) for registered users, OAuth 1.0a for third-party integrations; Cloud Service uses Adobe IMS."},
+    {"claims": ["auth"], "url": "https://developer.adobe.com/commerce/webapi/get-started/authentication/gs-authentication-oauth", "note": "OAuth 1.0a with HMAC-SHA256 signatures for integrations; consumer key/secret + access token generated on integration activation."},
+    {"claims": ["auth", "access"], "url": "https://developer.adobe.com/commerce/webapi/get-started/authentication/gs-authentication-token", "note": "Admin/customer token services return bearer tokens (Authorization: Bearer); applies to PaaS/Open Source, generated self-serve by store admins."},
+    {"claims": ["webhooks"], "url": "https://developer.adobe.com/commerce/extensibility/webhooks", "note": "Adobe Commerce Webhooks: synchronous HTTP callbacks on Commerce events, configured via Admin (SaaS) or webhooks.xml (PaaS)."},
+    {"claims": ["mcp"], "url": "https://experienceleague.adobe.com/en/docs/commerce-learn/ai-and-agentic-commerce/commerce-mcp/commerce-mcp-overview", "note": "Official Adobe page for Commerce MCP ('Coming Soon' badge): agentic experiences from discovery to checkout using real-time commerce data."},
+    {"claims": ["mcp"], "url": "https://registry.npmjs.org/%40adobe-commerce%2Fcommerce-extensibility-tools", "note": "Official Adobe Commerce npm MCP server for App Builder extensibility development (11 tools)."}
+  ]
+}

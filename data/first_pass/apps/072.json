@@ -1,0 +1,27 @@
+{
+  "app_id": 72,
+  "name": "Airtable",
+  "category": "Productivity and Project Management",
+  "official_domain": "airtable.com",
+  "description": "Productivity/project management: spreadsheet-database hybrid app platform with a Web API for records, bases, schema and webhooks.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free plan available; personal access tokens are created self-serve at airtable.com/create/tokens (all plan types) and OAuth integrations are registered self-serve at airtable.com/create/oauth. Legacy API keys are no longer supported.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted Airtable MCP server at https://mcp.airtable.com/mcp (OAuth or PAT auth; can read/write records and even build interfaces and automations), documented at support.airtable.com and airtable.com articles. Composio AIRTABLE toolkit exists (26 tools, 6 triggers, OAUTH2/API_KEY, Composio managed auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhooks created with PAT/OAuth tokens expire after 7 days unless refreshed. Org admins can restrict third-party integrations (MCP may need admin allowlisting in managed enterprises), but default developer access is self-serve.",
+  "evidence": [
+    {"claims": ["auth", "access", "api"], "url": "https://airtable.com/developers/web/api/authentication", "note": "Token-based auth via Authorization: Bearer; personal access tokens (created at /create/tokens) for personal use and OAuth access tokens (integrations registered at /create/oauth) for third-party integrations; legacy api_key not supported."},
+    {"claims": ["auth"], "url": "https://airtable.com/developers/web/guides/oauth-integrations", "note": "OAuth grant flow documented for integrations acting on behalf of other users; 'Any integrations that allow other users to grant access to Airtable should use OAuth.'"},
+    {"claims": ["webhooks"], "url": "https://airtable.com/developers/web/api/webhooks-overview", "note": "Official Webhooks API: create/list/delete webhooks per base, notification pings to a URL, webhook:manage scope; available on all billing plans."},
+    {"claims": ["mcp"], "url": "https://support.airtable.com/docs/using-the-airtable-mcp-server", "note": "Official Airtable MCP server at https://mcp.airtable.com/mcp with OAuth browser auth or personal access token."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists Airtable (slug AIRTABLE, 26 tools, 6 triggers, OAUTH2/API_KEY, Composio managed app: Yes)."}
+  ]
+}

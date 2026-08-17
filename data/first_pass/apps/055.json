@@ -1,0 +1,26 @@
+{
+  "app_id": 55,
+  "name": "Apify",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "apify.com",
+  "description": "Data, SEO and Scraping: cloud platform for building and running web-scraping/automation Actors, with full REST API over actors, runs, datasets, storages and schedules.",
+  "auth_methods": ["api_key", "oauth2_authorization_code"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Free plan includes monthly platform usage credits with no credit card; API token available immediately from Console > Settings > API & Integrations and sent as 'Authorization: Bearer' (or token query param, discouraged). OAuth browser flow is offered for connecting the hosted MCP server.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted vendor MCP at https://mcp.apify.com (OAuth or Bearer token; open-source @apify/actors-mcp-server for stdio). Composio toolkit exists at composio.dev/toolkits/apify with 112 tools.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "supports_webhooks=true based on Apify's documented platform webhooks for Actor run events (docs.apify.com/platform/integrations/webhooks); that specific page was not fetched this pass.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://docs.apify.com/api/v2", "note": "REST API v2 at api.apify.com/v2; API token from Console Integrations page sent as Bearer header (recommended) or token query param"},
+    {"claims": ["access", "api", "auth"], "url": "https://docs.apify.com/platform/integrations/agent-onboarding", "note": "'Free plan includes monthly platform usage credits with no credit card required'; API, MCP, CLI and client-library access all via API token"},
+    {"claims": ["mcp", "auth"], "url": "https://docs.apify.com/platform/integrations/mcp", "note": "Official Apify MCP server at mcp.apify.com with OAuth flow or Authorization: Bearer <APIFY_TOKEN>"},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/apify", "note": "Composio Apify toolkit page listing 112 tools (actors, builds, runs, datasets, etc.)"}
+  ]
+}

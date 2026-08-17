@@ -1,0 +1,281 @@
+{
+  "seed": 20260817,
+  "high_risk_threshold": 5,
+  "per_category": 2,
+  "selected": [
+    {
+      "app_id": 1,
+      "name": "Salesforce",
+      "reasons": [
+        "stratified_random(CRM and Sales)"
+      ]
+    },
+    {
+      "app_id": 8,
+      "name": "Close",
+      "reasons": [
+        "stratified_random(CRM and Sales)"
+      ]
+    },
+    {
+      "app_id": 10,
+      "name": "DealCloud",
+      "reasons": [
+        "high_risk(score=6)"
+      ]
+    },
+    {
+      "app_id": 11,
+      "name": "Zendesk",
+      "reasons": [
+        "stratified_random(Support and Helpdesk)"
+      ]
+    },
+    {
+      "app_id": 15,
+      "name": "Pylon",
+      "reasons": [
+        "high_risk(score=6)"
+      ]
+    },
+    {
+      "app_id": 20,
+      "name": "Gladly",
+      "reasons": [
+        "stratified_random(Support and Helpdesk)"
+      ]
+    },
+    {
+      "app_id": 21,
+      "name": "Slack",
+      "reasons": [
+        "stratified_random(Communications and Messaging)"
+      ]
+    },
+    {
+      "app_id": 29,
+      "name": "Aircall",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 30,
+      "name": "Vonage",
+      "reasons": [
+        "stratified_random(Communications and Messaging)"
+      ]
+    },
+    {
+      "app_id": 31,
+      "name": "Google Ads",
+      "reasons": [
+        "stratified_random(Marketing, Ads, Email and Social)"
+      ]
+    },
+    {
+      "app_id": 37,
+      "name": "systeme.io",
+      "reasons": [
+        "high_risk(score=5)"
+      ]
+    },
+    {
+      "app_id": 39,
+      "name": "Threads (Meta)",
+      "reasons": [
+        "stratified_random(Marketing, Ads, Email and Social)"
+      ]
+    },
+    {
+      "app_id": 43,
+      "name": "BigCommerce",
+      "reasons": [
+        "stratified_random(Ecommerce)"
+      ]
+    },
+    {
+      "app_id": 45,
+      "name": "Magento (Adobe Commerce)",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 46,
+      "name": "Squarespace",
+      "reasons": [
+        "evidence_policy_gap",
+        "stratified_random(Ecommerce)"
+      ]
+    },
+    {
+      "app_id": 47,
+      "name": "Ecwid",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 49,
+      "name": "Amazon Selling Partner",
+      "reasons": [
+        "high_risk(score=6)"
+      ]
+    },
+    {
+      "app_id": 52,
+      "name": "SE Ranking",
+      "reasons": [
+        "stratified_random(Data, SEO and Scraping)"
+      ]
+    },
+    {
+      "app_id": 58,
+      "name": "Sherlock",
+      "reasons": [
+        "high_risk(score=7)",
+        "evidence_policy_gap",
+        "stratified_random(Data, SEO and Scraping)"
+      ]
+    },
+    {
+      "app_id": 59,
+      "name": "Waterfall.io",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 60,
+      "name": "Clay",
+      "reasons": [
+        "high_risk(score=5)"
+      ]
+    },
+    {
+      "app_id": 61,
+      "name": "GitHub",
+      "reasons": [
+        "evidence_policy_gap",
+        "stratified_random(Developer, Infra and Data platforms)"
+      ]
+    },
+    {
+      "app_id": 64,
+      "name": "Cloudflare",
+      "reasons": [
+        "stratified_random(Developer, Infra and Data platforms)"
+      ]
+    },
+    {
+      "app_id": 67,
+      "name": "Snowflake",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 71,
+      "name": "Notion",
+      "reasons": [
+        "stratified_random(Productivity and Project Management)"
+      ]
+    },
+    {
+      "app_id": 75,
+      "name": "Asana",
+      "reasons": [
+        "stratified_random(Productivity and Project Management)"
+      ]
+    },
+    {
+      "app_id": 78,
+      "name": "Coda",
+      "reasons": [
+        "high_risk(score=5)"
+      ]
+    },
+    {
+      "app_id": 83,
+      "name": "Binance",
+      "reasons": [
+        "stratified_random(Finance and Fintech)"
+      ]
+    },
+    {
+      "app_id": 84,
+      "name": "Paygent Connect",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 85,
+      "name": "iPayX",
+      "reasons": [
+        "high_risk(score=5)"
+      ]
+    },
+    {
+      "app_id": 88,
+      "name": "Brex",
+      "reasons": [
+        "stratified_random(Finance and Fintech)"
+      ]
+    },
+    {
+      "app_id": 90,
+      "name": "PitchBook",
+      "reasons": [
+        "high_risk(score=7)"
+      ]
+    },
+    {
+      "app_id": 91,
+      "name": "NotebookLM",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 93,
+      "name": "Fathom",
+      "reasons": [
+        "stratified_random(AI, Research and Media-native)"
+      ]
+    },
+    {
+      "app_id": 94,
+      "name": "Consensus",
+      "reasons": [
+        "high_risk(score=6)"
+      ]
+    },
+    {
+      "app_id": 97,
+      "name": "higgsfield",
+      "reasons": [
+        "high_risk(score=5)",
+        "stratified_random(AI, Research and Media-native)"
+      ]
+    },
+    {
+      "app_id": 98,
+      "name": "Mermaid CLI",
+      "reasons": [
+        "high_risk(score=7)",
+        "evidence_policy_gap"
+      ]
+    },
+    {
+      "app_id": 100,
+      "name": "Grain",
+      "reasons": [
+        "evidence_policy_gap"
+      ]
+    }
+  ],
+  "sample_size": 38,
+  "population": 100
+}

@@ -1,0 +1,25 @@
+{
+  "app_id": 92,
+  "name": "Otter AI",
+  "category": "AI, Research and Media-native",
+  "official_domain": "otter.ai",
+  "description": "AI, Research and Media-native: AI meeting assistant that records, transcribes and summarizes meetings, with an Enterprise-only Public API and an official OAuth MCP server.",
+  "auth_methods": ["bearer_token", "api_key", "oauth2_authorization_code"],
+  "primary_auth": "bearer_token",
+  "access": "enterprise_gated",
+  "access_notes": "Otter's Public API 'is available for all Enterprise workspaces'; other plans must contact their Otter account manager. Enterprise users self-generate API keys under Integrations > Developer and send them as 'Authorization: Bearer YOUR_API_KEY'. The MCP server uses OAuth per user; Otter states 'We currently do not have a public API key' for arbitrary MCP client setups.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "narrow",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official hosted MCP server at https://mcp.otter.ai/mcp, OAuth-authenticated, documented in Otter's help center and announced on the vendor blog for Claude/ChatGPT and JSON-configurable MCP clients. No Composio toolkit found (toolkits/otter.md, otter_ai.md, otterai.md all 404).",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "enterprise_license_required",
+  "confidence": "high",
+  "uncertainty_notes": "Public API surface is mostly read-only (channels, conversations, transcripts, audio, action items, insights, workspace) plus POST /conversations; no webhook documentation found in the help-center API article. Third-party sources suggest MCP may also be gated to Business/Enterprise workspaces, but official docs do not state plan gating for MCP explicitly.",
+  "evidence": [
+    {"claims": ["api", "auth", "access"], "url": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API", "note": "'Otter's Public API is available for all Enterprise workspaces'; Bearer token auth with self-generated API keys; REST endpoints for channels, conversations, transcripts, audio, workspace."},
+    {"claims": ["mcp", "auth"], "url": "https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server", "note": "Official MCP server at https://mcp.otter.ai/mcp; 'All access is OAuth-authenticated with granular permissions'; no public API key for MCP."},
+    {"claims": ["mcp", "description"], "url": "https://otter.ai/blog/otter-for-enterprise-connect-ai-to-ai-with-otters-mcp", "note": "Vendor blog announcing Otter's MCP Server connecting meeting data to Claude/ChatGPT; positioned for Otter for Enterprise."}
+  ]
+}

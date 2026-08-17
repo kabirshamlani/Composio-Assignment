@@ -1,0 +1,674 @@
+[
+  {
+    "app_id": 58,
+    "name": "Sherlock",
+    "risk_score": 7,
+    "flags": [
+      "not_buildable_claim",
+      "negative_api_existence_claim"
+    ]
+  },
+  {
+    "app_id": 90,
+    "name": "PitchBook",
+    "risk_score": 7,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "hard_commercial_gate_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 98,
+    "name": "Mermaid CLI",
+    "risk_score": 7,
+    "flags": [
+      "not_buildable_claim",
+      "negative_api_existence_claim"
+    ]
+  },
+  {
+    "app_id": 10,
+    "name": "DealCloud",
+    "risk_score": 6,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "hard_commercial_gate_claim"
+    ]
+  },
+  {
+    "app_id": 15,
+    "name": "Pylon",
+    "risk_score": 6,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "hard_commercial_gate_claim"
+    ]
+  },
+  {
+    "app_id": 49,
+    "name": "Amazon Selling Partner",
+    "risk_score": 6,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "hard_commercial_gate_claim"
+    ]
+  },
+  {
+    "app_id": 94,
+    "name": "Consensus",
+    "risk_score": 6,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "hard_commercial_gate_claim"
+    ]
+  },
+  {
+    "app_id": 37,
+    "name": "systeme.io",
+    "risk_score": 5,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 60,
+    "name": "Clay",
+    "risk_score": 5,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 78,
+    "name": "Coda",
+    "risk_score": 5,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 85,
+    "name": "iPayX",
+    "risk_score": 5,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 97,
+    "name": "higgsfield",
+    "risk_score": 5,
+    "flags": [
+      "official_vendor_mcp_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 1,
+    "name": "Salesforce",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 2,
+    "name": "HubSpot",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 3,
+    "name": "Pipedrive",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 4,
+    "name": "Attio",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 5,
+    "name": "Twenty",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 6,
+    "name": "Podio",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 7,
+    "name": "Zoho CRM",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 8,
+    "name": "Close",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 11,
+    "name": "Zendesk",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 12,
+    "name": "Intercom",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 13,
+    "name": "Freshdesk",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 14,
+    "name": "Front",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 16,
+    "name": "LiveAgent",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 17,
+    "name": "Plain",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 19,
+    "name": "Gorgias",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 21,
+    "name": "Slack",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 22,
+    "name": "Twilio",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 23,
+    "name": "Zoho Cliq",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 24,
+    "name": "Lark (Larksuite)",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 25,
+    "name": "Pumble",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 30,
+    "name": "Vonage",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 31,
+    "name": "Google Ads",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 32,
+    "name": "Meta Ads",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 34,
+    "name": "GoHighLevel",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 35,
+    "name": "Mailchimp",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 36,
+    "name": "Klaviyo",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 41,
+    "name": "Shopify",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 42,
+    "name": "WooCommerce",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 43,
+    "name": "BigCommerce",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 44,
+    "name": "Salesforce Commerce Cloud",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 45,
+    "name": "Magento (Adobe Commerce)",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 51,
+    "name": "DataForSEO",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 52,
+    "name": "SE Ranking",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 53,
+    "name": "Ahrefs",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 54,
+    "name": "MrScraper",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 55,
+    "name": "Apify",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 56,
+    "name": "Firecrawl",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 57,
+    "name": "Bright Data",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 61,
+    "name": "GitHub",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 62,
+    "name": "Vercel",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 63,
+    "name": "Netlify",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 64,
+    "name": "Cloudflare",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 65,
+    "name": "Supabase",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 66,
+    "name": "Neo4j",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 67,
+    "name": "Snowflake",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 68,
+    "name": "MongoDB Atlas",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 69,
+    "name": "Datadog",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 70,
+    "name": "Sentry",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 71,
+    "name": "Notion",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 72,
+    "name": "Airtable",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 73,
+    "name": "Linear",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 74,
+    "name": "Jira",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 75,
+    "name": "Asana",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 76,
+    "name": "Monday.com",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 77,
+    "name": "ClickUp",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 79,
+    "name": "Smartsheet",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 80,
+    "name": "Harvest",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 81,
+    "name": "Stripe",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 82,
+    "name": "Plaid",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 86,
+    "name": "QuickBooks",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 87,
+    "name": "Xero",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 89,
+    "name": "Ramp",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 92,
+    "name": "Otter AI",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 93,
+    "name": "Fathom",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 95,
+    "name": "Reducto",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 96,
+    "name": "Devin",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 99,
+    "name": "YouTube Transcript",
+    "risk_score": 4,
+    "flags": [
+      "official_vendor_mcp_claim"
+    ]
+  },
+  {
+    "app_id": 20,
+    "name": "Gladly",
+    "risk_score": 3,
+    "flags": [
+      "hard_commercial_gate_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 59,
+    "name": "Waterfall.io",
+    "risk_score": 3,
+    "flags": [
+      "hard_commercial_gate_claim",
+      "medium_researcher_confidence"
+    ]
+  },
+  {
+    "app_id": 84,
+    "name": "Paygent Connect",
+    "risk_score": 3,
+    "flags": [
+      "hard_commercial_gate_claim",
+      "medium_researcher_confidence"
+    ]
+  }
+]

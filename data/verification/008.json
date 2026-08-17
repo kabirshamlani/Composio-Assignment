@@ -1,0 +1,25 @@
+{
+  "app_id": 8,
+  "name": "Close",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "developer.close.com/api/overview/oauth-authentication documents a full OAuth 2.0 authorization-code flow (app.close.com/oauth2/authorize -> api.close.com/oauth2/token with grant_type=authorization_code, refresh tokens via offline_access). Docs recommend OAuth for user-facing integrations, which is the relevant primary for a multi-tenant integration; API keys are the alternative for internal/server-side use."},
+    {"field": "auth_methods", "draft_value": ["api_key", "oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "developer.close.com/api/overview lists exactly two methods: API keys (HTTP Basic with key as username, empty password) and OAuth 2.0. The Basic mechanism carries an api_key credential, matching the draft's own note."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "SUPPORTED",
+     "reason": "close.com/pricing confirms 'Start your free 14-day trial—no credit card required' and four paid tiers from $9-19/user/month (annual/monthly) with no permanent free plan; help.close.com confirms API keys and OAuth apps are created self-serve under Settings -> Developer."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "API overview documents full CRUD over leads, contacts, opportunities, activities (calls, emails, SMS, notes, meetings), custom fields, webhooks and an event log, plus an OpenAPI spec at api.close.com/api/openapi.json."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "Base URL https://api.close.com/api/v1 with standard REST conventions and JSON; official remote MCP endpoint at https://mcp.close.com/mcp (HTTP Streamable, no SSE)."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "developer.close.com/mcp documents the vendor-hosted server at mcp.close.com/mcp with OAuth 2.0 DCR or Close-API-Key/Close-Scope header auth and the three scopes named in the draft (mcp.read, mcp.write_safe, mcp.write_destructive). docs.composio.dev/toolkits/close confirms the CLOSE toolkit (API_KEY auth, 6 tools, 0 triggers, category crm) exactly as drafted."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve trial signup, self-serve API keys and OAuth app creation, broad documented REST API with webhooks, and an official MCP server: nothing gates immediate building."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No approval process, partner gate or paid-only API found; trial includes API access and requires no credit card."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently fetched developer.close.com/api/overview, the OAuth authentication page, developer.close.com/mcp, close.com/pricing and docs.composio.dev/toolkits/close. All eight fields match the live docs, including the MCP scope names and the Composio toolkit's exact tool count. Only nuance: docs order API keys first and recommend them for scripts, so primary_auth=oauth2 is a judgment call for user-facing integrations, but both methods are fully documented and self-serve."
+}

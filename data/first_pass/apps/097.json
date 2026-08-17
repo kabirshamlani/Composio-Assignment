@@ -1,0 +1,27 @@
+{
+  "app_id": 97,
+  "name": "higgsfield",
+  "category": "AI, Research and Media-native",
+  "official_domain": "higgsfield.ai",
+  "description": "AI content suite generating images, video, audio and 3D through one asynchronous REST API (Higgsfield Cloud), plus a CLI and hosted MCP server.",
+  "auth_methods": ["api_key", "custom"],
+  "primary_auth": "api_key",
+  "access": "self_serve_paid",
+  "access_notes": "Register at cloud.higgsfield.ai and 'generate an API key immediately'; official help center says no sales call is required for standard access. API usage is billed in credits that are separate from consumer higgsfield.ai subscription credits, so paid API credits are effectively required for generation.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Vendor-hosted MCP server promoted on higgsfield.ai/cli ('Add the Higgsfield MCP server URL in your agent's settings and authenticate through your Higgsfield account. No API keys to manage'); official CLI (@higgsfield/cli) also exists. No Composio toolkit found (docs.composio.dev/toolkits/higgsfield returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "medium",
+  "uncertainty_notes": "Could not confirm from official pages whether new cloud.higgsfield.ai accounts get any free trial credits, so access could be self_serve_trial instead of self_serve_paid. Auth uses a non-standard header scheme 'Authorization: Key {key_id}:{key_secret}' (classified api_key + custom). API is generation-focused (write-heavy, one domain), hence medium breadth.",
+  "evidence": [
+    {"claims": ["auth", "api", "description"], "url": "https://docs.higgsfield.ai/docs", "note": "One asynchronous API for images/video/audio/3D at platform.higgsfield.ai; requests use header Authorization: Key ${HF_API_KEY_ID}:${HF_API_KEY_SECRET}"},
+    {"claims": ["api", "webhooks"], "url": "https://docs.higgsfield.ai/docs/how-to/introduction", "note": "Async lifecycle: submit, poll status_url or wait for a webhook; links to polling, webhook and error-handling guides"},
+    {"claims": ["access"], "url": "https://higgsfield.ai/creator-hub/help-center/business/team-and-business-higgsfield", "note": "'Register at cloud.higgsfield.ai: you can generate an API key immediately... No sales call is required'; API credits are separate from plan credits"},
+    {"claims": ["mcp"], "url": "https://higgsfield.ai/cli", "note": "Official CLI + MCP page: connect agents via the Higgsfield MCP server URL, auth through your Higgsfield account, no API keys needed"},
+    {"claims": ["access"], "url": "https://docs.higgsfield.ai/docs/help/faq", "note": "Getting started: create an account at cloud.higgsfield.ai, generate credentials from the dashboard; billing/rate limits managed there"}
+  ]
+}

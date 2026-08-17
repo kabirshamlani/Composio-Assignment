@@ -1,0 +1,27 @@
+{
+  "app_id": 34,
+  "name": "GoHighLevel",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "gohighlevel.com",
+  "description": "Marketing/CRM platform for agencies (funnels, contacts, conversations, calendars, opportunities, payments) with a broad REST API v2.0.",
+  "auth_methods": ["oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Developer Marketplace app registration is self-serve; for public/third-party apps HighLevel pushes OAuth 2.0 (location-level or agency-level, PKCE supported). For internal use, static Private Integration Tokens are generated directly from the account UI with scoped permissions. Using either requires a HighLevel account - plans are paid with a free trial; no permanent free tier.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "First-party LeadConnector MCP server: universal endpoint https://services.leadconnectorhq.com/mcp/ (any HTTP MCP client, OAuth or Private Integration Token) and per-client /mcp/anthropic/v2 endpoint with the full 625-operation catalog. Composio HIGHLEVEL toolkit also exists (218 tools, OAuth2, not Composio-managed).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Exact current pricing/trial length not verified from an official pricing page; classification as self_serve_trial rests on HighLevel being a paid SaaS with self-serve signup while all API credential creation (marketplace apps, private integration tokens) is self-serve.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://marketplace.gohighlevel.com/docs/Authorization/PrivateIntegrationsToken", "note": "Private Integration Tokens: static scoped tokens generated from the UI, used as Bearer tokens against API v2.0 (services.leadconnectorhq.com)"},
+    {"claims": ["auth", "access"], "url": "https://help.gohighlevel.com/support/solutions/articles/155000000136-how-to-get-started-with-the-developer-s-marketplace", "note": "Developer Marketplace OAuth 2.0 with location-level and agency-level access; PKCE supported; app registration through the marketplace"},
+    {"claims": ["api", "webhooks"], "url": "https://marketplace.gohighlevel.com/docs/", "note": "REST API covering contacts, conversations, calendars, opportunities, payments; 'Webhooks - Real-time notifications for 50+ events'"},
+    {"claims": ["mcp"], "url": "https://marketplace.gohighlevel.com/docs/other/mcp/", "note": "Official LeadConnector MCP server docs: /mcp/ universal endpoint and /mcp/anthropic/v2 full-catalog endpoint, auth via OAuth or Private Integration Token"},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/highlevel", "note": "Composio HIGHLEVEL toolkit: OAUTH2, 218 tools, 'Composio Managed App Available? No'"}
+  ]
+}

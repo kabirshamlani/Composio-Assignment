@@ -1,0 +1,27 @@
+{
+  "app_id": 29,
+  "name": "Aircall",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "basic_auth", "verdict": "SUPPORTED",
+     "reason": "Live developer.aircall.io authentication page (updated 2026-07-28): Basic Authentication with dashboard-generated API ID + token is the path for own-account integrations; no authorization flow needed."},
+    {"field": "auth_methods", "draft_value": ["basic_auth", "oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "Auth docs confirm exactly two methods: Basic Authentication (own tools) and OAuth (public integrations for multiple customers, restricted to approved tech partners)."},
+    {"field": "access", "draft_value": "self_serve_paid", "verdict": "SUPPORTED",
+     "reason": "Official aircall.io/pricing lists '250+ integrations and API access' on the self-serve Essentials plan ($30/user/mo annual, 3-license minimum). Nuance: direct Messaging API access requires the Professional plan and 'API developer support' is Custom-tier, but core REST API access is bundled with self-serve paid plans."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST API at api.aircall.io/v1 covers calls, contacts, users, teams, numbers, messages, webhooks, and conversation-intelligence data."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "REST-only public API; no vendor GraphQL/gRPC/MCP endpoint. Third-party MCP servers exist but are not an Aircall-operated protocol surface, so listing only rest is consistent with this batch's convention for platform/community MCPs (cf. Help Scout draft)."},
+    {"field": "mcp_status", "draft_value": ["official_platform_or_partner_mcp", "reputable_community_mcp"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Both values are correct but the draft recorded no evidence URL. Found: Pipedream hosts a live Aircall MCP server page (platform MCP), and community servers exist — themobilefirstco/aircall-mcp-server (73 tools, README explicitly 'Unofficial') and CassiaResearch/aircall-mcp-server (83 tools, 'Not an official Aircall product'). No Aircall vendor MCP exists; even the community repo's comparison table lists Aircall MCP support as 'This community server'.",
+     "replacement_evidence": "https://mcp.pipedream.com/app/aircall",
+     "additional_evidence": "https://github.com/themobilefirstco/aircall-mcp-server"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve paid signup yields dashboard API keys immediately; docs are public and complete."},
+    {"field": "primary_blocker", "draft_value": "paid_plan_required", "verdict": "SUPPORTED",
+     "reason": "API access requires a paid Aircall subscription (3-license minimum, ~$90/mo floor); no free tier."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-verified auth (Basic + partner-gated OAuth) on live developer docs, paid-plan API bundling on the official pricing page, and filled the draft's missing MCP evidence: Pipedream's hosted Aircall MCP server (mcp.pipedream.com/app/aircall) for the platform claim and the explicitly-unofficial themobilefirstco/CassiaResearch community servers. Confirmed no Aircall vendor MCP exists. Caveat worth noting: direct Messaging API access is Professional-plan-only."
+}

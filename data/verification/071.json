@@ -1,0 +1,25 @@
+{
+  "app_id": 71,
+  "name": "Notion",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "developers.notion.com/reference/authentication confirms bearer tokens come from internal connections, personal access tokens, or 'the OAuth flow for a public connection'; OAuth 2.0 authorization-code is the documented path for multi-user public connections, so it is a reasonable primary."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "api_key", "personal_access_token", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "Official authentication reference lists exactly these three token sources (internal-connection static token = api_key, PAT, OAuth public connection), all passed as HTTP bearer tokens. Composio's own Notion auth guide independently confirms OAuth2 + Internal Integration Token (API key) as the two supported modes."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Notion has a free plan and both internal connections and public OAuth integrations are created self-serve at notion.so/profile/integrations; no approval gate documented anywhere in the get-started/authorization guide."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST API covers pages, databases/data sources, blocks, users, comments, search, and file uploads with full read/write; MCP admin endpoints also exist. Clearly broad."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST base api.notion.com/v1 (curl examples with Notion-Version header) plus the hosted remote MCP server at mcp.notion.com documented under guides/mcp/overview."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "developers.notion.com/guides/mcp/overview: 'Notion MCP is a remote MCP server hosted by Notion' with OAuth authorization and admin controls. Composio NOTION toolkit confirmed live at docs.composio.dev/toolkits/notion (slug NOTION, 56 tools, 8 triggers, OAUTH2/API_KEY, Composio managed: Yes)."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve free integration creation, public docs, broad read/write REST API, webhooks, and both vendor MCP and Composio toolkit; nothing blocks immediate building."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gate found: no partner program, no paid requirement for API access, no admin approval needed to create an internal connection in one's own workspace."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked developers.notion.com authentication reference, authorization guide, and MCP overview directly, plus Composio toolkit page via independent search. All auth token types (internal static token, PAT, OAuth public connection, all sent as bearer), self-serve free access, REST+MCP protocols, official vendor-hosted MCP (mcp.notion.com) and Composio NOTION toolkit (56 tools/8 triggers, managed) confirmed. No contradictions."
+}

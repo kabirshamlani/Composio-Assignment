@@ -1,0 +1,27 @@
+{
+  "app_id": 1,
+  "name": "Salesforce",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Salesforce OAuth 2.0 web server (authorization code) flow is the standard integration auth for connected/external client apps; confirmed in Salesforce help and REST API docs."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "oauth2_client_credentials", "jwt"], "verdict": "SUPPORTED",
+     "reason": "Salesforce documents authorization code (with PKCE), client credentials, and JWT bearer OAuth flows for API integrations; hosted MCP setup docs also confirm OAuth 2.0 with PKCE via External Client Apps."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Free Developer Edition org is self-serve at developer.salesforce.com/signup and does not expire with periodic login; draft evidence URL confirms."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST, SOAP, Bulk, Metadata, Tooling, GraphQL, Pub/Sub and more cover the full platform; Trailhead API list confirms breadth."},
+    {"field": "api_protocols", "draft_value": ["rest", "graphql", "grpc", "mcp"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "All four protocols confirmed live, but the draft admitted it had no dedicated evidence URLs for GraphQL and gRPC. GraphQL API guide and gRPC-based Pub/Sub API docs found independently.",
+     "replacement_evidence": "https://developer.salesforce.com/docs/platform/graphql/guide/graphql-about.html",
+     "additional_evidence": "https://developer.salesforce.com/docs/platform/pub-sub-api/guide/grpc-api.html"},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "Salesforce Hosted MCP Servers are GA (April 2026 official developer blog; hosted-mcp-servers docs live, Enterprise Edition and above, OAuth+PKCE via External Client App with mcp_api scope). Composio SALESFORCE toolkit page confirms 223 tools, 7 triggers, OAUTH2/S2S_OAUTH2, Composio-managed app."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve free dev org plus broad self-serve API access; nothing blocks building today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker: signup, credentials, and API access are all self-serve in a free Developer Edition org."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently re-verified hosted MCP GA blog and docs (developer.salesforce.com/docs/platform/hosted-mcp-servers), Composio toolkit page (223 tools/7 triggers), and found the missing GraphQL and gRPC Pub/Sub evidence the draft flagged as uncaptured. One nuance: the GA blog says Enterprise Edition and above; Developer Edition MCP availability was asserted in draft notes but the blog highlight only mentions Enterprise+. This affects only mcp_notes, not the mcp_status value."
+}

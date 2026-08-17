@@ -1,0 +1,27 @@
+{
+  "app_id": 43,
+  "name": "BigCommerce",
+  "category": "Ecommerce",
+  "official_domain": "developer.bigcommerce.com",
+  "description": "Ecommerce: SaaS online-store platform with REST and GraphQL Admin/Storefront APIs for catalog, orders, customers and checkout.",
+  "auth_methods": ["oauth2_authorization_code", "api_key", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Store owners/authorized users can create store-level API accounts (static access token, client ID/secret) directly in any store's control panel, including free-trial stores; app developers register app-level credentials in the free Developer Portal (devtools.bigcommerce.com) and get per-store tokens via the OAuth code grant. All tokens are passed in the X-Auth-Token header.",
+  "api_protocols": ["rest", "graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official BigCommerce Storefront MCP server (B2C, beta; GA to all stores since April 2026) — store-specific hosted MCP URL enabled under Settings > Early access; plus an official docs MCP server at docs.bigcommerce.com/_mcp/server. No Composio BigCommerce toolkit found (composio.dev/toolkits/bigcommerce and docs.composio.dev/toolkits/bigcommerce return 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "A live store (trial or paid) is needed to generate store-level credentials; the Storefront MCP server covers shopper flows (search, cart, checkout URL) and must be enabled by the store owner.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://docs.bigcommerce.com/developer/docs/overview/api-fundamentals/api-accounts", "note": "Three OAuth-based API account types: store-level (static access token created in control panel), app-level (Developer Portal), account-level; X-Auth-Token header."},
+    {"claims": ["auth"], "url": "https://docs.bigcommerce.com/developer/docs/integrations/apps/guide/auth", "note": "Single-click apps use OAuth 2.0 authorization code grant against https://login.bigcommerce.com/oauth2/token."},
+    {"claims": ["webhooks"], "url": "https://docs.bigcommerce.com/developer/docs/integrations/webhooks/overview", "note": "Webhooks created via POST /stores/{hash}/v3/hooks with scopes like store/order/updated."},
+    {"claims": ["mcp"], "url": "https://docs.bigcommerce.com/developer/api-reference/mcp/overview", "note": "Official BigCommerce MCP server docs: B2C Storefront server in beta, enabled per store, store-specific MCP URL."},
+    {"claims": ["api"], "url": "https://docs.bigcommerce.com/developer/learn/courses/intro-to-bc-development/apis/admin-apis.md", "note": "REST Admin APIs and GraphQL Admin API both authenticated via X-Auth-Token OAuth tokens."}
+  ]
+}

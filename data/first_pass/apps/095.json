@@ -1,0 +1,26 @@
+{
+  "app_id": 95,
+  "name": "Reducto",
+  "category": "AI, Research and Media-native",
+  "official_domain": "reducto.ai",
+  "description": "AI document-processing platform: parse, extract, split, classify and edit documents via API.",
+  "auth_methods": ["api_key", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Create a free account at studio.reducto.ai, then generate an API key from the API Keys page in Studio; all roles can create keys. Usage is credit-billed via Studio billing.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Vendor-hosted MCP at https://mcp.reducto.ai/mcp (Bearer auth) plus a local server via `uvx mcp-server-reducto`, documented at docs.reducto.ai/mcp-server. No Composio toolkit found (docs.composio.dev/toolkits/reducto returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Exact free-tier credit allotment not verified from a pricing page; docs confirm a free account and immediate self-serve API key creation. Breadth is document-processing focused (parse/extract/split/classify/edit + jobs/upload), so rated medium rather than broad.",
+  "evidence": [
+    {"claims": ["auth", "access", "api"], "url": "https://docs.reducto.ai/agent-guide", "note": "Base URL platform.reducto.ai, 'Auth: Authorization: Bearer $REDUCTO_API_KEY', 'Create a free account at studio.reducto.ai' then create an API key"},
+    {"claims": ["auth", "webhooks", "access"], "url": "https://docs.reducto.ai/studio-account", "note": "Studio sidebar provides Usage, API Keys, Webhooks, Billing; 'Configure webhooks for async job notifications'; all roles can create API keys"},
+    {"claims": ["mcp"], "url": "https://docs.reducto.ai/mcp-server", "note": "Official vendor MCP server page: hosted https://mcp.reducto.ai/mcp with Bearer header, or local uvx mcp-server-reducto"},
+    {"claims": ["api", "description"], "url": "https://reducto.ai/developers", "note": "Developer page: full OpenAPI spec, REST endpoints for parse/extract/split/classify, SDKs for Python/Node/Go"}
+  ]
+}

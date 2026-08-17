@@ -1,0 +1,27 @@
+{
+  "app_id": 70,
+  "name": "Sentry",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "sentry.io",
+  "description": "Developer/infra platform: error tracking and application performance monitoring with a REST API over issues, events, projects, releases and alerts.",
+  "auth_methods": ["bearer_token", "personal_access_token", "oauth2_authorization_code", "api_key"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free developer plan; organization tokens, internal-integration tokens and personal tokens are all created self-serve from Sentry settings. Legacy API keys are disabled for new accounts.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official remote Sentry MCP at https://mcp.sentry.dev/mcp (repo getsentry/sentry-mcp) using OAuth, with optional Sentry-Bearer token header and a local @sentry/mcp-server package. Composio SENTRY toolkit exists (211 tools, OAUTH2, Composio managed auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Sentry's free-plan existence is well known but was not re-verified on the pricing page this pass; token creation being self-serve is verified in docs. OAuth2 (authorization code + PKCE) is documented for third-party apps; most automation uses org/internal-integration bearer tokens.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://docs.sentry.io/api/auth/", "note": "Auth tokens passed as Authorization: Bearer; OAuth2 authorization-code grant documented for third-party applications (sentry.io/oauth/authorize + /oauth/token, PKCE recommended); API keys described as legacy and disabled for new accounts."},
+    {"claims": ["auth", "access"], "url": "https://docs.sentry.io/account/auth-tokens/", "note": "Organization tokens, internal integration tokens, and personal tokens are all created self-serve in Sentry settings for programmatic API use."},
+    {"claims": ["webhooks"], "url": "https://docs.sentry.io/integrations/integration-platform/webhooks/", "note": "Integration platform webhooks: Sentry sends signed HTTP POST callbacks for issues, alerts, errors, comments and installation events."},
+    {"claims": ["mcp"], "url": "https://mcp.sentry.dev/", "note": "Official Sentry MCP Server at https://mcp.sentry.dev/mcp; 'All connections use OAuth'; vendor repo getsentry/sentry-mcp."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists Sentry (slug SENTRY, 211 tools, OAUTH2, Composio managed app: Yes)."}
+  ]
+}

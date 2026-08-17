@@ -1,0 +1,27 @@
+{
+  "app_id": 44,
+  "name": "Salesforce Commerce Cloud",
+  "category": "Ecommerce",
+  "official_domain": "developer.salesforce.com",
+  "description": "Ecommerce: Salesforce's enterprise B2C Commerce platform with SCAPI/OCAPI REST APIs for storefronts (Shopper APIs) and merchant operations (Admin APIs).",
+  "auth_methods": ["oauth2_client_credentials", "oauth2_authorization_code", "jwt"],
+  "primary_auth": "oauth2_client_credentials",
+  "access": "enterprise_gated",
+  "access_notes": "SCAPI is included at no extra cost for B2C Commerce customers, but you must be a customer (or registered partner) with an Account Manager org to create API clients, SLAS clients, and sandboxes. Shopper APIs use SLAS (OAuth 2.1: authorization_code_pkce, client_credentials); Admin APIs use Account Manager client_credentials only. Tokens are JWTs sent as Bearer. No public self-serve signup for credentials.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official B2C DX MCP Server (@salesforce/b2c-dx-mcp, SalesforceCommerceCloud GitHub org) is a developer-tooling MCP covering SCAPI, cartridge deploys, and Managed Runtime; it still requires B2C Commerce instance credentials. No Composio toolkit found for Salesforce Commerce Cloud (Composio's 'salesforce' toolkit targets the CRM).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "high",
+  "uncertainty_notes": "Could not confirm a native outbound webhook/event-push feature for B2C Commerce in official SCAPI docs (extensibility is via hooks/custom APIs/jobs); left supports_webhooks null. On-demand sandboxes require an existing customer/partner realm.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization.html", "note": "OAuth 2.1-based scopes; both Admin and Shopper APIs use JWT access tokens with Bearer scheme; Admin via Account Manager, Shopper via SLAS."},
+    {"claims": ["auth"], "url": "https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization-for-admin-apis.html", "note": "Admin APIs: create API client in Account Manager; 'only the client_credentials grant type is supported'."},
+    {"claims": ["auth", "api"], "url": "https://developer.salesforce.com/docs/commerce/b2c-commerce/guide/slas.html", "note": "SLAS grant-type table: authorization_code_pkce, authorization_code, client_credentials for shopper tokens."},
+    {"claims": ["access", "api"], "url": "https://developer.salesforce.com/docs/commerce/commerce-api/guide/scapi-get-started.html", "note": "'For B2C Commerce customers, the API is available at no extra cost' — access presumes an existing B2C Commerce instance/sandbox; Admin APIs are read+write across products, orders, inventory."},
+    {"claims": ["mcp"], "url": "https://developer.salesforce.com/docs/commerce/b2c-commerce/guide/mcp-dx-intro.html", "note": "Official docs for the B2C DX MCP Server (@salesforce/b2c-dx-mcp) connecting AI assistants to B2C Commerce environments."}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "app_id": 51,
+  "name": "DataForSEO",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "dataforseo.com",
+  "description": "Data, SEO and Scraping: pay-as-you-go SEO data APIs (SERP, keywords, backlinks, on-page, domain analytics, merchant and more).",
+  "auth_methods": ["basic_auth"],
+  "primary_auth": "basic_auth",
+  "access": "self_serve_trial",
+  "access_notes": "Free account signup issues API login/password immediately (API Access tab in dashboard); a small trial credit (~$1, about 500 SERP Live Advanced calls) is included, then pay-as-you-go top-ups from the Billing tab. Basic Authentication is the only auth method.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor MCP server (github.com/dataforseo/mcp-server-typescript, npm dataforseo-mcp-server, Docker dataforseo/mcp, plus vendor setup guide). Composio toolkit exists at composio.dev/toolkits/dataforseo with 312 tools.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "supports_webhooks=true refers to DataForSEO's task-completion pingback/postback URL mechanism in the task-based (non-live) endpoints; this is stated from general docs knowledge and was not re-verified on a fetched page this pass. API is broad in surface but predominantly data-retrieval (read).",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://docs.dataforseo.com/v3/auth/", "note": "'Create a free account... go to the API Access tab'; Basic Authentication is the only way to access DataForSEO API"},
+    {"claims": ["access"], "url": "https://dataforseo.com/help-center/how-to-authenticate-with-dataforseo-google-search-serp-api-api-key-setup-and-code-examples", "note": "$1 trial credit covers ~500 SERP Live Advanced calls; top up from Billing tab — self-serve trial then pay-as-you-go"},
+    {"claims": ["mcp"], "url": "https://github.com/dataforseo/mcp-server-typescript", "note": "Official DataForSEO MCP server repo under the verified dataforseo GitHub org"},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/dataforseo", "note": "Composio DataForSEO toolkit page listing 312 tools"},
+    {"claims": ["api"], "url": "https://docs.dataforseo.com/v3/appendix-status/", "note": "REST API v3 at api.dataforseo.com/v3 with JSON request/response examples"}
+  ]
+}

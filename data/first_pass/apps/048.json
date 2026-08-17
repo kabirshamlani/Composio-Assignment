@@ -1,0 +1,25 @@
+{
+  "app_id": 48,
+  "name": "Gumroad",
+  "category": "Ecommerce",
+  "official_domain": "gumroad.com",
+  "description": "Ecommerce: platform for creators to sell digital products, memberships and physical goods, with a REST OAuth API for products, sales, subscribers, licenses and payouts.",
+  "auth_methods": ["oauth2_authorization_code", "personal_access_token", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Anyone with a free Gumroad account can register an OAuth application in settings and, per the official API docs, 'On the application page, click Generate access token' for immediate own-account access; third-party access uses the OAuth2 authorization-code flow (gumroad.com/oauth/authorize) with scoped Bearer tokens. The Verify License endpoint needs no OAuth app.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit", "none_found"],
+  "mcp_notes": "Composio has a Gumroad toolkit (OAuth2, 7 tools: get sales, list products, verify license, resource subscriptions, etc.). No official vendor MCP server found on gumroad.com or the antiwork GitHub org (none_found refers to vendor MCP).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API is creator-account-scoped: strong on products/offer-codes/emails CRUD, sales read/refund/ship, subscribers, licenses, payouts — but no purchase/checkout creation, hence medium breadth. Webhook support is via 'Resource subscriptions' (sale, refund, dispute, cancellation events POSTed to your URL) plus the legacy Ping.",
+  "evidence": [
+    {"claims": ["auth", "access", "api", "webhooks"], "url": "https://gumroad.com/api", "note": "Official API reference: register an OAuth application, 'Generate access token' on the app page; REST endpoints for Products, Sales, Subscribers, Licenses, Payouts, Offer codes, and Resource subscriptions (event notifications to your URL)."},
+    {"claims": ["auth"], "url": "https://gumroad.com/help/article/280-create-application-api.html", "note": "Help Center: create an application, get client_id/client_secret, OAuth2 authorize at gumroad.com/oauth/authorize; token response is token_type Bearer."},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/gumroad", "note": "Composio Gumroad toolkit page: OAuth2 auth, 7 tools (Get Sales, List Products, Verify License, subscribe/unsubscribe resource, etc.)."}
+  ]
+}

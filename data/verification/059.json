@@ -1,0 +1,26 @@
+{
+  "app_id": 59,
+  "name": "Waterfall.io",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Live docs.waterfall.io/v1/introduction: 'The Waterfall API is available at https://api.waterfall.io. All requests require an API key in the x-api-key header.' (Homepage curl samples show an x-waterfall-api-key header variant, but the docs reference is authoritative.)"},
+    {"field": "auth_methods", "draft_value": ["api_key"], "verdict": "SUPPORTED",
+     "reason": "API key is the only documented auth method; the API Key Management endpoints (master key creating sub-keys) confirm a key-only model."},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "SUPPORTED",
+     "reason": "Docs' own OpenAPI description states 'To access the API, you need the API key provided in your contract' — keys are provisioned per customer contract. The waterfall.io homepage's only conversion CTA is 'Book a call'; no self-serve signup or published price list found in my independent checks. The draft correctly weighted official pages over third-party 'sign up and get a key' claims."},
+    {"field": "api_breadth", "draft_value": "narrow", "verdict": "SUPPORTED",
+     "reason": "Live endpoint index: Prospector, Search Contact/Company, Contact/Phone/Company Enrichment, Company Reveal (beta), Company Titles (beta), Job Change Detection, Email Verification, Webhook JWKS, Account Reporting, API Key Management — a focused enrichment/lookup surface, effectively read-only data retrieval; 'narrow' is fair."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "REST at api.waterfall.io/v1 with async launcher/finder job pattern confirmed live."},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Correct but the draft attached no evidence URL to the mcp claim. Independently re-checked: the full official docs index mentions no MCP server, and web searches for a Waterfall.io MCP return nothing. No Waterfall toolkit in the Composio catalog per the draft's catalog search.",
+     "replacement_evidence": "https://docs.waterfall.io/v1/introduction"},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "SUPPORTED",
+     "reason": "Well-documented REST API (with docs-site llms.txt and OpenAPI descriptions) but access requires a sales contract, and the surface is enrichment-lookup only — partially_buildable is a fair middle grade."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "The contract-provisioned API key and book-a-call-only onboarding make a sales gate the accurate primary blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Confirmed the right product was researched: waterfall.io is the B2B contact/company intelligence API (api.waterfall.io, docs.waterfall.io) with waterfall-enrichment endpoints — not any other 'Waterfall' brand. Re-fetched the docs introduction and enrichment pages, and the homepage via search. Access verdict strengthened beyond the draft: docs explicitly say the API key is 'provided in your contract'. supports_webhooks (job-completion webhook_url callbacks plus a Webhook JWKS signing-keys endpoint) also checks out. mcp none_found lacked an evidence URL in the draft; replacement supplied."
+}

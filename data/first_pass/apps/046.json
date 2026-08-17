@@ -1,0 +1,26 @@
+{
+  "app_id": 46,
+  "name": "Squarespace",
+  "category": "Ecommerce",
+  "official_domain": "developers.squarespace.com",
+  "description": "Ecommerce: website builder with commerce features and REST Commerce APIs (Orders, Inventory, Transactions, Products, Profiles, Webhooks) for merchant sites.",
+  "auth_methods": ["api_key", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_paid",
+  "access_notes": "Site owners generate API keys self-serve under Settings > Advanced > Developer API Keys, but Commerce APIs (Orders, Inventory, Transactions) are only available on higher-tier plans (Commerce Advanced; also Core/Plus/Advanced in the newer lineup) — no free plan or free API tier. Forms API needs Business plan or higher. Multi-site Extensions require registering as an OAuth client via an application form. Keys/tokens are sent as Authorization: Bearer.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No official Squarespace MCP server found on developers.squarespace.com or the Squarespace blog; no Composio Squarespace toolkit (composio.dev/toolkits/squarespace and docs.composio.dev/toolkits/squarespace return 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "high",
+  "uncertainty_notes": "Searched 'Squarespace MCP server official' and probed Composio toolkit URLs; found nothing vendor-official. API surface is commerce-focused (orders, inventory, transactions, products, profiles) rather than full site management, hence medium breadth. Webhook Subscriptions API requires OAuth tokens; API keys are not supported for webhooks.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developers.squarespace.com/commerce-apis/authentication-and-permissions", "note": "Commerce API auth via generated API key or OAuth access token; custom-app API keys require the Commerce Advanced plan; Extensions must use OAuth."},
+    {"claims": ["access"], "url": "https://support.squarespace.com/hc/en-us/articles/236297987-Squarespace-API-keys", "note": "Plan gating: Orders/Inventory/Transactions APIs available on Core, Plus, Advanced and Commerce Advanced plans; Forms API on Business+."},
+    {"claims": ["api", "auth"], "url": "https://developers.squarespace.com/commerce-apis/making-requests", "note": "REST requests to api.squarespace.com with Authorization: Bearer YOUR_API_KEY_OR_OAUTH_TOKEN."},
+    {"claims": ["webhooks"], "url": "https://developers.squarespace.com/commerce-apis/webhook-subscriptions-overview", "note": "Webhook Subscriptions API exists; 'must authenticate using an OAuth token'."}
+  ]
+}

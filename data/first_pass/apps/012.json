@@ -1,0 +1,28 @@
+{
+  "app_id": 12,
+  "name": "Intercom",
+  "category": "Support and Helpdesk",
+  "official_domain": "intercom.com",
+  "description": "Support and Helpdesk: customer messaging and support platform with shared inbox, help center and the Fin AI agent.",
+  "auth_methods": ["bearer_token", "oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "Self-serve signup with a free trial (no permanent free plan); developers get an Access Token immediately upon creating an app in the Developer Hub on their own workspace. Public apps that access other customers' workspaces must use OAuth and go through app review for scope approval.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Intercom hosts an official remote MCP server (https://mcp.intercom.com/mcp for US, https://mcp.eu.intercom.com/mcp for EU; AU not yet supported) with OAuth or Bearer token auth, documented at developers.intercom.com/docs/guides/mcp and github.com/intercom/intercom-mcp-server. Composio Intercom toolkit exists at docs.composio.dev/toolkits/intercom.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "OAuth tokens have no fixed expiry and Intercom does not issue refresh tokens; re-authorization is needed if revoked. Public-app OAuth scopes are reviewed at app submission, which adds a review step for multi-tenant integrations but does not gate private-app API access.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication", "note": "Access Token issued as soon as you create an app on your workspace (private apps); OAuth required for public apps accessing other people's Intercom data; tokens sent as Authorization: Bearer."},
+    {"claims": ["auth"], "url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication/setting-up-oauth", "note": "OAuth authorization-code flow with client_id/client_secret from the Developer Hub; regional endpoints for US/EU/AU."},
+    {"claims": ["api", "description"], "url": "https://developers.intercom.com/docs/build-an-integration/getting-started", "note": "REST API at api.intercom.io covering contacts, conversations, tickets, companies, articles etc.; self-serve workspace setup for developers."},
+    {"claims": ["mcp"], "url": "https://developers.intercom.com/docs/guides/mcp", "note": "Official Intercom-hosted remote MCP server at mcp.intercom.com/mcp (US) and mcp.eu.intercom.com/mcp (EU), following the authenticated remote MCP spec."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/intercom", "note": "Composio Intercom toolkit page exists (fetched successfully)."},
+    {"claims": ["webhooks"], "url": "https://developers.intercom.com/docs/build-an-integration/learn-more/authentication/oauth-scopes", "note": "'Webhook topics are related to corresponding OAuth permission scopes' — webhooks are a documented platform feature tied to scopes."}
+  ]
+}

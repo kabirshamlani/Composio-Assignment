@@ -1,0 +1,27 @@
+{
+  "app_id": 58,
+  "name": "Sherlock",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "none", "verdict": "SUPPORTED",
+     "reason": "Official repo (github.com/sherlock-project/sherlock, ~89.7k stars) and its CLI usage/flags show no authentication or credential concept at all — it is a local Python CLI queried against target sites."},
+    {"field": "auth_methods", "draft_value": ["none"], "verdict": "SUPPORTED",
+     "reason": "No auth exists anywhere in the official CLI docs; flags are search/output/proxy options only."},
+    {"field": "access", "draft_value": "no_credentials_required", "verdict": "SUPPORTED",
+     "reason": "Free open-source install via pipx/pip (sherlock-project on PyPI) or the official Docker image; Bellingcat's live tool page independently confirms one-command install and purely local CLI operation."},
+    {"field": "api_breadth", "draft_value": "none", "verdict": "SUPPORTED",
+     "reason": "No hosted API surface exists; Bellingcat's review states there is no official Sherlock API and the experimental REST API has been unmaintained since 2021."},
+    {"field": "api_protocols", "draft_value": ["none"], "verdict": "SUPPORTED",
+     "reason": "No remote protocol offered by the project; CLI only."},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "The core claim is correct — the sherlock-project org publishes no MCP server, there is no vendor/hosted service, and no Composio toolkit exists — but the draft attached no evidence URL for this claim. Also incomplete: small community MCP wrappers do exist (e.g. github.com/Burnsedia/sherlock-mcp, a FastMCP wrapper exposing search_username, and the adeze/sherlock fork bundling an MCP server). These are low-adoption projects, so whether they meet the 'reputable_community_mcp' bar is a judgment call; none_found for official/reputable MCPs remains defensible.",
+     "replacement_evidence": "https://github.com/sherlock-project/sherlock"},
+    {"field": "technical_verdict", "draft_value": "not_buildable", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Fair and cautiously phrased for a hosted-API integration pipeline: there is no remote interface, no credentials, and no official API to integrate against (Bellingcat: 'There is no official Sherlock API... running Sherlock locally... remains the recommended method'). However the tool demonstrably CAN be wrapped — community MCP servers and a paid Apify Actor already do so — and the draft itself acknowledges this in its uncertainty notes. 'not_buildable' is accurate under a no-remote-interface definition but overstates impossibility if local CLI/MCP wrapping counts as buildable.",
+     "replacement_evidence": "https://bellingcat.gitbook.io/toolkit/more/all-tools/sherlock"},
+    {"field": "primary_blocker", "draft_value": "local_cli_only", "verdict": "SUPPORTED",
+     "reason": "Exactly right: the sole blocker is that Sherlock is a local CLI with no hosted endpoint; nothing about auth, pricing, or partnership applies."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked the official GitHub repo, Bellingcat's independent tool review (live gitbook version), and searched for Sherlock MCP servers. The negative claims hold: no official API, no vendor MCP, no Composio toolkit. Nuances recorded: community MCP wrappers (Burnsedia/sherlock-mcp, adeze/sherlock fork) prove local wrapping is feasible, so not_buildable is fair only under a hosted-API definition — which the draft's own notes make clear. mcp_status lacked an evidence URL in the draft; replacement supplied. Beware an unrelated 'Sherlock MCP Server' by Covertlabs (infostealer intel platform) — different product, same name."
+}

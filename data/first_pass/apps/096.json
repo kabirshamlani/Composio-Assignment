@@ -1,0 +1,27 @@
+{
+  "app_id": 96,
+  "name": "Devin",
+  "category": "AI, Research and Media-native",
+  "official_domain": "devin.ai",
+  "description": "Cognition's autonomous AI software engineer; API to create and manage Devin sessions, knowledge, playbooks and org resources.",
+  "auth_methods": ["api_key", "personal_access_token", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Self-serve signup at app.devin.ai with Free, Pro ($20/mo), Max ($200/mo) and Teams ($80/mo min) plans. API credentials (cog_-prefixed service-user keys or PATs) are generated from Settings > Service users / the Devin API settings page.",
+  "api_protocols": ["rest", "websocket", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP server at https://mcp.devin.ai/mcp with Bearer auth (cog_ keys only; legacy apk_ keys unsupported), documented at docs.devin.ai/work-with-devin/devin-mcp. No Composio toolkit found (docs.composio.dev/toolkits/devin returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Did not verify whether the Free tier includes API/service-user key creation or whether a paid plan is effectively required for meaningful API usage (sessions consume paid quota/credits). No webhook/event-subscription docs found in the v3 API reference searches; left as null. WebSocket refers to the ACP live endpoint accepting PATs.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.devin.ai/api-reference/authentication", "note": "Principal + token model: Service User API Keys and Personal Access Tokens, all cog_-prefixed, sent as Authorization: Bearer"},
+    {"claims": ["auth", "api"], "url": "https://docs.devin.ai/api-reference/personal-access-tokens", "note": "PATs used identically in Authorization header against api.devin.ai/v3; also accepted by the ACP live WebSocket endpoint"},
+    {"claims": ["mcp"], "url": "https://docs.devin.ai/work-with-devin/devin-mcp", "note": "Official Devin MCP server at https://mcp.devin.ai/mcp; requires cog_ API key, optional X-Org-Id header for enterprise/PAT tokens"},
+    {"claims": ["access"], "url": "https://docs.devinenterprise.com/admin/billing/self-serve", "note": "'Devin has four self-serve plans you can sign up for directly at app.devin.ai': Free, Pro $20/mo, Max $200/mo, Teams $80/mo minimum"},
+    {"claims": ["api", "verdict"], "url": "https://docs.devin.ai/api-reference/getting-started/migration-guide", "note": "Current v3 REST API is org- and enterprise-scoped covering sessions, service users, roles and more, with cursor pagination and RBAC"}
+  ]
+}

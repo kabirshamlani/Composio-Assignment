@@ -1,0 +1,25 @@
+{
+  "app_id": 10,
+  "name": "DealCloud",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_client_credentials", "verdict": "SUPPORTED",
+     "reason": "Live api.docs.dealcloud.com/docs/token: 'DealCloud uses the OAuth2 Client Credentials flow to generate a bearer token'; POST with grant_type=client_credentials, client_id and the user's apiKey as client_secret."},
+    {"field": "auth_methods", "draft_value": ["oauth2_client_credentials", "api_key", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "Token docs confirm client-credentials flow using client_id + apiKey, returning a bearer token (15-minute expiry) used in the Authorization header; API key self-served from user Profile after an admin enables the API capability. MCP additionally uses per-user OAuth sign-in."},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "SUPPORTED",
+     "reason": "No self-serve signup, no free trial, no public pricing anywhere on intapp.com — only 'Schedule a demo'. Third-party contract data (Vendr/GetApp/prospeo) confirms sales-only procurement with contracts roughly $85K-$1.4M/year. This is a genuine hard commercial gate, not a login-gated-docs artifact: the API docs themselves are public but credentials exist only inside a purchased site."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Public docs cover Data and Schema APIs (api/rest/v4), User Management, Publications, Relationship Intelligence Import, and Site Backup APIs with distinct OAuth scopes."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST APIs confirmed at api/rest/v1 and v4; official MCP server confirmed. Note: the MCP server internally exposes GraphQL tooling (search_schema, introspect, execute_query), but no standalone customer-facing GraphQL endpoint is documented, so omitting graphql from api_protocols is reasonable."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Verified on the vendor's own docs domain (api.docs.dealcloud.com/mcp and /mcp/getting-started): 'DealCloud MCP Server — client preview starting July 2026', requires DealCloud with Celeste license plus Manage MCP Servers / MCP Access permissions, per-user OAuth, and all tools currently read-only. This is vendor-owned, not community. Caveat: it is a client preview, not GA."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "For a firm that already licenses DealCloud, the REST API is fully documented and credentials are admin-enabled self-serve; the sales gate is captured in primary_blocker rather than the verdict, consistent with the draft's stated convention."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "Enterprise sales-led procurement is the only path to credentials; no trial or self-serve tier exists. MCP further requires the Celeste license."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "High-risk claims both held up. (1) Official vendor MCP: confirmed live on api.docs.dealcloud.com — vendor-owned docs, July 2026 client preview, Celeste license + MCP Access gating, per-user OAuth, read-only tools. (2) Hard commercial gate: confirmed no trial/self-serve/public pricing via intapp.com demo-only flow and independent pricing benchmarks ($85K-$1.4M annual contracts). Also re-verified the token endpoint doc (client credentials, apiKey as secret, 15-min tokens, scoped APIs)."
+}

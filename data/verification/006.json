@@ -1,0 +1,26 @@
+{
+  "app_id": 6,
+  "name": "Podio",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "developers.podio.com/authentication: 'Server-side flow: This is the preferred way of authenticating for web apps' — OAuth2 authorization code is the primary documented flow."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "custom"], "verdict": "SUPPORTED",
+     "reason": "Live auth docs confirm four flows: server-side (auth code), client-side (implicit), username/password, and app authentication; access token sent as 'Authorization: OAuth2 ACCESS_TOKEN'. 'custom' fairly covers the non-standard grants and header."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Free $0 plan with self-serve signup at podio.com/signup confirmed on live Progress pricing page (up to 5 users, 100 items), and API access is included on the free tier. However the draft's access_notes say '1,000 API calls/day' while the live pricing page states 'API Integrations: 1000 calls per hour' on all plans (add-ons paid-only). Field value is correct; the rate-limit unit in the notes is wrong.",
+     "replacement_evidence": "https://www.progress.com/podio/pricing"},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Podio developer docs state the entire Podio frontend is built on the API; REST API covers apps, items, tasks, workspaces, users, files, comments and webhooks."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST API at api.podio.com confirmed; official hosted MCP server live at https://mcp.podio.com/mcp per Progress documentation."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Progress (Podio's vendor since the 2024 ShareFile/Podio acquisition) publishes the Podio MCP Server integration guide on progress.com and support.sharefile.com; hosted at mcp.podio.com with OAuth endpoints and 22 tools including writes. Repo/docs ownership is genuinely the vendor, not community."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve free plan with immediate API key generation and OAuth2 client registration; nothing gates building."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker; free-tier hourly API cap is a limit, not an access gate."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-opened developers.podio.com/authentication, progress.com/podio/pricing, and independently confirmed the official Podio MCP server via Progress/ShareFile docs (mcp.podio.com/mcp, OAuth, 22 tools). Only issue found: draft access_notes state the free-plan API cap as 1,000 calls/day, but the live pricing page says 1,000 calls per hour on all plans with paid add-ons for more."
+}

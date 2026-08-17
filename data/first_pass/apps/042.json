@@ -1,0 +1,27 @@
+{
+  "app_id": 42,
+  "name": "WooCommerce",
+  "category": "Ecommerce",
+  "official_domain": "woocommerce.com",
+  "description": "Ecommerce: open-source WordPress ecommerce plugin with a REST API for products, orders, customers, coupons and more on self-hosted stores.",
+  "auth_methods": ["basic_auth", "hmac_signature", "api_key"],
+  "primary_auth": "basic_auth",
+  "access": "self_serve_free",
+  "access_notes": "WooCommerce is a free open-source WordPress plugin. Store admins generate consumer key/secret pairs at WooCommerce > Settings > Advanced > REST API on their own site. Over HTTPS the key/secret are used via HTTP Basic Auth (or query params); over plain HTTP, OAuth 1.0a one-legged HMAC-SHA1 signatures are required. Access to a third-party merchant's store requires that store's admin to issue keys.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official WooCommerce MCP integration ships in WooCommerce core (developer preview/beta since 10.3): enable in Settings > Advanced > Features, connect via @automattic/mcp-wordpress-remote proxy to /wp-json/woocommerce/mcp authenticated with REST API keys. No Composio WooCommerce toolkit found (composio.dev/toolkits/woocommerce and docs.composio.dev/toolkits/woocommerce both return 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "The API is per-store (self-hosted WordPress), so there is no central developer portal; integrating with someone else's store requires their admin to generate keys. Vendor MCP is still labeled developer preview/beta.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.woocommerce.com/docs/apis/rest-api/authentication/", "note": "Official auth docs: HTTP Basic Auth with consumer key/secret over HTTPS; OAuth 1.0a one-legged HMAC signature for non-SSL."},
+    {"claims": ["access"], "url": "https://woocommerce.com/document/woocommerce-rest-api/", "note": "Merchant-facing doc: generate REST API keys self-serve at WooCommerce > Settings > Advanced > REST API with read/write permission levels."},
+    {"claims": ["api", "webhooks"], "url": "https://woocommerce.github.io/woocommerce-rest-api-docs/v3.html", "note": "Full REST reference: CRUD for orders, products, customers, coupons, plus a /webhooks endpoint and HMAC-SHA256-signed webhook deliveries."},
+    {"claims": ["mcp"], "url": "https://developer.woocommerce.com/docs/features/mcp", "note": "Official docs: native MCP support in WooCommerce core via WordPress MCP Adapter and @automattic/mcp-wordpress-remote proxy, authenticated with REST API keys."},
+    {"claims": ["mcp"], "url": "https://developer.woocommerce.com/2025/11/03/call-for-testing-woocommerce-mcp-beta/", "note": "WooCommerce developer blog: MCP integration beta announced in WooCommerce 10.3."}
+  ]
+}

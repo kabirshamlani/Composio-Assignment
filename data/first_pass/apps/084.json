@@ -1,0 +1,26 @@
+{
+  "app_id": 84,
+  "name": "Paygent Connect",
+  "category": "Finance and Fintech",
+  "official_domain": "paygent.co.jp",
+  "description": "Finance and Fintech: Japanese payment service provider (Mitsubishi UFJ Nicos / DeNA JV) whose 'connect' integration module enables server-to-server credit card, konbini and bank-transfer payments for merchants.",
+  "auth_methods": ["custom"],
+  "primary_auth": "custom",
+  "access": "contact_sales",
+  "access_notes": "No self-serve developer signup. Merchants apply via the merchant administrator site, return a stamped paper application with corporate documents, and each payment method is screened by the underlying payment institutions before test and then production environments are granted. API specs and the test-environment connection kit are only downloadable after contract from the login-gated merchant portal. Authentication is a proprietary scheme: mutual-TLS client certificates plus a connection ID/password (and registered source IP addresses).",
+  "api_protocols": ["rest", "sdk_only"],
+  "api_breadth": "unknown",
+  "supports_webhooks": null,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No vendor MCP server found on paygent.co.jp and no Paygent toolkit found in the Composio toolkits index (docs.composio.dev/toolkits).",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "medium",
+  "uncertainty_notes": "The assignment hint said 'paygent (NMI-powered)' but searches ('\"Paygent Connect\" NMI payment gateway', '\"paygent\" transactiongateway.com NMI white label') found no evidence linking Paygent to NMI; NMI is a separate US white-label gateway. 'paygent/connect' is Paygent's own Composer package name for its PHP B2B module (PaygentB2BModule), which wraps a proprietary HTTPS POST 'telegram' interface — 'rest' here means plain HTTPS server-to-server calls, not a documented RESTful API. Full API breadth and webhook/notification support could not be determined because specifications sit behind the contract-gated merchant portal (this is login-gating, not proof of absence).",
+  "evidence": [
+    {"claims": ["access"], "url": "https://www.paygent.co.jp/payment_service/connect/", "note": "Official onboarding flow: apply via merchant admin site, mail stamped application with official documents, screening by each payment institution, then test and production environment setup."},
+    {"claims": ["auth", "access"], "url": "https://www.paygent.co.jp/files/user/movies/basic_course/pdf/basic_course_02_fortest.pdf", "note": "Official setup manual: client certificate (.pfx) install required to access even the test environment; connection credentials issued via the merchant administrator site."},
+    {"claims": ["api", "auth"], "url": "https://qiita.com/ryotaro_tech/items/b665720d139282671949", "note": "Third-party integration walkthrough of the paygent/connect PHP module (PaygentB2BModule): client cert path, CA bundle, connection ID/password config — confirms module + proprietary server-to-server interface (lead, not vendor proof)."},
+    {"claims": ["access", "api"], "url": "https://support.paygent.co.jp/faq/show/3650?site_domain=default", "note": "Official merchant support FAQ: manuals/specifications are downloaded from the login-gated merchant administrator site ('マニュアル/仕様書'), i.e. docs are contract-gated."}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "app_id": 33,
+  "name": "LinkedIn Ads",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "linkedin.com",
+  "description": "Advertising platform: LinkedIn Marketing API for creating and managing ad campaigns, reporting, lead sync and company-page content.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "partner_gated",
+  "access_notes": "All Marketing/Advertising API access requires applying for the Advertising API product on a LinkedIn developer app tied to a verified Company Page; LinkedIn manually reviews every application against qualification criteria (established business, established use case) and 'reserves the right to review applications and select partners at its discretion'. Development tier (max 5 ad accounts for POST) is the entry point; Standard tier and restricted APIs (Matched Audiences, Audience Insights, Media Planning) require further review/forms with up to 60-day response times. Reviews commonly take weeks to months.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit"],
+  "mcp_notes": "Composio LINKEDIN_ADS toolkit exists (28 tools, OAuth2, no Composio-managed auth, so you must bring your own approved LinkedIn app credentials). No official LinkedIn/Microsoft vendor MCP for the Marketing API found in official docs.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "high",
+  "uncertainty_notes": "2-legged client-credentials OAuth exists in LinkedIn's shared auth docs but most Marketing API permissions are 3-legged member-auth only. Exact review timelines are not published by LinkedIn (third-party sources report 4 weeks to 4 months).",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://learn.microsoft.com/en-us/linkedin/shared/authentication/authentication", "note": "Documents 3-legged OAuth (member authorization) and 2-legged OAuth (client credentials) as the two authorization flows for LinkedIn APIs"},
+    {"claims": ["access"], "url": "https://learn.microsoft.com/en-us/linkedin/marketing/quick-start?view=li-lms-2026-06", "note": "Step 1 is 'Apply for API Access': create a Company Page and developer app, then apply for the desired API under the Products tab and complete the access form"},
+    {"claims": ["access", "api"], "url": "https://learn.microsoft.com/en-us/linkedin/marketing/integrations/marketing-tiers?view=li-lms-2026-06", "note": "Development vs Standard access tiers; 'LinkedIn reserves the right to review applications and select partners at its discretion and a partner might not be upgraded even if they meet these minimum requirements'"},
+    {"claims": ["access"], "url": "https://developer.linkedin.com/product-catalog/marketing/advertising-api", "note": "Qualifications include an established business and established use case; restricted APIs are private and require additional approval via a separate form after Advertising API approval"},
+    {"claims": ["webhooks"], "url": "https://learn.microsoft.com/en-us/linkedin/shared/api-guide/webhook-validation", "note": "Webhook registration/validation (HMAC-SHA256 challenge) for push notifications, e.g. lead notifications; Webhooks tab only enabled for apps with an approved webhook use case"},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/linkedin_ads", "note": "Composio LINKEDIN_ADS toolkit: OAUTH2 auth, 28 tools (campaigns, analytics, lead forms), 'Composio Managed App Available? No'"}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "app_id": 72,
+  "name": "Airtable",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Live authentication docs: 'Any integrations that allow other users to grant access to Airtable should use OAuth', with tokens issued via the OAuth grant flow after registering at /create/oauth. For third-party integration use (the relevant framing), OAuth authorization code is the primary method; PATs are for personal development."},
+    {"field": "auth_methods", "draft_value": ["personal_access_token", "oauth2_authorization_code", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "Authentication page confirms personal access tokens and OAuth access tokens, both passed as 'Authorization: Bearer' headers; legacy api_key parameter is not supported (deprecation completed Feb 1 2024)."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Airtable has a free plan; PATs are created self-serve at airtable.com/create/tokens and OAuth integrations registered self-serve at /create/oauth. The official MCP support article lists 'Plan availability: All plans', confirming API/MCP reach the free tier."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Web API covers records CRUD, base/table/field schema management, base creation, comments, webhooks, and enterprise endpoints; Composio wraps 26 tools including create base/table/field. Broad is fair."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST Web API at api.airtable.com confirmed; official hosted MCP server at https://mcp.airtable.com/mcp confirmed in the Airtable support article (verified via Claude Code setup command 'claude mcp add --transport http airtable https://mcp.airtable.com/mcp')."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "Vendor ownership verified: the MCP server is documented on support.airtable.com (updated Aug 10 2026), hosted on airtable.com's own mcp.airtable.com domain, auth via OAuth or PAT, and can read/write records, create bases, and build interfaces/automation drafts, matching the draft's notes. Composio AIRTABLE toolkit page confirms 26 tools, 6 triggers, OAUTH2/API_KEY."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Free self-serve plan, self-serve tokens/OAuth registration, broad REST API, official webhooks, official MCP: buildable today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker. Only caveat (correctly captured in draft uncertainty notes) is that enterprise admins can restrict third-party integrations, which is not a default gate."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently re-opened airtable.com/developers/web/api/authentication, the webhooks API overview/create-webhook pages (webhook:manage scope, all billing plans, 7-day expiry matching draft uncertainty notes), the official MCP support article, and the Composio AIRTABLE toolkit page. All eight fields hold with no corrections."
+}

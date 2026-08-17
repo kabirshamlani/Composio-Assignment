@@ -1,0 +1,27 @@
+{
+  "app_id": 71,
+  "name": "Notion",
+  "category": "Productivity and Project Management",
+  "official_domain": "notion.com",
+  "description": "Productivity/project management: connected workspace for docs, wikis and databases with a REST API over pages, databases, blocks, users and comments.",
+  "auth_methods": ["oauth2_authorization_code", "api_key", "personal_access_token", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free plan available; internal connections (static API tokens) and public OAuth connections are both created self-serve in the Notion developer portal / integration settings.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted Notion MCP at https://mcp.notion.com/mcp (OAuth; SSE fallback at /sse); the open-source makenotion/notion-mcp-server is soft-deprecated in favor of the remote server. Composio NOTION toolkit exists (56 tools, 8 triggers, OAUTH2/API_KEY, Composio managed auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "All API tokens are passed as bearer tokens; 'api_key' refers to internal-connection static tokens and 'personal_access_token' to user-scoped PATs. Webhook events are sparse (metadata only) and require follow-up API calls for content.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developers.notion.com/reference/authentication", "note": "API accepts bearer tokens from internal connections, personal access tokens, or the OAuth flow for public connections; REST base api.notion.com/v1."},
+    {"claims": ["auth", "access"], "url": "https://developers.notion.com/guides/get-started/authorization", "note": "Internal connections use a static API token, PATs are user-scoped static tokens, and public connections use OAuth 2.0 authorization-code flow (api.notion.com/v1/oauth/token, HTTP Basic client auth)."},
+    {"claims": ["webhooks"], "url": "https://developers.notion.com/reference/webhooks", "note": "Webhooks send HTTP POST events for page/database/comment changes; subscriptions created self-serve in connection settings with HMAC signature verification."},
+    {"claims": ["mcp"], "url": "https://developers.notion.com/guides/mcp/overview", "note": "'Notion MCP is a remote MCP server hosted by Notion' with OAuth authorization; endpoints mcp.notion.com/mcp and /sse."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists Notion (slug NOTION, 56 tools, 8 triggers, OAUTH2/API_KEY, Composio managed app: Yes)."}
+  ]
+}

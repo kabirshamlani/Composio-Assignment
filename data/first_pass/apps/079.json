@@ -1,0 +1,28 @@
+{
+  "app_id": 79,
+  "name": "Smartsheet",
+  "category": "Productivity and Project Management",
+  "official_domain": "smartsheet.com",
+  "description": "Project management: enterprise work management platform built around spreadsheet-like sheets, reports, dashboards and workflow automation.",
+  "auth_methods": ["api_key", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_paid",
+  "access_notes": "API access tokens can be generated self-serve in the UI (Personal Settings > API Access), but the API is restricted to licensed users on Business and Enterprise plans. Developer Tools registration at developers.smartsheet.com/register is only for registering OAuth apps and itself requires an email belonging to an existing licensed user on a Business plan or higher; the previously offered free developer sandbox account registration is no longer advertised. Production use requires a paid Business/Enterprise plan (trial of a qualifying plan also works).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official Smartsheet MCP Server is generally available at https://mcp.smartsheet.com (OAuth 2.0 or personal access token; requires Business/Enterprise plan), documented at developers.smartsheet.com/ai-mcp. No Composio Smartsheet toolkit found (docs.composio.dev/toolkits/smartsheet returns 404 and the toolkit catalog does not list it).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "high",
+  "uncertainty_notes": "Some API endpoints (user management, event reporting) are further restricted to Enterprise/Advanced Work Management plans with support activation. The old developer registration page (register/index.html) that offered a free developer sandbox account now 404s; the current Developer Tools Registration page covers only OAuth app registration and requires an existing licensed Business+ user, so it is unclear whether a free sandbox program still exists in any form.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developers.smartsheet.com/api/smartsheet/guides/basics/authentication", "note": "REST API authenticates with access tokens (API keys) generated in the UI, passed as Authorization: Bearer; OAuth 2.0 3-legged flow recommended for user-consent scenarios."},
+    {"claims": ["auth"], "url": "https://developers.smartsheet.com/api/smartsheet/guides/advanced-topics/oauth", "note": "OAuth 2.0 authorization_code flow with scopes (including ADMIN_WEBHOOKS for webhook management) and refresh tokens via POST /token."},
+    {"claims": ["access"], "url": "https://developers.smartsheet.com/register", "note": "Developer Tools Registration (OAuth app registration only): 'The email address used to register for Developer Tools must belong to an existing licensed Smartsheet user on a Business plan or higher'; no registration needed for direct API access via access tokens."},
+    {"claims": ["access", "api", "webhooks"], "url": "https://developers.smartsheet.com/api/smartsheet/openapi", "note": "'The Smartsheet API is restricted to users on Business and Enterprise plans'; OpenAPI reference covers sheets, rows, users, webhooks and more (read+write)."},
+    {"claims": ["mcp"], "url": "https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server", "note": "Official Smartsheet MCP server docs on the vendor developer portal."},
+    {"claims": ["mcp"], "url": "https://www.smartsheet.com/content-center/smartsheet-mcp-server-now-generally-available", "note": "Vendor announcement: MCP Server GA; requires a Business or Enterprise plan; OAuth 2.0 or personal access token."}
+  ]
+}

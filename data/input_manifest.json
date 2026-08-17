@@ -1,0 +1,11 @@
+{
+  "source": "DOCS/AI Product Ops Intern - The take-home assignment.md (verbatim transcription)",
+  "input_sha256": "edefe97ee43cf40011cb6b1d097f1e6457561e3ff1470785b7f2eb9e872a53f4",
+  "validated_at": "2026-08-17T11:05:48.524146+00:00",
+  "expected_count": 100,
+  "actual_count": 100,
+  "missing_ids": [],
+  "status": "OK",
+  "policy": "missing IDs are never invented; any gap is reported, not reconstructed",
+  "structural_errors": []
+}

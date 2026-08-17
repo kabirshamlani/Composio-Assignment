@@ -1,0 +1,26 @@
+{
+  "app_id": 82,
+  "name": "Plaid",
+  "category": "Finance and Fintech",
+  "official_domain": "plaid.com",
+  "description": "Finance and Fintech: bank data connectivity API for account linking, transactions, balances, identity, assets and payment initiation.",
+  "auth_methods": ["api_key", "oauth2_client_credentials"],
+  "primary_auth": "api_key",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Signing up on the Plaid Dashboard immediately yields a client_id and secret with full Sandbox access. Production requires submitting a request via the Dashboard with company/use-case details and approval takes a couple of business days; free Trial plan and Limited Production tiers exist as intermediate steps. OAuth2 client_credentials (scope mcp:dashboard) is used only for the Dashboard MCP server.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Two official Plaid MCP servers: a remote Dashboard MCP at https://api.dashboard.plaid.com/mcp/ (diagnostics/analytics, requires Production access) and a local sandbox MCP (mcp-server-plaid) in plaid/ai-coding-toolkit. No Plaid toolkit found in the Composio toolkits index (docs.composio.dev/toolkits).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "Composio toolkit absence based on grepping the full docs.composio.dev/toolkits index page for 'plaid' (no match).",
+  "evidence": [
+    {"claims": ["auth", "access", "api"], "url": "https://plaid.com/docs/api/", "note": "'create an account on the Plaid Dashboard... we'll provide a live client_id and secret'; endpoints require client_id+secret headers; 'You can request Production API access via the Dashboard'."},
+    {"claims": ["access"], "url": "https://support.plaid.com/hc/en-us/articles/16110110883479-How-are-Sandbox-Production-Trial-plan-and-Limited-Production-different", "note": "'Approval for the Production environment takes a couple of business days, and you'll need to provide more information about your company'; Sandbox is free and immediate."},
+    {"claims": ["access", "webhooks"], "url": "https://plaid.com/docs/sandbox/", "note": "Sandbox is free and fully featured, keys from the Dashboard; sandbox supports simulating webhooks (/sandbox webhook simulation, Limited Production request form)."},
+    {"claims": ["mcp"], "url": "https://plaid.com/docs/resources/mcp/", "note": "Plaid offers two MCP servers: remote Dashboard MCP server at api.dashboard.plaid.com/mcp/ (OAuth client_credentials, mcp:dashboard scope) and a local development MCP server."}
+  ]
+}

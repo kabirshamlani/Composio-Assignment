@@ -1,0 +1,29 @@
+{
+  "app_id": 88,
+  "name": "Brex",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "personal_access_token", "verdict": "SUPPORTED",
+     "reason": "developer.brex.com/guides/authentication: customers 'generate a user token from your Brex dashboard' (Settings/Developer > Create Token, account or card admin) and pass it as Authorization: Bearer. This static admin-generated user token is indeed the primary path for a Brex customer."},
+    {"field": "auth_methods", "draft_value": ["personal_access_token", "oauth2_authorization_code", "oauth2_client_credentials", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "User tokens (bearer) per the authentication guide; developer.brex.com/guides/partner_authentication confirms partner OAuth 2.0 with Authorization Code Grant for account APIs and Client Credentials Grant for the onboarding API ('This section is only for Brex developer partners'; client ID/secret issued by Brex developer support). The new MCP endpoint additionally does OAuth with Dynamic Client Registration, still within these method families."},
+    {"field": "access", "draft_value": "admin_gated", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Admin gating confirmed: only an account or card admin can accept the developer API agreement and create user tokens, and API access presupposes an approved Brex business account. Partner OAuth credentials require contacting Brex, i.e. partner-gated, as the draft says. However the draft's access_notes claim 'There is no sandbox' is overstated: the quoted line ('Brex currently only offers a production API server at https://api.brex.com') is real but applies to the customer path; developer.brex.com/docs/partner_onboarding documents a staging environment with staging credentials and provisioned staging accounts for approved developer partners. So there IS a sandbox/staging tier, just gated behind partner approval, not self-serve. The 'admin_gated' enum value itself remains correct."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST APIs cover transactions, expenses, cards, users/teams, payments, bills, travel, accounting, budgets/spend limits, onboarding and webhooks; Composio wraps 84 Brex tools and the official MCP exposes ~44 tools across expenses, cards, banking, bills, travel, accounting. Broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "CONTRADICTED",
+     "reason": "Brex now also operates an official hosted MCP endpoint at https://api.brex.com/mcp (HTTP transport, OAuth with Dynamic Client Registration or Brex API token), so the protocol list should include mcp alongside rest.",
+     "corrected_value": ["rest", "mcp"],
+     "replacement_evidence": "https://developer.brex.com/docs/mcp"},
+    {"field": "mcp_status", "draft_value": ["official_composio_toolkit"], "verdict": "CONTRADICTED",
+     "reason": "The draft states 'No official Brex vendor MCP server found on developer.brex.com', but Brex publishes one: developer.brex.com/docs/mcp documents the official Brex MCP server hosted at https://api.brex.com/mcp (beta; enabled via Settings > Beta features 'Brex in AI assistants' after an admin accepts the developer API agreement; OAuth via accounts-api.brex.com with RFC 7591 Dynamic Client Registration, or admin API token; ~44 tools spanning expenses, users, cards, banking, bills, vendors, accounting, travel, including write actions like update_expense_memo and receipt upload). Brex also announced it at brex.com/journal/brex-mcp-connect-brex-to-ai-tools. The Composio BREX toolkit (84 tools) is separately confirmed at composio.dev/toolkits/brex, so that half of the draft value stands.",
+     "corrected_value": ["official_vendor_mcp", "official_composio_toolkit"],
+     "replacement_evidence": "https://developer.brex.com/docs/mcp"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "For an existing Brex customer, an admin can self-serve a user token immediately and the full REST API plus webhooks (and now the official MCP) are usable in production; docs are public. Buildable now, with the gate correctly expressed as the blocker."},
+    {"field": "primary_blocker", "draft_value": "admin_install_required", "verdict": "SUPPORTED",
+     "reason": "Confirmed: an account or card admin must accept the developer API agreement and generate tokens (and enable the MCP beta feature); an arbitrary developer without a Brex business account cannot self-serve access (non-customers must go through partner onboarding with application approval)."}
+  ],
+  "overall": "corrected",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked Brex authentication and partner authentication guides (draft quotes verified verbatim), partner onboarding, the Composio BREX toolkit page (84 tools confirmed), and searched independently for a vendor MCP. Two corrections: (1) Brex DOES ship an official vendor MCP server at api.brex.com/mcp, documented at developer.brex.com/docs/mcp (beta, OAuth+DCR or API token), so mcp_status and api_protocols were contradicted; the docs page may postdate the draft's research. (2) The 'no sandbox' claim is only true for the customer path; approved developer partners get a staging environment per developer.brex.com/docs/partner_onboarding. Access/auth/breadth/blocker claims all held up."
+}

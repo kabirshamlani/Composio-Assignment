@@ -1,0 +1,28 @@
+{
+  "app_id": 10,
+  "name": "DealCloud",
+  "category": "CRM and Sales",
+  "official_domain": "dealcloud.com",
+  "description": "CRM and Sales: Intapp's deal and relationship management platform for private equity, investment banking and advisory firms.",
+  "auth_methods": ["oauth2_client_credentials", "api_key", "bearer_token"],
+  "primary_auth": "oauth2_client_credentials",
+  "access": "contact_sales",
+  "access_notes": "No self-serve signup or public pricing; Intapp DealCloud is sold via demo/sales (enterprise contracts). For existing customers, an admin must enable the 'API' capability on a user group, then the user self-serves an API key from their Profile; that API key is used as the client_secret in the OAuth2 client-credentials token flow. The MCP server additionally requires the 'DealCloud with Celeste' license.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": false,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official DealCloud MCP Server in client preview starting July 2026; read-only access to DealCloud data, per-user OAuth sign-in, requires DealCloud with Celeste license plus 'MCP Access' user permission. No Composio toolkit found (docs.composio.dev/toolkits/dealcloud returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "high",
+  "uncertainty_notes": "No push webhooks: real-time events are delivered via the stateful Publications API (long-polling of topics), so supports_webhooks is recorded as false even though event-driven integration is possible. API is customer-gated: credentials exist only inside a purchased DealCloud site, so verdict buildable_now applies to firms that already have a license.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://api.docs.dealcloud.com/docs/token", "note": "'DealCloud uses the OAuth2 Client Credentials flow to generate a bearer token'; scopes for data, user_management, publish, ri_import, backup; tokens expire after 15 minutes."},
+    {"claims": ["auth", "access"], "url": "https://api.docs.dealcloud.com/docs/apikeys", "note": "API access requires a user group with the 'API' capability enabled by an admin; the user then enables and copies an API key from their Profile."},
+    {"claims": ["mcp"], "url": "https://api.docs.dealcloud.com/mcp", "note": "Official 'DealCloud MCP Server — client preview starting July 2026' documented by the vendor; gives AI assistants read access scoped to the user's permissions."},
+    {"claims": ["mcp", "access"], "url": "https://api.docs.dealcloud.com/mcp/getting-started", "note": "MCP prerequisites: 'DealCloud with Celeste license', admin 'Manage MCP Servers' and end-user 'MCP Access' permissions; per-user OAuth sign-in, no client_id/secret needed."},
+    {"claims": ["webhooks", "api"], "url": "https://api.docs.dealcloud.com/docs/publications", "note": "Real-time events via the stateful Publications API (poll-based topic consumption, 9-day retention) rather than push webhooks; standard REST Data/Schema/User Management APIs also documented."},
+    {"claims": ["access"], "url": "https://www.intapp.com/schedule-demo/", "note": "Intapp offers only 'Schedule a demo' / speak-with-an-expert; no self-serve signup or public pricing for DealCloud."}
+  ]
+}

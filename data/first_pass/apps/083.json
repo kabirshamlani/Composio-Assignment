@@ -1,0 +1,26 @@
+{
+  "app_id": 83,
+  "name": "Binance",
+  "category": "Finance and Fintech",
+  "official_domain": "binance.com",
+  "description": "Finance and Fintech: cryptocurrency exchange with public APIs for market data, spot/derivatives trading, wallets and account management.",
+  "auth_methods": ["api_key", "hmac_signature"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "API keys are created self-serve on the API Management page of a Binance account (account signup requires identity/KYC verification in most regions). SIGNED endpoints additionally require request signing with HMAC-SHA256, RSA or Ed25519 keys. A public spot testnet also exists for testing.",
+  "api_protocols": ["rest", "websocket"],
+  "api_breadth": "broad",
+  "supports_webhooks": false,
+  "mcp_status": ["reputable_community_mcp"],
+  "mcp_notes": "No official Binance vendor MCP server found in Binance docs; multiple community MCP servers exist (e.g. binance-mcp-server on PyPI, several GitHub repos). No Binance toolkit found in the Composio toolkits index; Composio's CryptoKit blog mentions Binance but the toolkit list does not include it.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Core spot API delivers account/market events via WebSocket user data streams rather than HTTP webhooks, hence supports_webhooks=false for the main API (some side products like Binance Pay have merchant notifications). Vendor-MCP absence based on searches 'Binance official MCP server' which surfaced only community servers.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md", "note": "Official spot REST docs: API keys created on the account's API Management page; SIGNED endpoints require HMAC-SHA-256 (or RSA/Ed25519) signatures over request params."},
+    {"claims": ["auth", "api", "access"], "url": "https://developers.binance.com/legacy-docs/binance-spot-api-docs/websocket-api/request-security", "note": "Official developer portal WebSocket API request-security page documenting API key + HMAC/RSA/Ed25519 signing; confirms websocket protocol and self-serve key creation."},
+    {"claims": ["mcp"], "url": "https://github.com/nirholas/Binance-MCP", "note": "Community (not vendor) MCP server for the Binance API; representative of the community MCP ecosystem found in searches."},
+    {"claims": ["access"], "url": "https://www.binance.com/en/academy/articles/hmac-signature-what-it-is-and-how-to-use-it-for-binance-api-security", "note": "Official Binance Academy page: 'You can obtain your API secret key by creating an API key on Binance' — self-serve key creation for account holders."}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 6,
+  "name": "Podio",
+  "category": "CRM and Sales",
+  "official_domain": "podio.com",
+  "description": "CRM and Sales: Progress Podio is a customizable work-management/CRM platform of apps, items and workspaces with a full REST API.",
+  "auth_methods": ["oauth2_authorization_code", "custom"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free plan (up to 5 employees, 100 items, 1,000 API calls/day) with no credit card; API keys (client ID/secret) are self-serve from account settings at podio.com. Higher API capacity requires paid plans/add-ons under the Aug 2026 hybrid pricing model.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Progress (Podio's vendor) documents an official Podio MCP Server for ChatGPT, Copilot Studio, Claude etc., usable with shared default credentials or your own Podio API key. No Composio Podio toolkit found (docs.composio.dev/toolkits/podio and composio.dev/toolkits/podio both 404); Composio only has a toolkit for Procfu, a third-party Podio automation product.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "'custom' covers Podio's non-standard OAuth grants: username/password grant and 'app authentication' (app_id + app_token), plus a client-side implicit flow. Access token is sent as 'Authorization: OAuth2 TOKEN' rather than standard Bearer. Free-plan API is capped at 1,000 calls/day and add-ons cannot be purchased on free plans.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developers.podio.com/authentication", "note": "OAuth2 with server-side, client-side, password and app-authentication flows; app registration yields Client ID/Secret; 'Authorization: OAuth2 ACCESS_TOKEN' header."},
+    {"claims": ["access", "api", "webhooks"], "url": "https://developers.podio.com/", "note": "'Get started right away - generate your API key'; 'the entire Podio frontend is built on the API'; 'you have the ability to register webhooks in your Podio apps'."},
+    {"claims": ["access"], "url": "https://www.progress.com/podio/pricing", "note": "Free plan at $0/user/month with self-serve signup at podio.com/signup; paid Plus/Premium plans add API capacity."},
+    {"claims": ["mcp"], "url": "https://www.progress.com/podio/documentation/using-podio/podio-mcp-server", "note": "Official Progress documentation for the Podio MCP Server connecting ChatGPT, Copilot Studio, Claude and other MCP clients to Podio data."}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 68,
+  "name": "MongoDB Atlas",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "mongodb.com",
+  "description": "Developer/data platform: managed MongoDB cloud database with an Administration REST API for managing clusters, projects, users and backups.",
+  "auth_methods": ["oauth2_client_credentials", "api_key", "bearer_token"],
+  "primary_auth": "oauth2_client_credentials",
+  "access": "self_serve_free",
+  "access_notes": "Free-forever M0 clusters and self-serve signup; service accounts (OAuth2 client credentials, recommended) and legacy HTTP Digest API keys are both created self-serve from the Atlas UI.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "none_found"],
+  "mcp_notes": "Official MongoDB MCP Server with two first-party deployment types: self-run Local MCP and the hosted MongoDB Atlas Managed MCP Server. No Composio MongoDB/Atlas toolkit found in the Composio toolkit catalog (only an open tool-request issue ComposioHQ/composio#2984); none_found refers to the Composio toolkit specifically.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API keys use HTTP Digest (not Basic/Bearer) and are labeled legacy. The older Atlas Data API for document CRUD was deprecated, so data-plane access is via drivers or the MCP server rather than plain REST. Webhooks refer to Atlas alert third-party/webhook notification integrations configured per project.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://www.mongodb.com/docs/atlas/api/api-authentication", "note": "'The Atlas Administration API accepts... Service account access tokens (OAuth 2.0)' via client-credentials flow and 'API keys (HTTP Digest Authentication)' described as legacy."},
+    {"claims": ["auth", "api", "webhooks"], "url": "https://www.mongodb.com/docs/api/doc/atlas-admin-api-v2/", "note": "Admin API v2 reference: OAuth2 token endpoint POST https://cloud.mongodb.com/api/oauth/token returning a Bearer token; REST resources cover all Atlas components including third-party/webhook alert integrations."},
+    {"claims": ["access"], "url": "https://www.mongodb.com/docs/atlas/configure-api-access/", "note": "Self-serve procedure for creating service accounts and API keys directly in the Atlas UI to grant programmatic access."},
+    {"claims": ["mcp"], "url": "https://www.mongodb.com/docs/mcp-server/overview/", "note": "'The MongoDB MCP Server is our official MCP server implementation' with Local MCP and the hosted MongoDB Atlas Managed MCP Server deployment types."}
+  ]
+}

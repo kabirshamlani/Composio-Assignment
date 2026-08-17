@@ -1,0 +1,25 @@
+{
+  "app_id": 39,
+  "name": "Threads (Meta)",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Official get-started doc confirms Threads user access tokens 'conform to the OAuth 2.0 protocol' with an Authorization Window issuing authorization codes exchanged for user access tokens."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "OAuth 2.0 authorization-code flow issues short/long-lived user access tokens that are sent as bearer tokens on API requests; both entries are accurate."},
+    {"field": "access", "draft_value": "sandbox_self_serve_production_gated", "verdict": "SUPPORTED",
+     "reason": "Confirmed live at developers.facebook.com/docs/threads/get-started/: creating a Meta app with the Threads use case is self-serve and 'Threads testers can grant your app these permissions at any time', but for non-tester users 'each permission must first be approved through the App Review process, and your app must be published'. Production approval status re-checked as instructed: per-permission App Review (screencast of the full user journey) plus app publication is required; third-party integrators also report Meta Tech Provider Verification as a prerequisite for advanced access."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "Permission list (threads_basic, content_publish, delete, keyword_search, manage_insights, manage_mentions, manage_replies, profile_discovery, read_replies) confirms a publishing/replies/insights-focused API with no ads or DMs - medium is fair."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "Threads API is a REST-style Graph API at graph.threads.net; no GraphQL or MCP endpoint documented."},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "SUPPORTED",
+     "reason": "Independently confirmed: no official Meta MCP for Threads found, and the live Composio catalog (1183 toolkits, grepped for 'threads') contains no Threads toolkit."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Development against your own account and designated testers works immediately after self-serve app creation; the full API surface is exercisable pre-review."},
+    {"field": "primary_blocker", "draft_value": "production_approval", "verdict": "SUPPORTED",
+     "reason": "Per-permission Meta App Review with screencast (community sources report 2-4 weeks per permission) plus app publication gates production use for arbitrary users - correct blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked app-review/production-approval status as instructed: official docs confirm self-serve dev access via testers and per-permission App Review plus published-app requirement for ordinary users. Draft evidence URL developers.facebook.com/docs/threads/get-started/ confirmed live with the exact quoted language. No Threads MCP in Composio catalog or from Meta."
+}

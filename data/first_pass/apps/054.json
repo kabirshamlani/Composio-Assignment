@@ -1,0 +1,26 @@
+{
+  "app_id": 54,
+  "name": "MrScraper",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "mrscraper.com",
+  "description": "Data, SEO and Scraping: AI-powered web scraping platform with APIs for AI scrapers, HTML fetching, e-commerce/travel scrapers, results and analytics.",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "API tokens are created self-serve in the dashboard (profile > API Tokens) and sent in the x-api-token header (analytics endpoints take the token name as a query param). A permanent free plan with monthly token allowance and no credit card is documented; paid plans (Pro $199/mo etc.) add volume, residential proxies and pay-as-you-go overage.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official cloud-hosted vendor MCP at https://mcp.mrscraper.com/mcp (Bearer API token), documented at docs.mrscraper.com. No Composio toolkit found (composio.dev/toolkits/mrscraper returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Webhook support not found in the docs pages reviewed. Free-plan token allowance is small (docs billing page says 100 tokens/month while the pricing page shows 1,000), so real workloads need a paid plan.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://docs.mrscraper.com/docs/api/authentication", "note": "All endpoints require API token in x-api-token header; analytics endpoints use apiTokenName query param; REST base api.app.mrscraper.com"},
+    {"claims": ["auth", "access"], "url": "https://docs.mrscraper.com/docs/getting-started/api-token", "note": "Self-serve API token generation from the dashboard (profile > API Tokens > New Token)"},
+    {"claims": ["access"], "url": "https://docs.mrscraper.com/docs/getting-started/billing", "note": "Free plan with monthly tokens and no credit card required; Standard/Pro/Enterprise tiers"},
+    {"claims": ["mcp"], "url": "https://docs.mrscraper.com/docs/getting-started/mcp-server", "note": "Official cloud-hosted MrScraper MCP server at mcp.mrscraper.com/mcp with Bearer API-token auth"}
+  ]
+}

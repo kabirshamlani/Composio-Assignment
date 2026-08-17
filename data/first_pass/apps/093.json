@@ -1,0 +1,27 @@
+{
+  "app_id": 93,
+  "name": "Fathom",
+  "category": "AI, Research and Media-native",
+  "official_domain": "fathom.video",
+  "description": "AI, Research and Media-native: AI meeting notetaker that records, transcribes and summarizes calls, with a public REST API, webhooks, SDKs and an official MCP server.",
+  "auth_methods": ["api_key", "oauth2_authorization_code"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "API keys are self-generated from the API Access section of user Settings on the Fathom website — no approval process. Fathom has a free plan and third-party review confirms API access is included on all plan tiers including free. OAuth 2.0 is offered for public integrations that other Fathom users install.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official MCP documented in the vendor developer hub (developers.fathom.ai/mcp-docs) with guides for ChatGPT and Claude connectors. Composio FATHOM toolkit exists (7 tools; OAuth2 and API key; Composio-managed app available).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API surface is meeting-data-centric: list meetings/teams/users, get transcripts/summaries, request recording downloads, manage webhooks — reads plus webhook/download management rather than broad write operations. Free-tier API availability is asserted by a third-party review; official docs show no plan gate but do not explicitly enumerate plans.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developers.fathom.ai/api-overview", "note": "'All REST API resources are authenticated with API keys generated via the Fathom website's settings area'; keys sent in X-Api-Key header."},
+    {"claims": ["api", "access", "mcp"], "url": "https://developers.fathom.ai/llms.txt", "note": "Official docs index: quickstart ('Generate an API key and make your first call'), OAuth guide for public apps, TypeScript/Python SDKs, MCP docs (mcp-docs/index, chatgpt, claude), OpenAPI spec."},
+    {"claims": ["webhooks"], "url": "https://developers.fathom.ai/webhooks", "note": "Webhooks configurable in Settings or via POST /webhooks; signature verification via SDK verify_webhook helper."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/fathom.md", "note": "Composio FATHOM toolkit: OAuth2 + API key, 7 tools, 'Composio Managed App Available? Yes'."},
+    {"claims": ["access", "verdict"], "url": "https://pipeline.zoominfo.com/sales/fathom-api-review", "note": "Third-party review: 'API access is available on all plan tiers including the free plan... no developer approval process'; MCP server at api.fathom.ai/mcp."}
+  ]
+}

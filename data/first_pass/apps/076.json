@@ -1,0 +1,28 @@
+{
+  "app_id": 76,
+  "name": "Monday.com",
+  "category": "Productivity and Project Management",
+  "official_domain": "developer.monday.com",
+  "description": "Project management: Work OS platform for boards, items, workflows, docs and CRM-style project tracking.",
+  "auth_methods": ["api_key", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Admin/member users on any plan (including free and free no-expiry developer sandbox accounts) can copy a personal API token from the Developers section; free/trial plans are capped at 200 daily API calls. OAuth apps are built self-serve in the Developer Center (OAuth 2.1 with PKCE rolled out platform-wide). Viewers/student accounts cannot access the API.",
+  "api_protocols": ["graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted Platform MCP server at https://mcp.monday.com/mcp (Streamable HTTP; OAuth 2.0 or Bearer API token; ~60+ tools; maintained by monday.com AI team, open-source repo github.com/mondaycom/mcp). Separate Apps MCP exists for the apps framework. Composio also lists a monday toolkit (composio.dev/toolkits/monday).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Daily API call limits are low on free/trial plans (200 calls/day); paid plans get more.",
+  "evidence": [
+    {"claims": ["api", "auth"], "url": "https://developer.monday.com/api-reference/docs/getting-started", "note": "GraphQL API at https://api.monday.com/v2; access token sent in the Authorization header."},
+    {"claims": ["auth"], "url": "https://developer.monday.com/apps/docs/oauth", "note": "OAuth2 authorization code flow via auth.monday.com/oauth2/authorize for monday apps."},
+    {"claims": ["access"], "url": "https://developer.monday.com/api-reference/docs/basics", "note": "Admin, member and guest users can use the API; admins and members have their own API tokens; viewers/student accounts cannot."},
+    {"claims": ["access"], "url": "https://developer.monday.com/api-reference/docs/developer-sandbox-account", "note": "Free, no-expiration developer/sandbox account available self-serve for API and app development."},
+    {"claims": ["mcp"], "url": "https://developer.monday.com/api-reference/docs/mondaycom-mcp", "note": "Official hosted Platform MCP server at https://mcp.monday.com/mcp maintained by the monday.com AI team."},
+    {"claims": ["mcp"], "url": "https://github.com/mondaycom/mcp", "note": "monday.com's official GitHub org hosts the open-source MCP server package, confirming vendor ownership."}
+  ]
+}

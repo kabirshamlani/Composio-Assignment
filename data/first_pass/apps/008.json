@@ -1,0 +1,28 @@
+{
+  "app_id": 8,
+  "name": "Close",
+  "category": "CRM and Sales",
+  "official_domain": "close.com",
+  "description": "CRM and Sales: sales-focused CRM with built-in calling, email and SMS, exposing a full REST API over leads, contacts, opportunities and activities.",
+  "auth_methods": ["api_key", "oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_trial",
+  "access_notes": "No free plan; self-serve 14-day free trial with no credit card at app.close.com/signup (paid plans from $9-19/user/month). API keys are self-serve under Settings -> Developer -> API Keys; OAuth apps can be created for user-facing integrations.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Close hosts an official MCP server at https://mcp.close.com/mcp (HTTP Streamable, OAuth 2.0 with Dynamic Client Registration, or Close-API-Key + Close-Scope headers with mcp.read / mcp.write_safe / mcp.write_destructive scopes). Composio has a CLOSE toolkit, though it is narrow (6 tools, 0 triggers, API key auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API keys are transmitted via HTTP Basic auth (key as username, blank password) — mechanism is Basic, credential type is api_key. The Composio toolkit exists but covers only a handful of actions relative to the full Close API.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developer.close.com/api/overview", "note": "Base URL https://api.close.com/api/v1; two auth methods: API keys (Basic auth, key as username) and OAuth 2.0 'best for user-facing integrations'."},
+    {"claims": ["auth", "access"], "url": "https://developer.close.com/api/overview/api-key-authentication", "note": "API keys created self-serve under Settings -> Developer -> API Keys, scoped to a user/organization."},
+    {"claims": ["access"], "url": "https://close.com/pricing", "note": "'Start your free 14-day trial — no credit card required'; four paid tiers, no permanent free plan."},
+    {"claims": ["webhooks"], "url": "https://developer.close.com/resources/webhook-subscriptions/", "note": "Webhook subscriptions POST event data (create/update/delete on leads, opportunities, etc.) with HMAC signatures and retries."},
+    {"claims": ["mcp"], "url": "https://developer.close.com/mcp", "note": "Official Close MCP server at https://mcp.close.com/mcp with OAuth 2.0 DCR or Close-API-Key/Close-Scope header auth and three scope tiers."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/close", "note": "Composio CLOSE toolkit page: API_KEY auth, 6 tools, 0 triggers, category crm."}
+  ]
+}

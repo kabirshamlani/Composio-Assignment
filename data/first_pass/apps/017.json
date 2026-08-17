@@ -1,0 +1,28 @@
+{
+  "app_id": 17,
+  "name": "Plain",
+  "category": "Support and Helpdesk",
+  "official_domain": "plain.com",
+  "description": "Support and helpdesk: API-first B2B customer support platform (threads, customers, help center) with full UI-API parity via GraphQL.",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "All plans include a 7-day free trial with no credit card required; paid plans start at $35/seat/month. API keys are generated self-serve in Settings -> Machine Users with fine-grained permissions.",
+  "api_protocols": ["graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor remote MCP server at mcp.plain.com/mcp (OAuth, 30 tools across threads/customers/tenants/help center/workspace). Composio also has a PLAIN toolkit (23 tools, API key auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://www.plain.com/docs/graphql/authentication", "note": "API keys issued to Machine Users, sent as 'Authorization: Bearer plainApiKey_xxx'; fine-grained per-key permissions."},
+    {"claims": ["api", "description"], "url": "https://www.plain.com/docs/graphql/introduction", "note": "Single GraphQL endpoint core-api.uk.plain.com/graphql/v1; 'no limitations in what can be done via the API vs the UI'."},
+    {"claims": ["access"], "url": "https://www.plain.com/pricing", "note": "Plans from $35/seat/month, 7-day free trial, no credit card required — self-serve trial signup."},
+    {"claims": ["webhooks"], "url": "https://www.plain.com/docs/webhooks", "note": "Webhook targets (up to 25 per workspace) deliver workspace events via HTTPS POST."},
+    {"claims": ["mcp"], "url": "https://help.plain.com/article/mcp-server", "note": "Official Plain MCP server at https://mcp.plain.com/mcp using OAuth with the user's existing Plain account."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/plain.md", "note": "Composio PLAIN toolkit: 23 tools, auth API_KEY."}
+  ]
+}

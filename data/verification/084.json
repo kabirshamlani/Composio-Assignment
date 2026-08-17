@@ -1,0 +1,27 @@
+{
+  "app_id": 84,
+  "name": "Paygent Connect",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "custom", "verdict": "SUPPORTED",
+     "reason": "Confirmed proprietary scheme: mutual-TLS client certificate (.pfx/.pem) plus connection ID and connection-ID password, with credentials issued through the merchant administrator site. Corroborated by the official test-environment setup manual and by independent integrator documentation (CS-Cart and ebisumart both configure マーチャントID/接続ID/接続IDパスワード plus client cert)."},
+    {"field": "auth_methods", "draft_value": ["custom"], "verdict": "SUPPORTED",
+     "reason": "No OAuth, API key, or standard token scheme is documented anywhere public; everything points to the client-cert + connection ID/password scheme. 'custom' is the correct classification."},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "SUPPORTED",
+     "reason": "Official onboarding page (paygent.co.jp/payment_service/connect/) re-checked live: inquiry, hearing/quote from a sales rep, application via the merchant administrator site, mailed stamped application with official corporate documents, screening by each payment institution (~6 weeks guideline), then test and production environments. Unambiguously contact_sales with underwriting."},
+    {"field": "api_breadth", "draft_value": "unknown", "verdict": "SUPPORTED",
+     "reason": "Specifications are only downloadable from the login-gated merchant administrator site after contract (official FAQ), so breadth genuinely cannot be assessed from public sources. 'unknown' is the honest value and the draft correctly treated login-gating as not proof of absence."},
+    {"field": "api_protocols", "draft_value": ["rest", "sdk_only"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "The integration is the PaygentB2BModule SDK (Composer package paygent/connect) wrapping a proprietary HTTPS POST 'telegram' (denshin) interface with versioned message formats — integrator docs expose a 電文バージョン (telegram version) parameter. 'sdk_only' is right; 'rest' is a loose label the draft itself flags in uncertainty_notes as meaning plain HTTPS server-to-server calls, not a RESTful API. Correct in substance, imprecise in labeling.",
+     "replacement_evidence": "https://support.ebisumart.com/item/PAYGENT_CREDIT_TORIHIKISAKI_COLUMN_MAPPING.html"},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Value is correct but the draft provided no evidence URL for the MCP claim. My own searches for 'Paygent MCP' return only unrelated products that coincidentally share the name (FoxRick/paygentic-sdk agent-payments MCP, docs.paygent.to LLM cost-tracking SDK, paygent.net wallet assistant) — none belong to the Japanese PSP at paygent.co.jp, whose official site offers no MCP or public developer program. Composio toolkit absence re-confirmed: docs.composio.dev/toolkits/paygent returns 404.",
+     "replacement_evidence": "https://www.paygent.co.jp/payment_service/connect/"},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "SUPPORTED",
+     "reason": "Integration is technically possible via the contracted module/telegram interface, but only after sales contact, paper application, and per-payment-method institutional screening; nothing is buildable without a merchant contract."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "The contract-plus-screening onboarding is the defining blocker, confirmed on the official onboarding page."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Right-product check (the key risk): the assignment hint said 'paygent (NMI-powered)', but my independent searches confirm the draft's finding that Paygent (paygent.co.jp, Mitsubishi UFJ Nicos / DeNA joint venture) has no connection to NMI, and 'paygent/connect' is Paygent's own Composer package for its module-type integration — so the Japanese PSP researched in the draft is the correct product and the hint appears wrong. Searches for a Paygent MCP surface only unrelated same-name products (paygentic-sdk, docs.paygent.to, paygent.net), supporting none_found; that field is PARTIALLY_SUPPORTED only because the draft shipped it without an evidence URL. Also re-verified the official onboarding flow live and the contract-gated documentation FAQ."
+}

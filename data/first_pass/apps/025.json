@@ -1,0 +1,28 @@
+{
+  "app_id": 25,
+  "name": "Pumble",
+  "category": "Communications and Messaging",
+  "official_domain": "pumble.com",
+  "description": "Team communication and messaging platform (by CAKE.com) with channels, DMs, threads and an app/integration platform.",
+  "auth_methods": ["oauth2_authorization_code", "api_key", "custom"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Pumble states the API is publicly available to anyone on any subscription, including the free plan. Developers create an app (via workspace settings or the Pumble CLI) to get an app key and client secret, then use OAuth2 to issue user/bot access tokens. A simpler API-key addon can be installed to generate workspace API keys via /api-keys generate.",
+  "api_protocols": ["rest", "websocket"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Pumble ships an official MCP server (announced July 2026 at cake.com/updates/mcp-server; setup at pumble.com/mcp) with ~19 tools for messages, channels, users. No Pumble toolkit found in the Composio toolkits catalog (docs.composio.dev/toolkits) as of research date.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "API breadth is workspace-messaging scoped (users, channels, messages, reactions, files, scheduled messages); fewer object types and admin surfaces than Slack, hence rated medium. Every API request requires both a 'token' (user/bot access token) and an 'x-app-token' app key header, recorded as 'custom' alongside OAuth2.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://docs.pumble.com/", "note": "REST API at api-ga.pumble.com/v1; mandatory 'token' + 'x-app-token' headers; App OAuth2 endpoints (oauth2/access, oauth2 grant) and app websocket-connection endpoint documented."},
+    {"claims": ["auth"], "url": "https://cake-com.github.io/pumble-node-sdk/authorization.html", "note": "'Pumble uses OAuth2 in order to allow your app to access the API' — consent screen, redirectUrl, authorization code exchanged with clientSecret for access tokens."},
+    {"claims": ["access"], "url": "https://pumble.com/integrations", "note": "'The Pumble API is publicly available for anyone to explore... You can access the API and install integrations on any Pumble subscription.'"},
+    {"claims": ["auth", "access"], "url": "https://pumble.com/help/integrations/automation-workflow-integrations/api-keys-integration/", "note": "Self-serve API-key addon: install addon, /api-keys generate produces API keys for HTTP requests."},
+    {"claims": ["webhooks"], "url": "https://pumble.com/help/integrations/add-pumble-apps/incoming-webhooks-for-pumble/", "note": "Incoming webhooks with unique URLs for posting messages; app platform also signs outbound event requests with a signing secret."},
+    {"claims": ["mcp"], "url": "https://pumble.com/help/integrations/automation-workflow-integrations/how-to-use-the-pumble-mcp-server/", "note": "Official Pumble MCP server help page listing MCP tools (send_message, search_messages, create_channel, etc.) and Claude/Codex/Gemini setup."}
+  ]
+}

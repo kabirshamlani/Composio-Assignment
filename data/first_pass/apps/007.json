@@ -1,0 +1,28 @@
+{
+  "app_id": 7,
+  "name": "Zoho CRM",
+  "category": "CRM and Sales",
+  "official_domain": "zoho.com/crm",
+  "description": "CRM and Sales: Zoho's cloud CRM with leads, deals, workflows and a mature v8 REST API using OAuth 2.0 and credit-based rate limits.",
+  "auth_methods": ["oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free Edition (3 users, free forever) includes REST API access with 5,000 API credits/day; app registration in the Zoho API Console is self-serve, and a free Developer Edition org exists for testing. No API key option — OAuth 2.0 only, with a 'Self Client' console option for server-side/standalone use.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Zoho offers official pre-built Zoho CRM MCP servers (four scoped servers: Data Insights, Data Operations, Module Customization, Workflow Automation) hosted by Zoho and authenticated via OAuth, part of the wider Zoho MCP product. Composio has a ZOHO toolkit (57 tools, category crm, OAuth2 managed app) covering Zoho CRM.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Access token is passed as 'Authorization: Zoho-oauthtoken {token}' rather than standard Bearer, and endpoints are region-specific (zohoapis.com/.eu/.in etc.). The Self Client console flow is a Zoho-specific way to mint OAuth grant tokens, not a separate auth method. Composio toolkit slug is ZOHO (suite-level) rather than a CRM-specific slug.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://www.zoho.com/crm/developer/docs/api/v8/oauth-overview.html", "note": "Zoho CRM API uses the OAuth 2.0 protocol for authentication; access tokens valid 1 hour with long-lived refresh tokens."},
+    {"claims": ["auth"], "url": "https://www.zoho.com/crm/developer/docs/api/v8/auth-request.html", "note": "Authorization code grant flow via accounts.zoho.com/oauth/v2/auth, plus Self Client option in the Zoho Developer Console."},
+    {"claims": ["access", "api"], "url": "https://www.zoho.com/crm/developer/docs/api/v8/api-limits.html", "note": "API credit table: Free Edition gets 5,000 credits per 24-hour window (concurrency 5) — API is available on the free edition."},
+    {"claims": ["access"], "url": "https://www.zoho.com/crm/zohocrm-pricing.html", "note": "Free Edition, 'free forever for 3 users', lists 'APIs — Connect Zoho CRM to any app and perform actions with 5000 API calls/day'."},
+    {"claims": ["webhooks"], "url": "https://www.zoho.com/crm/developer/docs/api/v8/notifications/overview.html", "note": "Notification APIs push instant notifications to a provided URL on record create/update/delete — webhook-style event delivery."},
+    {"claims": ["mcp"], "url": "https://www.zoho.com/crm/developer/docs/mcp/overview.html", "note": "Official Zoho CRM MCP docs: four pre-built vendor-hosted MCP servers usable from Cursor, Claude Desktop, VS Code, Windsurf via OAuth."}
+  ]
+}

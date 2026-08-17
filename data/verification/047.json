@@ -1,0 +1,26 @@
+{
+  "app_id": 47,
+  "name": "Ecwid",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "docs.ecwid.com confirms 'Ecwid uses OAuth 2.0 to provide secure access to the store data for public apps', with the authorization-code exchange at POST my.ecwid.com/api/oauth/token and token_type always bearer."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "api_key", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "OAuth2 code grant for public apps; for your own store a custom app is auto-created in the admin app dashboard with static public/secret access tokens (api_key-style) used directly as Bearer tokens, skipping OAuth - all confirmed on the live make-your-first-api-request page."},
+    {"field": "access", "draft_value": "self_serve_paid", "verdict": "SUPPORTED",
+     "reason": "Live dev-environment page states 'Only stores on paid plans can access API' and Ecwid's own API docs repo confirms the API is available on Venture, Business and Unlimited only, with all API functions failing on the Free plan; free paid-plan upgrades for App Market developers are on-request. self_serve_paid is correct."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "REST API v3 manages products, categories, orders, customers, discount coupons, payment and shipping methods, application data and storefront settings - broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "JSON REST API at app.ecwid.com/api/v3; no GraphQL and no vendor MCP endpoint exists."},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Value is correct but the draft carried no evidence URL for it. Independent searches confirm no first-party Ecwid/Lightspeed MCP server exists as of August 2026: only third-party MCP wrappers (viaSocket, Vinkius, an unpublished community 'mcp-ecwid'), and the independent APIs.io agent-readiness profile scores Ecwid 0/12 on 'MCP Server'. The live Composio catalog (1183 toolkits, grepped) has no Ecwid toolkit.",
+     "replacement_evidence": "https://apis.io/providers/ecwid/"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "On a paid plan, the auto-created custom app provides immediate token access with no review; public apps use standard OAuth2. Buildable today."},
+    {"field": "primary_blocker", "draft_value": "paid_plan_required", "verdict": "SUPPORTED",
+     "reason": "The Free-plan API lockout is the operative gate; no approval process for API access on paid plans."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Assigned check completed: the evidence-less mcp claim - none_found confirmed via independent searches (only third-party MCP wrappers exist; APIs.io independently scores Ecwid 0/12 for MCP Server), marked PARTIALLY_SUPPORTED with replacement evidence per instructions. Paid-plan gating ('Only stores on paid plans can access API') and the OAuth2/custom-app token model re-confirmed live; draft evidence URLs docs.ecwid.com/get-started/set-up-your-dev-environment-in-ecwid and make-your-first-api-request confirmed live and matching."
+}

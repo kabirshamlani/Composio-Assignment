@@ -1,0 +1,27 @@
+{
+  "app_id": 53,
+  "name": "Ahrefs",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "ahrefs.com",
+  "description": "Data, SEO and Scraping: SEO toolset with API v3 exposing Site Explorer, Keywords Explorer, Rank Tracker, Site Audit and SERP data.",
+  "auth_methods": ["api_key", "oauth2_authorization_code"],
+  "primary_auth": "api_key",
+  "access": "self_serve_paid",
+  "access_notes": "API v3 requires a paid Ahrefs subscription (Lite/Standard/Advanced/Enterprise each include a monthly API-unit allowance; keys created self-serve in Account Settings > API Keys and sent as 'Authorization: Bearer'). Only Enterprise can buy extra units/overages. Building a public third-party integration via Ahrefs Connect uses OAuth 2.0 and requires an Enterprise plan to activate in production (free during development). Four free public endpoints exist without a subscription.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official hosted remote MCP at https://api.ahrefs.com/mcp/mcp (ahrefs.com/mcp; available on all paid plans; the older local @ahrefs/mcp repo is deprecated). Composio toolkit exists at composio.dev/toolkits/ahrefs with 40 tools.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "high",
+  "uncertainty_notes": "API is broad in endpoint surface but essentially read-only SEO data, hence breadth 'medium'. Webhook support not determined. Exact per-plan unit/row limits have changed over time; figures cited are from the official help article.",
+  "evidence": [
+    {"claims": ["access", "api"], "url": "https://help.ahrefs.com/en/articles/6559232-about-api-v3", "note": "API v3 usable on Lite and higher paid plans with per-plan API-unit and max-rows limits; 'all new applications require a Lite or higher subscription'"},
+    {"claims": ["auth", "access"], "url": "https://docs.ahrefs.com/ahrefs-connect/docs/how-it-works", "note": "Ahrefs Connect OAuth (client IDs/secrets, redirect URIs) for third-party integrations; Enterprise plan required to activate new integrations in production"},
+    {"claims": ["api", "access"], "url": "https://docs.ahrefs.com/en/api/reference/public", "note": "Only 4 free public endpoints (crawler IPs, free domain rating) available without a subscription at api.ahrefs.com/v3/public"},
+    {"claims": ["mcp"], "url": "https://ahrefs.com/mcp", "note": "Official Ahrefs MCP, 'available on Lite, Standard, Advanced, and Enterprise' paid plans"},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/ahrefs", "note": "Composio Ahrefs toolkit page listing 40 tools"}
+  ]
+}

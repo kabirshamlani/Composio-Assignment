@@ -1,0 +1,25 @@
+{
+  "app_id": 31,
+  "name": "Google Ads",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "developers.google.com/google-ads/api/rest/auth: 'The Google Ads API uses OAuth 2.0 for authorizing API requests. Both OAuth 2.0 user authentication flow and service account flow are supported.' The user flow (desktop/web app authorization code) is the standard multi-user path; every call also carries the developer-token header."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "service_account"], "verdict": "SUPPORTED",
+     "reason": "Both confirmed on official docs: user OAuth flows and the service-account workflow (developers.google.com/google-ads/api/docs/oauth/service-accounts — JWT exchange for access token, service account granted access in the Ads account). Draft's uncertainty note correctly treats the mandatory developer-token header as an extra credential, not a standalone method."},
+    {"field": "access", "draft_value": "sandbox_self_serve_production_gated", "verdict": "SUPPORTED",
+     "reason": "developers.google.com/google-ads/api/docs/access-levels (fetched live) confirms exactly the draft's model: new tokens start at Test Account Access (test accounts only, 15k ops/day); Explorer Access may be auto-granted (production, 2,880 ops/day, restricted features); Basic Access requires an application with ~5-business-day review (and may require Google Cloud brand verification); Standard Access is a further ~10-day review. The draft does NOT fall into the sandbox-recorded-as-self-serve trap; it explicitly captures the developer-token approval gate and pairs it with primary_blocker=production_approval."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Full campaign/ad group/ad/keyword/budget/audience management plus GAQL reporting across googleads.googleapis.com v25 services; mutate and search services cover the whole ads object model."},
+    {"field": "api_protocols", "draft_value": ["rest", "grpc"], "verdict": "SUPPORTED",
+     "reason": "Official docs show REST endpoints (curl POST https://googleads.googleapis.com/v25/customers/{id}/googleAds:searchStream) alongside the gRPC-based client libraries; the API is served over both transports."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "Official vendor MCP verified at developers.google.com/google-ads/api/docs/developer-toolkit/mcp-server: read-only (current release), Python, stdio, OAuth 2.0 or service account, tools get_resource_metadata / list_accessible_customers / search (GAQL), repo under the googleads GitHub org. Composio toolkit verified at docs.composio.dev/toolkits/googleads: GOOGLEADS, OAUTH2, 22 tools, 0 triggers, Composio-managed — exact match to the draft."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Test accounts immediately, Explorer-level production reads often auto-granted (2,880 ops/day), full docs public; combined with the flagged production_approval blocker this is a fair 'buildable now, scale later' assessment."},
+    {"field": "primary_blocker", "draft_value": "production_approval", "verdict": "SUPPORTED",
+     "reason": "Basic Access (full features, 15k ops/day) requires a Google-reviewed application, ~5 business days, plus possible brand verification; Standard requires another review. This is the binding constraint on production use."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Adversarially re-checked the developer-token gating since ad platforms often get mis-classed as self-serve: fetched the live access-levels page (also a draft evidence URL) and it matches the draft in detail, including the Explorer auto-grant nuance and review durations. Also verified OAuth + service-account auth, REST + gRPC transports (v25), the official read-only googleads MCP server guide, and the Composio GOOGLEADS toolkit (22 tools, OAUTH2). No corrections needed."
+}

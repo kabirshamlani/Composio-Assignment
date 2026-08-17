@@ -1,0 +1,25 @@
+{
+  "app_id": 15,
+  "name": "Pylon",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "bearer_token", "verdict": "SUPPORTED",
+     "reason": "Live docs.usepylon.com API authentication page: 'The Pylon API uses Bearer authentication'; tokens generated at app.usepylon.com/settings/api-tokens."},
+    {"field": "auth_methods", "draft_value": ["bearer_token", "oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "REST API is bearer-token only; the MCP server separately uses OAuth 2.0 (AuthKit) per-user sign-in, confirmed on the live Pylon MCP docs page. The draft correctly scopes OAuth to the MCP surface."},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "SUPPORTED",
+     "reason": "usepylon.com/get-started is a demo-booking form and public pricing has been pulled from the site. Multiple independent 2026 reviews (StackArbiter, dupple, checkthat) confirm no self-serve signup and no transparent free trial — every evaluation starts with a sales conversation. Some aggregators mention a trial arranged after the demo, which is still sales-gated, matching the draft's uncertainty note."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Developer docs and the API/webhooks page cover accounts, contacts, issues, messages, tasks, knowledge base, custom objects and more at api.usepylon.com."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST API confirmed in developer docs; hosted MCP server at https://mcp.usepylon.com (streamable HTTP, stateless) confirmed on the vendor's docs."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Verified on docs.usepylon.com/pylon-docs/integrations/pylon-mcp: vendor-hosted server at mcp.usepylon.com, OAuth 2.0 (AuthKit) only, enabled via Settings > AI Controls > MCP Server, read/write tools for issues plus accounts/contacts reads, gated by the MCP Access role. Genuinely vendor-owned, not community."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "For existing customers, API tokens are admin self-serve and the REST API is fully documented; the sales gate is recorded in primary_blocker."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "No self-serve signup path; platform access (and hence any API token) requires the sales-led demo/onboarding flow with 3-seat annual minimums."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Both high-risk claims held. Official vendor MCP re-verified directly on the live Pylon docs (mcp.usepylon.com, OAuth-only, MCP Access role, read/write issue tools). Commercial gate re-verified: get-started is demo-only, public pricing pulled, independent reviews unanimously report no self-serve signup; any trial is sales-arranged. Bearer auth re-verified on live API docs."
+}

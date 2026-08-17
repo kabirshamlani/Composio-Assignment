@@ -1,0 +1,27 @@
+{
+  "app_id": 88,
+  "name": "Brex",
+  "category": "Finance and Fintech",
+  "official_domain": "developer.brex.com",
+  "description": "Finance and Fintech: corporate card and spend-management platform with REST APIs for transactions, expenses, cards, users, payments and webhooks.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "oauth2_client_credentials", "bearer_token"],
+  "primary_auth": "personal_access_token",
+  "access": "admin_gated",
+  "access_notes": "API access requires an approved Brex business account: an account or card admin generates a user token self-serve from the Brex dashboard (Developer > Settings) after accepting the developer API agreement. There is no sandbox — 'Brex currently only offers a production API server at https://api.brex.com'. Partner OAuth 2.0 credentials (authorization code, or client credentials for the onboarding API) require contacting Brex developer support, i.e. partner-gated.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit"],
+  "mcp_notes": "Composio has a BREX toolkit (84 tools, OAUTH2/API_KEY, not Composio-managed). No official Brex vendor MCP server found on developer.brex.com.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "admin_install_required",
+  "confidence": "high",
+  "uncertainty_notes": "Vendor-MCP absence based on Brex developer docs searches which surfaced only the Composio toolkit page; docs are public but token creation requires an actual Brex customer account (business underwriting), which cannot be self-served by an arbitrary developer.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developer.brex.com/guides/authentication", "note": "User token generated in the Brex dashboard by an account/card admin after accepting the developer API agreement; 'Brex currently only offers a production API server at https://api.brex.com'."},
+    {"claims": ["auth", "access"], "url": "https://developer.brex.com/guides/partner_authentication", "note": "Partner OAuth 2.0 (authorization code grant; client credentials for onboarding API) — 'This section is only for Brex developer partners'; partners obtain client ID/secret from Brex."},
+    {"claims": ["api"], "url": "https://developer.brex.com/guides/quickstart", "note": "REST quickstart: bearer user token against https://api.brex.com/v2/users/me."},
+    {"claims": ["webhooks"], "url": "https://developer.brex.com/openapi/webhooks_api", "note": "Official Webhooks API: register/list/update webhook subscriptions, HMAC-SHA256 signed events (transfers, expenses, users, referrals)."},
+    {"claims": ["mcp"], "url": "https://composio.dev/toolkits/brex", "note": "Composio Brex toolkit page: 84 tools, MCP or direct API, requires configuring your own OAuth credentials (not Composio-managed)."}
+  ]
+}

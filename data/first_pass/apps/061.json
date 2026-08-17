@@ -1,0 +1,26 @@
+{
+  "app_id": 61,
+  "name": "GitHub",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "github.com",
+  "description": "Code hosting and DevOps platform with a very broad REST + GraphQL API covering repos, issues, PRs, actions, orgs and more.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "oauth2_device_code", "jwt", "basic_auth", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free self-serve accounts; anyone can mint fine-grained or classic PATs from settings, register OAuth Apps, or create GitHub Apps (JWT + installation access tokens) without approval. GitHub recommends GitHub Apps for org/multi-tenant integrations.",
+  "api_protocols": ["rest", "graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor MCP: github/github-mcp-server (remote hosted server with OAuth 2.1 or PAT auth, plus local Docker image). Composio GITHUB toolkit exists with 893 tools, OAuth2 auth, 20 triggers.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "primary_auth: GitHub actually steers third-party integrators to GitHub Apps (JWT -> installation tokens, user-authorization via OAuth code flow); listed OAuth authorization code as primary since that is the user-facing grant. basic_auth applies only to a few app-management endpoints (client_id/client_secret). Webhooks are a core documented feature (repo/org/app webhooks at docs.github.com/webhooks).",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://docs.github.com/rest/authentication/authenticating-to-the-rest-api", "note": "Tokens via PAT (fine-grained recommended), GitHub App, OAuth app, or Actions GITHUB_TOKEN; GitHub Apps recommended for org/behalf-of-user use; basic auth (client id/secret) for some app endpoints."},
+    {"claims": ["mcp", "auth"], "url": "https://github.com/github/github-mcp-server", "note": "Official GitHub MCP server repo: remote server with OAuth login or GITHUB_PERSONAL_ACCESS_TOKEN; local Docker image ghcr.io/github/github-mcp-server."},
+    {"claims": ["mcp"], "url": "https://github.com/github/github-mcp-server/blob/main/docs/host-integration.md", "note": "Remote GitHub MCP Server requires a valid access token (OAuth 2.1 recommended, PAT accepted) in the Authorization header."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists GitHub: 893 tools, 20 triggers, OAUTH2 auth."}
+  ]
+}

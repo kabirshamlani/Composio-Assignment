@@ -1,0 +1,26 @@
+{
+  "app_id": 38,
+  "name": "Pinterest",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "pinterest.com",
+  "description": "Visual discovery/social platform; API v5 covers pins, boards, ads, catalogs and analytics for organic and paid use cases.",
+  "auth_methods": ["oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Free but review-gated in two tiers: submitting an app request grants Trial access after a (routine, business-day) review - Trial includes a sandbox (api-sandbox.pinterest.com), test tokens, 1,000 req/day cap and Pins hidden from the public. Production-grade Standard access requires a manual upgrade review including a video demo proving a compliant OAuth flow; rejections for missing OAuth demonstration are common. No paid tier.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": false,
+  "mcp_status": ["official_composio_toolkit"],
+  "mcp_notes": "Composio has a PINTEREST_ADS toolkit (10 tools, OAuth2, not Composio-managed); no general-purpose Pinterest toolkit found in the catalog. No official Pinterest vendor MCP found on developers.pinterest.com.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "The only webhook-like mechanism found is the beta Lead Ads subscriptions endpoint (POST /ad_accounts/{id}/leads/subscriptions), which is 'not available to all apps'; there are no general-purpose webhooks in API v5, hence supports_webhooks=false.",
+  "evidence": [
+    {"claims": ["access", "auth"], "url": "https://developers.pinterest.com/docs/getting-started/connect-app/", "note": "App requests reviewed each business day for Trial access; requires building an OAuth 2 authorization-code flow with token refresh"},
+    {"claims": ["access", "verdict"], "url": "https://developers.pinterest.com/docs/key-concepts/access-tiers/", "note": "Trial vs Standard access tiers; Standard upgrade requires a video recording demonstrating the OAuth flow, even for single-user apps"},
+    {"claims": ["api", "access"], "url": "https://developers.pinterest.com/docs/developer-tools/sandbox/", "note": "Self-serve sandbox environment (api-sandbox.pinterest.com) with sandbox tokens available at Trial or Standard tier"},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists PINTEREST_ADS (10 tools, OAUTH2); no general Pinterest toolkit listed"}
+  ]
+}

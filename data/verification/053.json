@@ -1,0 +1,26 @@
+{
+  "app_id": 53,
+  "name": "Ahrefs",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "API v3 uses self-serve API keys sent as an Authorization: Bearer header (keys created in Account Settings). The official About API v3 help article (updated June 18, 2026) confirms direct API access is one of three delivery methods alongside MCP and Ahrefs Connect."},
+    {"field": "auth_methods", "draft_value": ["api_key", "oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "API key for direct API v3 access; OAuth 2.0 (client IDs/secrets, redirect URIs) for Ahrefs Connect third-party integrations, confirmed in the help article's method list and docs.ahrefs.com Ahrefs Connect pages cited by the draft."},
+    {"field": "access", "draft_value": "self_serve_paid", "verdict": "SUPPORTED",
+     "reason": "Live help article: 'Using API v3 from any of the above methods is possible for Lite and higher subscription plans.' Per-plan API units (Lite 100k, Standard 400k, Advanced 1M, Enterprise 2M/month) and max rows per request (100/250/500/unlimited). FAQ: 'all new applications require a Lite or higher subscription for activation.' Only Enterprise gets uncapped/PAYG extra units (ahrefs.com/pricing: 'Uncapped API access'). Draft's plan-gating claims are exactly right."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "Endpoint list spans Site Explorer, Keywords Explorer, Site Audit, Rank Tracker, SERP, Batch Analysis, Brand Radar, Web Analytics, GSC Insights — many endpoints but essentially read-only SEO data retrieval; 'medium' is a fair call."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "REST confirmed (api.ahrefs.com/v3). However Ahrefs also runs an official hosted remote MCP server included on all paid plans (sharing the same API-unit pool), so ['rest','mcp'] would be more complete and consistent with how sibling drafts record vendor MCP endpoints in api_protocols.",
+     "replacement_evidence": "https://ahrefs.com/mcp"},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "ahrefs.com/mcp fetched live: official Ahrefs MCP, 'available on Lite, Standard, Advanced, and Enterprise', with ChatGPT/Claude/Cursor/Copilot Studio setup guides. Composio toolkit page composio.dev/toolkits/ahrefs fetched live and confirms 40 tools."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve paid plan yields immediate API key access with documented units; no partner approval for direct API use (Enterprise only needed to activate Ahrefs Connect public integrations in production)."},
+    {"field": "primary_blocker", "draft_value": "paid_plan_required", "verdict": "SUPPORTED",
+     "reason": "A Lite or higher paid subscription is required for all but 4 free public endpoints; that is accurately the primary blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-fetched the official About API v3 help article (help.ahrefs.com/en/articles/6559232, updated June 2026), ahrefs.com/mcp, ahrefs.com/pricing (via search) and composio.dev/toolkits/ahrefs. The key question — which paid plan includes API access — verifies exactly as drafted: Lite and higher, with per-plan unit caps, Enterprise-only overages/uncapped access, and API v2 fully deprecated. Only nit: api_protocols could include 'mcp' given the official hosted MCP endpoint."
+}

@@ -1,0 +1,26 @@
+{
+  "app_id": 37,
+  "name": "systeme.io",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "systeme.io",
+  "description": "All-in-one funnel builder and marketing platform (funnels, email, courses) with a public REST API for contacts, tags, funnels and sales.",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "API keys are generated self-serve from account Settings > 'MCP & API keys' (up to 3 keys, optional expiration; leave expiration empty to keep a key active indefinitely). systeme.io offers a free plan, so credentials are obtainable at no cost. The only documented auth is the X-API-Key header; no OAuth yet.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP server at https://mcp.systeme.io/mcp?mcpKey=... (MCP keys generated in account settings), documented in official help pages and developer.systeme.io/docs/mcp-server; covers contacts, tags, custom fields, newsletters, funnels, price plans, coupons and automation rules. No Composio toolkit for systeme.io found in the docs.composio.dev toolkit catalog.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "medium",
+  "uncertainty_notes": "Webhook support not confirmed from official docs (third-party aggregators claim webhooks exist, but I did not verify a page on developer.systeme.io). API surface is narrower than big marketing suites (contacts/tags/funnels/newsletters/sales); some sources say certain features were initially plan-gated. Whether every API endpoint is available on the free plan was not verified from an official pricing/docs page.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developer.systeme.io/reference/api", "note": "Public API docs: RESTful API at api.systeme.io, 'your only option right now is to attach your API key to the X-API-Key header'"},
+    {"claims": ["access"], "url": "https://help.systeme.io/article/2323-how-to-create-a-public-api-key-on-systeme-io", "note": "API keys created self-serve under Settings > MCP & API keys; up to 3 keys per account; expiration optional (leave empty for indefinite)"},
+    {"claims": ["mcp"], "url": "https://help.systeme.io/article/9489-how-to-use-systeme-ios-mcp", "note": "Official systeme.io MCP server help article; MCP keys from settings; points to official MCP docs at developer.systeme.io/docs/mcp-server"},
+    {"claims": ["mcp"], "url": "https://help.systeme.io/article/11230-how-to-connect-your-systemeio-account-with-claude-using-mcp-keys", "note": "Official guide connecting Claude to remote MCP server URL https://mcp.systeme.io/mcp?mcpKey=..."}
+  ]
+}

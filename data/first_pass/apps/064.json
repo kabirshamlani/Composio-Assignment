@@ -1,0 +1,28 @@
+{
+  "app_id": 64,
+  "name": "Cloudflare",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "cloudflare.com",
+  "description": "Edge/network cloud platform (DNS, CDN, Workers, R2, Zero Trust) with a REST API of 2,500+ endpoints plus a GraphQL Analytics API.",
+  "auth_methods": ["bearer_token", "api_key", "oauth2_authorization_code"],
+  "primary_auth": "bearer_token",
+  "access": "self_serve_free",
+  "access_notes": "Free self-serve accounts; scoped API tokens (user or account-owned) are created instantly in the dashboard or via API and sent as 'Authorization: Bearer'. Legacy Global API Key (X-Auth-Key + X-Auth-Email) still supported but discouraged. OAuth is used for the managed MCP servers, not the raw REST API.",
+  "api_protocols": ["rest", "graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor MCP: managed Cloudflare API MCP server at https://mcp.cloudflare.com/mcp (OAuth recommended, API token bearer supported) exposing the whole API via search()/execute(), plus a catalog of other managed servers (docs, agents). Composio catalog lists CLOUDFLARE (20 tools), CLOUDFLARE_API_KEY (25 tools) and CLOUDFLARE_BROWSER_RENDERING (4 tools) toolkits.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "supports_webhooks refers to Cloudflare Notifications webhook destinations (developers.cloudflare.com/notifications); not separately fetched this pass. developers.cloudflare.com fetches timed out twice (bot protection/latency), so auth evidence relies on search-rendered official pages.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developers.cloudflare.com/fundamentals/api/get-started/", "note": "'Create an API token to grant access to the API'; API keys also supported but 'less secure than API tokens' (legacy Global API key)."},
+    {"claims": ["auth", "access"], "url": "https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/", "note": "Account API tokens as durable service principals, created self-serve in dashboard or via the token-creation API."},
+    {"claims": ["mcp", "api"], "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/", "note": "Cloudflare's own managed MCP servers; API MCP server covers 'over 2,500 endpoints' via search()/execute(); connect with OAuth or an API token bearer header."},
+    {"claims": ["mcp", "auth"], "url": "https://github.com/cloudflare/mcp", "note": "Official cloudflare/mcp repo: URL https://mcp.cloudflare.com/mcp; OAuth recommended, API token (user or account) as bearer for CI/CD."},
+    {"claims": ["api"], "url": "https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/docs/analytics/graphql-api/getting-started/authentication/api-token-auth.mdx", "note": "Official docs source: GraphQL Analytics API authenticated with API tokens (Bearer)."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists Cloudflare (20 tools), Cloudflare Api Key (25 tools) and Cloudflare Browser Rendering (4 tools), all API_KEY auth."}
+  ]
+}

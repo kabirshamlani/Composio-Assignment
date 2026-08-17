@@ -1,0 +1,25 @@
+{
+  "app_id": 37,
+  "name": "systeme.io",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Official API docs at developer.systeme.io/reference/api state 'your only option right now is to attach your API key to the X-API-Key header of each request'; confirmed live via independent search."},
+    {"field": "auth_methods", "draft_value": ["api_key"], "verdict": "SUPPORTED",
+     "reason": "X-API-Key header is the only documented auth method; no OAuth exists yet (docs explicitly solicit suggestions for future auth methods)."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Help article 2323 confirms self-serve key creation under Settings > MCP & API keys (up to 3 keys, optional expiration; leave empty for indefinite). systeme.io has a free plan, and the official MCP help article 11331 states the documented actions are 'available on all systeme.io plans', superseding an earlier launch-era Unlimited-plan restriction announced on Facebook."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "Public API covers contacts, tags, custom fields, funnels, newsletters and sales operations - a real but narrow surface compared to full marketing suites; 'medium' is a fair rating."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "RESTful API at api.systeme.io/api confirmed in official reference; hosted MCP endpoint at https://mcp.systeme.io/mcp confirmed in official help articles 9489/11229/11230."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Ownership verified: the MCP server is documented on systeme.io's own domains (help.systeme.io articles 9489, 11229, 11230, 11331 and developer.systeme.io/docs/mcp-server) and hosted at mcp.systeme.io - genuinely vendor-owned, not a community wrapper. MCP keys are generated in account settings. Composio catalog (1183 toolkits, grepped) has no systeme.io toolkit, matching the draft."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Free account plus self-serve API key means integration can be built immediately."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gating found: no review process, no paid requirement for core API/MCP access per official help pages."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "High-risk official-vendor-MCP claim re-checked with independent searches: MCP server confirmed vendor-owned (help.systeme.io + developer.systeme.io + mcp.systeme.io are all systeme.io properties). Draft evidence URLs developer.systeme.io/reference/api and help article 2323 confirmed live and matching the notes. One nuance found: MCP keys (unlike API keys) required an expiration of up to 90 days at launch per the official Facebook group announcement, and the feature was initially Unlimited-plan-only, but the current official help article says MCP actions are available on all plans."
+}

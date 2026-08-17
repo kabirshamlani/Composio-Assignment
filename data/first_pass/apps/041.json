@@ -1,0 +1,28 @@
+{
+  "app_id": 41,
+  "name": "Shopify",
+  "category": "Ecommerce",
+  "official_domain": "shopify.com",
+  "description": "Ecommerce: hosted online-store platform with Admin/Storefront APIs for products, orders, customers, inventory and fulfillment.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "api_key"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Developers create apps for free in the Shopify Dev Dashboard; free development stores are available via a dev account. Merchants can also generate admin-created custom app access tokens directly in the Shopify admin. All tokens are sent as X-Shopify-Access-Token.",
+  "api_protocols": ["rest", "graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Shopify ships multiple official MCP servers: Dev MCP (npm @shopify/dev-mcp, docs/schema tooling) and a hosted Storefront MCP endpoint per store ({shop}.myshopify.com/api/mcp), plus Customer Accounts MCP. Composio also has a Shopify toolkit (API_KEY, OAUTH2, S2S_OAUTH2).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "GraphQL Admin API is the primary surface for new apps; REST Admin API is legacy but still served. Offline access tokens are transitioning to expiring tokens with refresh tokens.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://shopify.dev/docs/apps/build/authentication-authorization", "note": "Official auth overview: authorization code grant, token exchange, admin-generated access tokens for custom apps."},
+    {"claims": ["auth", "access"], "url": "https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/client-credentials-grant", "note": "OAuth 2.0 client credentials grant for org-owned server-to-server apps; token endpoint at {shop}.myshopify.com/admin/oauth/access_token."},
+    {"claims": ["api", "auth"], "url": "https://shopify.dev/docs/api/admin-graphql/2026-07", "note": "GraphQL Admin API reference; all requests use X-Shopify-Access-Token header; broad read+write objects (products, orders, customers, etc.)."},
+    {"claims": ["access"], "url": "https://shopify.dev/docs/apps/build/dev-dashboard/get-api-access-tokens", "note": "Self-serve tutorial: create app in Dev Dashboard, get client ID/secret, exchange for access tokens programmatically."},
+    {"claims": ["mcp"], "url": "https://shopify.dev/docs/api/app-ui/using-mcp", "note": "Official shopify.dev docs for the Shopify Dev MCP server (npx @shopify/dev-mcp)."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/shopify", "note": "Composio Shopify toolkit page exists; lists auth (API_KEY, OAUTH2, S2S_OAUTH2) and hundreds of tool slugs like SHOPIFY_BULK_CREATE_PRODUCTS."}
+  ]
+}

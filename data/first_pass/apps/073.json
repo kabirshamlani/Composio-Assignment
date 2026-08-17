@@ -1,0 +1,28 @@
+{
+  "app_id": 73,
+  "name": "Linear",
+  "category": "Productivity and Project Management",
+  "official_domain": "linear.app",
+  "description": "Project management: streamlined issue tracking and project planning tool for modern software teams.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "api_key", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Anyone on a free Linear workspace can create a personal API key under Settings > Account > Security & Access; OAuth2 applications are created self-serve at linear.app/settings/api/applications/new. Workspace admins can restrict Member API key creation, but admins always can.",
+  "api_protocols": ["graphql", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Linear hosts an official remote MCP server at https://mcp.linear.app/mcp (Streamable HTTP, OAuth 2.1 with dynamic client registration; read-only variant at /mcp/readonly), documented at linear.app/docs/mcp and announced in the 2025-05-01 changelog. Composio also has a managed LINEAR toolkit (47 tools, 12 triggers, OAuth2 + API key auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://linear.app/developers/graphql", "note": "Public API is GraphQL at api.linear.app/graphql; 'The Linear API supports personal API keys and OAuth2 authentication' — API key passed as Authorization header, OAuth tokens as Bearer."},
+    {"claims": ["auth", "access"], "url": "https://linear.app/developers/oauth-2-0-authentication", "note": "OAuth2 authorization_code flow recommended for apps; also documents client_credentials grant for server-to-server. OAuth apps created self-serve in workspace settings."},
+    {"claims": ["access", "webhooks", "api"], "url": "https://linear.app/docs/api-and-webhooks", "note": "Personal API keys created from Settings > Account > Security & Access; 'full support for mutating all entities'; webhooks and OAuth apps managed in Settings > Administration > API."},
+    {"claims": ["mcp"], "url": "https://linear.app/docs/mcp", "note": "Official vendor-hosted remote MCP server at https://mcp.linear.app/mcp using OAuth 2.1; tools for finding, creating and updating issues, projects, comments."},
+    {"claims": ["mcp"], "url": "https://linear.app/changelog/2025-05-01-mcp", "note": "Vendor changelog announcing the official Linear MCP server."},
+    {"claims": ["mcp", "description"], "url": "https://docs.composio.dev/toolkits/linear", "note": "Composio managed LINEAR toolkit: OAuth2 + API_KEY auth, 47 tools, 12 triggers."}
+  ]
+}

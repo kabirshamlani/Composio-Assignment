@@ -1,0 +1,27 @@
+{
+  "app_id": 60,
+  "name": "Clay",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "clay.com",
+  "description": "GTM data-enrichment workbook platform (150+ data providers) accessed programmatically via inbound table webhooks, an OAuth MCP server, and an Enterprise-only people/company lookup API.",
+  "auth_methods": ["oauth2_authorization_code", "api_key", "custom"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Clay accounts are self-serve with a free tier; inbound table webhooks work on free plans and the MCP server (with Functions/permissioning) is available on self-serve Launch/Growth plans, with company/contact lookups even for free and trial users. However the general People & Company HTTP lookup API is Enterprise-plan-only, and HTTP API enrichment columns require Growth ($495/mo) or above.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "narrow",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP server at https://api.clay.com/v3/mcp with OAuth 2.0 + open Dynamic Client Registration (RFC 7591, no Clay-side approval); exposed in ChatGPT/Claude/Codex. No Clay toolkit found in the docs.composio.dev/toolkits catalog.",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "api_too_narrow",
+  "confidence": "medium",
+  "uncertainty_notes": "Clay is workflow-first, not API-first: no public versioned REST API or OpenAPI spec. Programmatic surface = (a) per-table inbound webhook URLs (secret URL + optional header auth token = 'custom'), (b) Enterprise-only lookup API using a clay-api-key ('api_key'), (c) official MCP over OAuth. The MCP path is real and self-serve for agents, but general table CRUD / workflow control via a public API does not exist, hence partially_buildable. Plan-gating details for the HTTP API tier come from a third-party comparison page (pipeline.zoominfo.com) corroborated by Clay's own blog/docs; exact plan boundaries may drift.",
+  "evidence": [
+    {"claims": ["mcp", "auth"], "url": "https://university.clay.com/docs/connect-to-clay-mcp", "note": "Official docs: MCP endpoint https://api.clay.com/v3/mcp, OAuth issuer api.clay.com, open Dynamic Client Registration - 'Registration is open - there is no Clay-side approval step.'"},
+    {"claims": ["api", "webhooks", "auth"], "url": "https://university.clay.com/docs/webhook-integration-guide", "note": "Every table can receive JSON via a unique webhook URL with optional one-time-shown authentication token; 50,000 submission limit per webhook (unlimited via Enterprise auto-delete)."},
+    {"claims": ["api"], "url": "https://university.clay.com/docs/http-api-integration-overview", "note": "HTTP API is an in-UI enrichment column for calling external APIs from Clay tables - not a public API into Clay itself."},
+    {"claims": ["mcp", "access"], "url": "https://www.clay.com/blog/clay-mcp", "note": "Vendor blog: 'MCP with Functions, MCP permissioning, and credit budgets is available now on all modern self-serve (Launch, Growth) and Enterprise plans... lookups are still available for free and trial users.'"},
+    {"claims": ["access", "api", "verdict"], "url": "https://pipeline.zoominfo.com/sales/clay-api", "note": "Third-party analysis (lead, not proof): no versioned REST API/OpenAPI; webhooks on free tier, HTTP API on Growth+, Enterprise People & Company API enterprise-only; MCP at clay.com/mcp."}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "app_id": 78,
+  "name": "Coda",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Live developer docs (coda.io/developers, now branded Superhuman Docs API) confirm auth is an API token from the account page passed as 'Authorization: Bearer <api_token>'; every endpoint lists Bearer authorization."},
+    {"field": "auth_methods", "draft_value": ["api_key", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "API token over Bearer header is the only documented REST API auth. (The MCP server additionally supports OAuth 2 with PKCE, which the draft correctly kept in mcp_notes rather than auth_methods.)"},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Developer docs state verbatim that the API is 'available to all of our users free of charge, in both free and paid workspaces', with tokens generated self-serve from account settings."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "API reference covers docs, pages, tables, rows, columns, controls, folders, permissions, Packs and analytics but not org-level admin; 'medium' is a fair rating. Composio's CODA toolkit wraps 110 tools within this surface."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "RESTful API at coda.io/apis/v1 confirmed; hosted vendor MCP servers confirmed at coda.io/apis/mcp and docs.superhuman.com/apis/mcp."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "High-risk vendor-ownership claim verified: the Superhuman help center security article states 'The Superhuman Docs MCP server is officially published at https://docs.superhuman.com/apis/mcp' and that the earlier Coda MCP at coda.io/apis/mcp 'is still officially supported'. Both endpoints are on vendor-owned domains (coda.io / superhuman.com after the rebrand), not community repos. Composio CODA toolkit page confirms API_KEY auth, 110 tools, 4 triggers."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Free self-serve API tokens, documented REST API and an official hosted MCP server; buildable today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker: signup, tokens and API access are free and self-serve."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Focus was the high-risk official-vendor-MCP claim: confirmed via the Superhuman help center (help.superhuman.com security article naming docs.superhuman.com/apis/mcp as the officially published endpoint and coda.io/apis/mcp as still officially supported) and independent coverage noting the official hosted server went public beta April 2026, distinct from older community servers. help.superhuman.com sits behind a Cloudflare bot wall on direct fetch but content was verifiable via search indexing. Also re-opened coda.io/developers (free-of-charge statement, Bearer auth, inbound-only 'trigger automation' webhook endpoint consistent with supports_webhooks=false) and the Composio CODA toolkit (110 tools, 4 triggers, API_KEY). The Coda-to-Superhuman-Docs rebrand described in the draft is real and correctly handled."
+}

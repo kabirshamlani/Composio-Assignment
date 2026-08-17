@@ -1,0 +1,27 @@
+{
+  "app_id": 78,
+  "name": "Coda",
+  "category": "Productivity and Project Management",
+  "official_domain": "coda.io",
+  "description": "Productivity and project management: all-in-one doc platform combining documents, tables, automations and apps (rebranded as Superhuman Docs in 2026).",
+  "auth_methods": ["api_key", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "The REST API is available free of charge to all users on free and paid workspaces; API tokens are generated self-serve from coda.io/account (tokens can be scoped read/write and restricted to specific docs/tables).",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": false,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official vendor-hosted MCP server at https://coda.io/apis/mcp (public beta; OAuth 2 with PKCE or personal access token), now also at https://docs.superhuman.com/apis/mcp after the Superhuman Docs rebrand; documented in the official Superhuman help center. Composio has a CODA toolkit (API key auth, 110 tools, 4 triggers).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "medium",
+  "uncertainty_notes": "Coda is rebranding to Superhuman Docs; docs now live on both coda.io and superhuman.com domains. The API only exposes docs/pages/tables/rows/controls (plus Packs), not org admin — breadth rated medium. Webhooks are inbound-only (automation trigger endpoints); there is no outbound webhook subscription API, so supports_webhooks is false for event notifications.",
+  "evidence": [
+    {"claims": ["auth", "access", "api"], "url": "https://coda.io/developers", "note": "Official API reference: RESTful API at https://coda.io/apis/v1, 'available to all of our users free of charge, in both free and paid workspaces'; auth via Authorization: Bearer <api_token> from coda.io/account."},
+    {"claims": ["webhooks"], "url": "https://help.coda.io/hc/en-us/articles/39555941038349-Does-Coda-have-an-API", "note": "Official help article on the public API; webhook support is limited to inbound automation-trigger endpoints, no outbound webhook subscriptions documented."},
+    {"claims": ["mcp"], "url": "https://help.superhuman.com/hc/en-us/articles/46210118248205-Security-recommendations-for-the-Coda-MCP", "note": "Official help center: 'The Superhuman Docs MCP server is officially published at https://docs.superhuman.com/apis/mcp'; the earlier Coda MCP at https://coda.io/apis/mcp is still officially supported."},
+    {"claims": ["mcp"], "url": "https://help.superhuman.com/hc/en-us/articles/46210076980365-Connect-to-the-Coda-MCP", "note": "Official setup guide for connecting AI clients to the Coda/Superhuman Docs MCP."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/coda", "note": "Composio CODA toolkit: API_KEY auth, 110 tools, 4 triggers."}
+  ]
+}

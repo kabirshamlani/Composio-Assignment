@@ -1,0 +1,28 @@
+{
+  "app_id": 89,
+  "name": "Ramp",
+  "category": "Finance and Fintech",
+  "official_domain": "ramp.com",
+  "description": "Finance and Fintech: corporate card, expense management and finance automation platform with a Developer API covering transactions, cards, users, bills and reimbursements.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "sandbox_self_serve_production_gated",
+  "access_notes": "Ramp customers with Admin/Owner access create developer apps self-serve in the dashboard (Company > Developer) and get client credentials for their own account. Third-party developers must request a sandbox account (demo-api.ramp.com) and cannot connect to production; after building in sandbox they must apply for production access. OAuth authorization can only be granted by Admin/Business Owner users.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Ramp ships three official MCP servers documented at docs.ramp.com: Ramp MCP (acts on account data), Developer MCP (unauthenticated docs server at mcp.ramp.com/developer/mcp), and a CLI for agent workflows. A Composio RAMP toolkit exists with 88 tools (OAuth2, not Composio-managed; bring your own OAuth app).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "production_approval",
+  "confidence": "high",
+  "uncertainty_notes": "Production approval applies to third-party/public integrations; a business that is already a Ramp customer with admin access has fully self-serve credentials for its own account. Token requests use HTTP Basic auth (client_id:client_secret) as part of the OAuth flows, not as a standalone API auth method.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.ramp.com/llms-guides/authorization.txt", "note": "Ramp uses OAuth 2.0 with scopes; client credentials and authorization code flows; authorization code is for 'third-party applications and public integrations'."},
+    {"claims": ["access"], "url": "https://support.ramp.com/accessing-the-developer-api", "note": "Admin access required to create a developer app; 'Third-party developer accounts cannot connect to apps in production... you can apply for production access'; sandbox at demo-api.ramp.com."},
+    {"claims": ["api", "access"], "url": "https://docs.ramp.com/llms-guides/getting-started.txt", "note": "Quickstart: create app in dashboard, get token from /developer/v1/token, call Bearer-authenticated REST endpoints; 'Need a test environment? Request sandbox access.'"},
+    {"claims": ["webhooks"], "url": "https://docs.ramp.com/llms-guides/webhooks.txt", "note": "Webhook subscriptions via /developer/v1/webhooks with HMAC-SHA256 signed payloads (X-Ramp-Signature)."},
+    {"claims": ["mcp"], "url": "https://docs.ramp.com/developer-api/v1/developer-mcp", "note": "'Ramp ships three MCP servers'; Developer MCP at mcp.ramp.com/developer/mcp; Ramp MCP lets Claude/ChatGPT/Cursor act on a Ramp account."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/ramp.md", "note": "Composio RAMP toolkit: OAuth2, 88 tools, 'Composio Managed App Available? No'."}
+  ]
+}

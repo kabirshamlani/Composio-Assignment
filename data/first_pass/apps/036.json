@@ -1,0 +1,27 @@
+{
+  "app_id": 36,
+  "name": "Klaviyo",
+  "category": "Marketing, Ads, Email and Social",
+  "official_domain": "klaviyo.com",
+  "description": "Email/SMS marketing and CRM platform for consumer brands with REST APIs for profiles, events, campaigns, flows, segments and catalogs.",
+  "auth_methods": ["api_key", "oauth2_authorization_code"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Anyone with a Klaviyo account (free tier available) can create scoped private API keys self-serve for server-side /api endpoints; public key (site ID) is used for client-side endpoints. For tech partners / marketplace apps, Klaviyo requires OAuth (authorization code with PKCE) - creating an OAuth app in the Developer Console is self-serve, though App Marketplace listing itself requires review and 5+ active users.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official Klaviyo MCP server, GA since Aug 2025: remote-hosted at https://mcp.klaviyo.com/mcp (OAuth) plus a local uvx package using a private API key. Composio KLAVIYO toolkit also exists (225 tools, API key or OAuth2, not Composio-managed).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developers.klaviyo.com/en/docs/authenticate_", "note": "Three auth methods documented: private API keys and OAuth for server-side APIs, public key for client-side; OAuth required for App Marketplace apps"},
+    {"claims": ["auth", "access", "api"], "url": "https://developers.klaviyo.com/en/reference/api_overview", "note": "Private key auth via 'Authorization: Klaviyo-API-Key' header with API key scopes; get-started flow is set up an account, obtain credentials, authenticate"},
+    {"claims": ["mcp"], "url": "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server", "note": "Official Klaviyo MCP server docs: remote server at https://mcp.klaviyo.com/mcp and local server config, with read-only and toolset filtering options"},
+    {"claims": ["webhooks"], "url": "https://developers.klaviyo.com/en/reference/webhooks_api_overview", "note": "Webhooks API: create webhook subscriptions with topics and HMAC-SHA256 signed deliveries"},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Composio toolkit catalog lists KLAVIYO: 225 tools, API_KEY and OAUTH2 auth schemes"}
+  ]
+}

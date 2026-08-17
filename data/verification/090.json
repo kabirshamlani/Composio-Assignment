@@ -1,0 +1,25 @@
+{
+  "app_id": 90,
+  "name": "PitchBook",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "Official help page (pitchbook.com/help/PitchBook-api): the Direct Data team helps 'establish the API connection through an API key or authentication token'. No OAuth or self-serve credential flow is documented anywhere; provisioned key/token is the auth model. The exact request header remains unpublished (correctly flagged in the draft's uncertainty_notes)."},
+    {"field": "auth_methods", "draft_value": ["api_key"], "verdict": "SUPPORTED",
+     "reason": "Only 'API key or authentication token' provisioning is officially described for the data API. The separate Premium MCP connector authenticates via PitchBook SSO/OAuth login, but that is the MCP surface, not the Direct Data REST API, so ['api_key'] for the API itself is accurate."},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "SUPPORTED",
+     "reason": "Official help page states the API 'is a separate offering from the PitchBook Platform that requires a standalone contract agreement'; prospects 'send a request directly to our Direct Data team' and existing clients go through Plugins & Apps in the Platform. No developer portal, no public key generation, no published pricing. One nuance the draft could add: PitchBook's Direct Data help article (help/data-feed-api-crm-direct-data-solutions-q3-2025) says a test sandbox can be created for a client's developers, but only within that same sales/contract relationship, so contact_sales stands."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "Official pages describe read-only, on-demand retrieval over company, investor, deal and fund entities with relational endpoints (financing details, deal stock info, VC exit predictor); the Premium MCP exposes 11 read tools over the same entity types. Data-retrieval only, no write surface: medium is a fair rating, with the caveat that the full endpoint reference sits behind client auth (as the draft discloses)."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "Official help page: 'The PitchBook API is a RESTful implementation... base URL: https://api.pitchbook.com'. Official Premium Connector MCP server at premium.mcp.pitchbook.com/mcp (streamable HTTP) confirmed by pitchbook.com/products/premium-connectors and Anthropic's financial-services connector registry."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Better-than-draft official evidence found: pitchbook.com/products/premium-connectors (first-party) describes the Premium Connector MCP integration, and states the gate precisely: 'PitchBook clients with seat-based, unlimited, or trial licenses—and an enterprise partner license—can access the PitchBook Premium Connector'. The endpoint premium.mcp.pitchbook.com/mcp is also listed in Anthropic's github.com/anthropics/financial-services connector table and Claude's official PitchBook tutorial (SSO login required). Absence of a Composio toolkit re-confirmed: docs.composio.dev/toolkits/pitchbook.md returns 404 today."},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "SUPPORTED",
+     "reason": "The REST API and MCP both work only for contracted PitchBook clients (platform subscription plus separate Direct Data contract for the API; license plus enterprise partner license for the MCP). Buildable for entitled customers, not for arbitrary developers."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "Standalone contract negotiated through the Direct Data/sales team is the gate; no self-serve path or trial API access exists. Correct."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "pitchbook.com/help/PitchBook-api is behind a Cloudflare bot wall on direct fetch, but its content (retrieved via search cache) matches the draft's quotes verbatim: RESTful API at api.pitchbook.com, standalone contract agreement, Direct Data team provisioning via API key or authentication token, Plugins & Apps path for clients. Independently confirmed the official Premium MCP via first-party pitchbook.com/products/premium-connectors (gate: PitchBook seat/unlimited/trial license + enterprise partner license, SSO auth) and Anthropic's official connector registry, strengthening the draft's aggregator-based MCP evidence. Composio toolkit 404 re-confirmed. Minor additions, no contradictions: a client-scoped test sandbox exists within the contract relationship, and the MCP gate is 'license + enterprise partner license' specifically."
+}

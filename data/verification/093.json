@@ -1,0 +1,25 @@
+{
+  "app_id": 93,
+  "name": "Fathom",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "developers.fathom.ai/api-overview states 'All REST API resources are authenticated with API keys generated via the Fathom website's settings area'."},
+    {"field": "auth_methods", "draft_value": ["api_key", "oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "API-key auth confirmed on api-overview; OAuth 2.0 for public integrations confirmed via the 'Building with OAuth' guide in the docs index and the documented oauth2/token endpoint at api.fathom.ai/external/v1/oauth2/token with per-app rate limits."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Official help center article 'Public API' (help.fathom.video/en/articles/8368641) says 'Anyone can browse the API docs and start building', keys are created at the user level with no approval step; Fathom's product-updates article states 'Public API and webhooks - all users can now use our API', and Fathom has a free plan. Third-party review corroborates free-tier API access."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "OpenAPI-backed docs list meetings, meeting types, recording summaries/transcripts/downloads, teams, team members, users, and webhook create/delete - a meeting-data-centric surface of moderate size, matching the draft's characterization (reads plus webhook/download management)."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST API documented at developers.fathom.ai; official hosted MCP server at https://api.fathom.ai/mcp documented in the vendor mcp-docs section."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "developers.fathom.ai/mcp-docs states 'Fathom now offers an official MCP (Model Context Protocol) server' with server URL api.fathom.ai/mcp (vendor-owned domain, so ownership is verified). Composio toolkit page docs.composio.dev/toolkits/fathom.md is live: slug FATHOM, OAUTH2 + API_KEY, 7 tools, Composio managed app available."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-generated API keys, public docs and OpenAPI spec, SDKs, webhooks, and no approval gate mean an integration can be built immediately on any plan."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gate found: API access is included on all plans including free, keys are self-serve, and rate limits (60/min global) are the only constraint."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked developers.fathom.ai (api-overview, llms.txt docs index, mcp-docs), the official help.fathom.video 'Public API' article, and the Composio FATHOM toolkit page. Also opened the draft's api-overview and zoominfo evidence URLs; both exist and say what the draft claims. All eight fields hold, including free-plan API access, which is now confirmed by Fathom's own help center rather than only the third-party review the draft leaned on. MCP at api.fathom.ai/mcp is vendor-owned and explicitly called official."
+}

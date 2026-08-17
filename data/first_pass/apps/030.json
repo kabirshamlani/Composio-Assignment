@@ -1,0 +1,27 @@
+{
+  "app_id": 30,
+  "name": "Vonage",
+  "category": "Communications and Messaging",
+  "official_domain": "developer.vonage.com",
+  "description": "CPaaS provider with APIs for SMS/Messages (WhatsApp, RCS), Voice, Verify, Video, Numbers and Reports.",
+  "auth_methods": ["api_key", "basic_auth", "jwt"],
+  "primary_auth": "api_key",
+  "access": "self_serve_trial",
+  "access_notes": "Free self-serve signup issues an API key + secret immediately; new accounts get a small free trial credit (usage restricted to verified test numbers until a payment method is added). Usage is billed per-request/pay-as-you-go for production. JWTs (signed with a Vonage Application's private key) are required for webhook-capable APIs like Messages and Verify V2; key+secret can be sent Base64-encoded via Basic auth on newer APIs.",
+  "api_protocols": ["rest"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Vonage ships two official MCP servers: a hosted Documentation MCP Server (documentation-mcp.vonage.dev/mcp) and the Server API Bindings MCP server (@vonage/vonage-mcp-server-api-bindings on npm) with tools for SMS, WhatsApp, RCS, voice, apps, and numbers. No Vonage toolkit found in the Composio toolkits catalog.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Voice API also supports WebSocket media streaming, but the primary integration surface is REST + webhooks. Exact trial credit amount and test-number limits vary by region and were reported secondhand in search synthesis.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developer.vonage.com/en/getting-started/concepts/authentication", "note": "API key + secret created at signup; newer APIs take them Base64-encoded in the Authorization header; JWTs generated from application ID + private key; JWT recommended for Messages."},
+    {"claims": ["access", "api", "webhooks"], "url": "https://developer.vonage.com/en/getting-started/overview", "note": "'sign up for an account. This will give you an API key and secret'; free credit at account opening, per-request billing; webhooks send data back to your server."},
+    {"claims": ["access", "webhooks"], "url": "https://developer.vonage.com/en/dashboard/getting-started", "note": "Free trial account; payment method optional for trial, required for production; API settings page manages keys, secrets, and signed webhooks."},
+    {"claims": ["mcp"], "url": "https://developer.vonage.com/en/mcp-server/conceptual-guides/introduction-to-vonage-mcp", "note": "Official Vonage docs page introducing the Documentation MCP Server and Server API Bindings MCP Server."},
+    {"claims": ["mcp"], "url": "https://registry.npmjs.org/@vonage/vonage-mcp-server-api-bindings", "note": "Official @vonage npm package: MCP tools for SMS, WhatsApp/RCS send, voice messages, application and number management."}
+  ]
+}

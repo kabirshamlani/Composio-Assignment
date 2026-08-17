@@ -1,0 +1,28 @@
+{
+  "app_id": 87,
+  "name": "Xero",
+  "category": "Finance and Fintech",
+  "official_domain": "developer.xero.com",
+  "description": "Finance and Fintech: cloud accounting platform for small businesses with REST APIs for invoicing, contacts, bank transactions, payroll and reporting.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Developer signup and app registration are free and self-serve (with a free Demo Company for testing). Uncertified apps start on the Starter tier capped at 5 connections (Core tier up to 50 after adding payment details), and each Xero organisation can connect at most 2 uncertified apps; app certification or paid Custom Connections (client_credentials grant) lift these limits. No API-key auth — OAuth 2.0 is required.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Xero ships an official open-source MCP server (XeroAPI/xero-mcp-server on GitHub, @xeroapi/xero-mcp-server on npm), announced on the Xero Developer blog; Composio has a XERO toolkit (OAUTH2, ~53 tools, not Composio-managed — bring your own OAuth credentials).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://developer.xero.com/faq", "note": "'The Xero API does not support basic API Key authentication. Our API uses OAuth 2.0'; Starter tier default with 5-connection cap, Custom Connections use client credentials grant."},
+    {"claims": ["access"], "url": "https://developer.xero.com/documentation/guides/oauth2/limits/", "note": "Uncertified app limits: Starter 5 connections, Core 50; each organisation limited to two uncertified apps; no limit for certified apps."},
+    {"claims": ["mcp"], "url": "https://github.com/xeroapi/xero-mcp-server", "note": "Official Xero MCP server in the XeroAPI GitHub org, OAuth2 custom connections auth."},
+    {"claims": ["mcp"], "url": "https://devblog.xero.com/xero-introduces-new-model-context-protocol-server-for-smarter-accounting-4d195ccaeda5", "note": "Xero developer blog announcement of its open-source MCP server integrating with the public API."},
+    {"claims": ["mcp"], "url": "https://v3.docs.composio.dev/tools/xero", "note": "Composio Xero toolkit: OAUTH2, slug XERO, tools for invoices, payments, bank transactions, reports (not Composio-managed)."},
+    {"claims": ["webhooks", "api"], "url": "https://developer.xero.com/documentation/guides/webhooks/overview/", "note": "Official webhooks guide: HTTP POST notifications for Contact, Invoice, Credit Note and Subscription create/update events with HMAC signature verification."}
+  ]
+}

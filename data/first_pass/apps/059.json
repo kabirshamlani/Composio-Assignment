@@ -1,0 +1,26 @@
+{
+  "app_id": 59,
+  "name": "Waterfall.io",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "waterfall.io",
+  "description": "B2B contact/company intelligence API: waterfall enrichment across 30+ vendors for contacts, companies, emails, phones, prospecting and job-change tracking.",
+  "auth_methods": ["api_key"],
+  "primary_auth": "api_key",
+  "access": "contact_sales",
+  "access_notes": "API-first product with usage-based prepaid pricing, but the official site's only CTA is 'Book a call' (with founders) to discuss use case; no public self-serve signup or published price list found on waterfall.io. Docs include an 'API Key Management' endpoint for creating sub-keys under a master key, implying keys are provisioned per customer.",
+  "api_protocols": ["rest"],
+  "api_breadth": "narrow",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No vendor MCP announcement found (searched waterfall.io site and web for 'waterfall.io MCP'); no Waterfall toolkit in the docs.composio.dev/toolkits catalog.",
+  "technical_verdict": "partially_buildable",
+  "primary_blocker": "partner_or_sales_gate",
+  "confidence": "medium",
+  "uncertainty_notes": "Verified this is the contact/company-intel product (api.waterfall.io, docs.waterfall.io) and not another 'Waterfall' brand. Access is the main unknown: third-party reviews (leadsforge.ai, coldiq.com) claim 'every user gets an API key after signing up', but I found no self-serve signup flow on official pages, so recording contact_sales per official site. API is enrichment/lookup-oriented (async launcher/finder jobs), effectively read-only data retrieval - hence narrow/partially_buildable despite solid REST docs. supports_webhooks=true refers to job-completion callbacks via webhook_url param.",
+  "evidence": [
+    {"claims": ["auth", "api", "description"], "url": "https://docs.waterfall.io/v1/introduction", "note": "'The Waterfall API is available at https://api.waterfall.io. All requests require an API key in the x-api-key header.' Endpoint table: Prospector, Contact/Company/Phone Enrichment, Search, Email verification, Company Reveal, API Key Management."},
+    {"claims": ["api", "webhooks"], "url": "https://docs.waterfall.io/v1/contact-enrichment-launcher", "note": "Async job model (launcher returns job_id, finder retrieves results); optional webhook_url for job callbacks."},
+    {"claims": ["access"], "url": "https://www.waterfall.io/book-a-call", "note": "Prepaid top-up pricing model described in FAQ; getting started is via booking a call - no self-serve pricing/signup published."},
+    {"claims": ["access", "description"], "url": "https://www.waterfall.io/", "note": "Homepage markets the Prospector/Enrichment APIs with x-api-key examples; the only conversion CTA is 'Book a call' with the team/founders."}
+  ]
+}

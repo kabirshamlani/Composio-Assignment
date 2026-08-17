@@ -1,0 +1,27 @@
+{
+  "app_id": 77,
+  "name": "ClickUp",
+  "category": "Productivity and Project Management",
+  "official_domain": "clickup.com",
+  "description": "Project management: all-in-one productivity platform for tasks, docs, goals, chat and time tracking.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "API is available on all ClickUp plans including Free Forever; anyone with an account can generate a personal API token (pk_...), and workspace owners/admins can create OAuth apps self-serve in workspace settings. Rate limit 100 req/min per token on standard plans.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official ClickUp-hosted MCP server at https://mcp.clickup.com/mcp (public beta, all plans, OAuth-only auth) documented at developer.clickup.com. Composio also has a CLICKUP toolkit (docs.composio.dev/toolkits/clickup).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "MCP server is public beta; without the Everything AI add-on MCP calls are limited (50/day free, 300/day paid). REST API itself has normal limits.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://developer.clickup.com/docs/authentication", "note": "Personal API token (pk_, raw Authorization header) for personal use; OAuth 2.0 authorization code flow (token URL api.clickup.com/api/v2/oauth/token) for apps."},
+    {"claims": ["access"], "url": "https://help.clickup.com/hc/en-us/articles/6303422883095-Create-your-own-app-with-the-ClickUp-API", "note": "'The ClickUp API is available on all ClickUp plans'; anyone with an account can generate a personal token; owners/admins create OAuth apps."},
+    {"claims": ["webhooks"], "url": "https://developer.clickup.com/docs/webhooks", "note": "Webhooks created via Create Webhook endpoint, signed with a shared secret, subscribing to task/list/folder/space/goal events."},
+    {"claims": ["mcp"], "url": "https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server", "note": "Official ClickUp MCP server at https://mcp.clickup.com/mcp, public beta, available on all plans."},
+    {"claims": ["mcp"], "url": "https://help.clickup.com/hc/en-us/articles/33335772678423-What-is-ClickUp-MCP", "note": "ClickUp help center confirms the official MCP server, OAuth-only auth and plan-based rate limits."}
+  ]
+}

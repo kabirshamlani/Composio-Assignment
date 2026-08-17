@@ -1,0 +1,25 @@
+{
+  "app_id": 49,
+  "name": "Amazon Selling Partner",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Public apps must use Login with Amazon (Amazon's OAuth 2.0 implementation) with an authorization-code flow yielding refresh tokens exchanged for access tokens at runtime; confirmed at developer-docs.amazon.com/sp-api/docs/authorize-public-applications and the onboarding authorization-workflow step."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "oauth2_client_credentials"], "verdict": "SUPPORTED",
+     "reason": "LWA authorization-code flow for per-seller authorization; grantless operations (e.g. Notifications destinations) use an LWA client_credentials grant with scopes - both documented in SP-API connection docs."},
+    {"field": "access", "draft_value": "production_approval", "verdict": "SUPPORTED",
+     "reason": "Developer registration/approval re-verified carefully as instructed: developers must create a Solution Provider Portal account (including government-ID identity verification with a live video call with an Amazon employee), then submit a developer profile that Amazon reviews - standard roles take one to two weeks, restricted (PII) roles trigger a three-stage business/security/technical review including a meeting with an Amazon solution architect. A sandbox application can be registered while the profile review is pending, but production access is gated on approval. production_approval is exactly right."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "SP-API spans orders, listings, feeds, reports, fulfillment (FBA/MFN), pricing, catalog, finances and notifications - broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "SP-API is REST/JSON; the official MCP package is a local dev tool rather than a hosted API protocol, and the draft correctly did not list mcp in api_protocols."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Ownership verified against the high-risk trap: fetched the npm registry record for @amazon-sp-api-release/sp-api-dev-mcp directly - maintainers are amazon.com accounts including 'selling-partner-api-sdk-release', latest 1.0.4, Apache-2.0, bundling sp-api-dev-assistant and sp-api-workflow servers. This is a genuine Amazon-published MCP package, not a community wrapper. No SP-API toolkit in the live Composio catalog (grepped 1183 entries; no 'amazon' SP-API entry)."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Registration is free and self-initiated with a documented review; sandbox app registration is available during review and private apps can self-authorize after approval - buildable now with the approval wait correctly captured as the blocker."},
+    {"field": "primary_blocker", "draft_value": "production_approval", "verdict": "SUPPORTED",
+     "reason": "Amazon's developer-profile review (1-2 weeks standard, longer three-stage audit for restricted PII roles) gates all production API access - correct blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Both high-risk items re-verified: (1) official vendor MCP - npm registry fetched directly, package is published by Amazon accounts (amazon.com maintainer emails, selling-partner-api-sdk-release), confirming vendor ownership; (2) access gating - Solution Provider Portal onboarding confirmed live including identity verification via video call, developer-profile review (1-2 weeks standard, three-stage for restricted roles), sandbox available pre-approval. Draft evidence URL developer-docs.amazon.com/sp-api/docs/register-as-a-public-developer confirmed live and matching."
+}

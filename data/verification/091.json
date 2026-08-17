@@ -1,0 +1,25 @@
+{
+  "app_id": 91,
+  "name": "NotebookLM",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "service_account", "verdict": "SUPPORTED",
+     "reason": "The only programmatic surface (Gemini Notebook Enterprise API on discoveryengine.googleapis.com) uses standard Google Cloud auth: docs demonstrate 'Authorization: Bearer $(gcloud auth print-access-token)' and the RPC reference requires cloud-platform/discoveryengine.* OAuth scopes plus discoveryengine.notebooks.* IAM permissions. Service accounts are the standard Google Cloud server-side pattern for such APIs, so this is a reasonable primary; docs examples themselves use user-credential tokens."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "service_account", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "Standard Google Cloud authentication applies: OAuth 2.0 (user or service-account) bearer tokens with documented scopes (cloud-platform, discoveryengine.readwrite, discoveryengine.serving.readwrite, discoveryengine.assist.readwrite) verified in the google.cloud.notebooklm.v1alpha RPC reference. No API-key or other scheme is documented."},
+    {"field": "access", "draft_value": "enterprise_gated", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "The enum is correct: the API exists only for the Enterprise product and needs a Google Cloud project with the Discovery Engine API enabled, Cloud NotebookLM IAM roles, admin setup, and per-user licenses; the consumer app (renamed Gemini Notebook per Google's official blog) has no public API, and only unofficial community tools (e.g. jacob-bd/gemini-notebook-mcp-cli) reach it. However the draft's license list is incomplete/stale: current Google docs say Gemini Notebook Enterprise is sold standalone (about $9 per license/month, purchasable in the Cloud console) or included in Gemini Enterprise Standard/Plus (support page also lists Frontline); 'Gemini Education Premium' was not found on the current licensing pages I checked. The gate is a paid enterprise-product license plus Cloud admin setup, which enterprise_gated still captures."},
+    {"field": "api_breadth", "draft_value": "narrow", "verdict": "SUPPORTED",
+     "reason": "v1alpha surface covers notebook CRUD (create/get/listRecentlyViewed/batchDelete/share), source management (batchCreate/uploadFile/get/batchDelete), and audio-overview create/delete. No querying/chat-generation, webhook, or admin surfaces documented. Narrow is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest", "grpc"], "verdict": "SUPPORTED",
+     "reason": "REST verified directly: curl examples against https://LOCATION-discoveryengine.googleapis.com/v1alpha/projects/.../notebooks. gRPC verified via the google.cloud.notebooklm.v1alpha RPC/proto reference (service methods defined as protobuf RPCs on the Discovery Engine endpoint)."},
+    {"field": "mcp_status", "draft_value": ["none_found"], "verdict": "SUPPORTED",
+     "reason": "Independent searches found no Google-official MCP server for NotebookLM/Gemini Notebook (consumer or Enterprise). The most visible MCP is the community project jacob-bd/gemini-notebook-mcp-cli (43 tools), which third-party guides explicitly describe as 'not officially supported by Google'. No Composio NotebookLM toolkit surfaced in searches either, consistent with the draft's 404 check."},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "SUPPORTED",
+     "reason": "A real, documented API exists but only for the Enterprise product, at v1alpha maturity, with narrow coverage and a license + Cloud-project gate; the consumer product 30M+ people use has no API. Partially buildable is the right call."},
+    {"field": "primary_blocker", "draft_value": "enterprise_license_required", "verdict": "SUPPORTED",
+     "reason": "Confirmed: users need Gemini Notebook Enterprise licenses (standalone or via Gemini Enterprise editions) plus the Cloud NotebookLM User role and a configured Google Cloud project before any API call works."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-verified which Google product actually exposes an API: only Gemini Notebook Enterprise (formerly NotebookLM Enterprise), served as google.cloud.notebooklm.v1alpha on *-discoveryengine.googleapis.com — fetched the api-notebooks doc (draft evidence) and the RPC reference directly, confirming REST+gRPC, OAuth scopes and IAM permissions verbatim. The consumer rename to Gemini Notebook is confirmed by Google's official blog; the consumer app and the Gemini API expose no NotebookLM API, and the draft correctly does not conflate them. Only correction-level nuance (kept as PARTIALLY_SUPPORTED on access): the license options are standalone Gemini Notebook Enterprise (~$9/user/month) or Gemini Enterprise Standard/Plus/Frontline; I could not confirm 'Gemini Education Premium' on current pages. No official MCP; community servers only."
+}

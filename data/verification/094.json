@@ -1,0 +1,25 @@
+{
+  "app_id": 94,
+  "name": "Consensus",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "The OpenAPI spec at docs.consensus.app/reference/v1_quick_search secures the endpoint with securityScheme XApiKeyHeader: type apiKey, in header, name x-api-key."},
+    {"field": "auth_methods", "draft_value": ["api_key", "oauth2_authorization_code", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "REST uses x-api-key; the official MCP docs (docs.consensus.app/docs/mcp) show OAuth sign-in for Claude/ChatGPT/Claude Code/Codex/Cursor and 'Authorization: Bearer YOUR_API_KEY' for enterprise/other MCP clients. The draft correctly scopes OAuth to the MCP connector, not the REST API."},
+    {"field": "access", "draft_value": "contact_sales", "verdict": "SUPPORTED",
+     "reason": "consensus.app/home/api states verbatim: 'The Consensus API is available by application only. Our baseline pricing starts at $0.10 per call, plus a platform fee. Apply today to receive a custom quote.' A public API exists and is publicly documented, but there is no self-serve key generation - access is application/quote-gated, so contact_sales is the right classification. The 'OAuth requested' hint matches the MCP OAuth flow, which is self-serve (even without an account, 3 papers/search)."},
+    {"field": "api_breadth", "draft_value": "narrow", "verdict": "SUPPORTED",
+     "reason": "docs.consensus.app/reference documents a single endpoint, GET /v1/quick_search (read-only paper search); the docs index shows nothing broader."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST quick_search endpoint at api.consensus.app plus official hosted MCP server at https://mcp.consensus.app/mcp."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "docs.consensus.app/docs/mcp (vendor-owned docs domain) documents the server at mcp.consensus.app/mcp with search/fetch tools and plan-based result limits. Independently confirmed docs.composio.dev/toolkits/consensus.md returns 404, so no Composio toolkit."},
+    {"field": "technical_verdict", "draft_value": "partially_buildable", "verdict": "SUPPORTED",
+     "reason": "The REST API is fully documented but key issuance requires an application and custom quote; meanwhile the MCP path is self-serve. Partially buildable with a sales/application gate on direct API access is accurate."},
+    {"field": "primary_blocker", "draft_value": "partner_or_sales_gate", "verdict": "SUPPORTED",
+     "reason": "'Available by application only' with custom quotes is an application/sales gate; no self-serve API key path exists anywhere in the docs."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Adversarial focus per hint: confirmed a real public REST API exists (documented OpenAPI for GET /v1/quick_search with x-api-key) but access is genuinely application-only with custom pricing - not self-serve. Opened the draft's consensus.app/home/api and docs.consensus.app evidence URLs directly; both match the draft's quotes. Verified the official MCP at mcp.consensus.app/mcp uses OAuth (self-serve, works even without an account at reduced limits) and Bearer API keys for enterprise. Composio toolkit 404 re-confirmed. All eight fields hold."
+}

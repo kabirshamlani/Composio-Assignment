@@ -1,0 +1,24 @@
+{
+  "app_id": 100,
+  "name": "Grain",
+  "category": "AI, Research and Media-native",
+  "official_domain": "grain.com",
+  "description": "AI meeting recording and notes platform; public v2 API exposes recordings, transcripts, highlights, stories, uploads and event hooks.",
+  "auth_methods": ["personal_access_token", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "personal_access_token",
+  "access": "self_serve_paid",
+  "access_notes": "Personal Access Tokens are self-generated at grain.com/app/settings/integrations?tab=api but require a paid Starter plan or above (Free plan has no API access). Workspace Access Tokens need Business/Enterprise plus an admin. OAuth2 client_id/client_secret are 'obtained separately', i.e. not fully self-serve.",
+  "api_protocols": ["rest"],
+  "api_breadth": "medium",
+  "supports_webhooks": true,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No official Grain MCP server found in vendor docs (developers.grain.com, support.grain.com) or via web search; no Composio toolkit (docs.composio.dev/toolkits/grain returns 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": "paid_plan_required",
+  "confidence": "high",
+  "uncertainty_notes": "OAuth2 client registration process is not documented as self-serve ('Obtain the client_id and client_secret... separately'), and an older aggregator note described the public API beta as limited to select partners; the current official support article contradicts that for PATs, which are plan-gated but self-serve. Every v2 request also requires a Public-Api-Version header.",
+  "evidence": [
+    {"claims": ["auth", "api", "webhooks"], "url": "https://developers.grain.com/", "note": "PATs generated at grain.com/app/settings/integrations?tab=api; standard OAuth2 authorization-code flow with PKCE; Authorization: Bearer TOKEN; Hooks API (POST /_/public-api/v2/hooks/create) with recording/highlight/story/upload events"},
+    {"claims": ["access", "auth", "description"], "url": "https://support.grain.com/en/articles/15507288-grain-api", "note": "'Personal API access is available on Starter, Business, and Enterprise plans... The Free plan does not include API access'; WAT requires Business/Enterprise admin; API reads meeting data, manages recordings, real-time events"}
+  ]
+}

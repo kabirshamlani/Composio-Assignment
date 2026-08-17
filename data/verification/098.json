@@ -1,0 +1,25 @@
+{
+  "app_id": 98,
+  "name": "Mermaid CLI",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "none", "verdict": "SUPPORTED",
+     "reason": "mermaid-cli is an MIT-licensed npm package (@mermaid-js/mermaid-cli) run locally via mmdc; the README documents no credentials, accounts, or auth of any kind."},
+    {"field": "auth_methods", "draft_value": ["none"], "verdict": "SUPPORTED",
+     "reason": "Install via npm/Docker and run locally; no authentication exists anywhere in the tool."},
+    {"field": "access", "draft_value": "no_credentials_required", "verdict": "SUPPORTED",
+     "reason": "npmjs.com/package/@mermaid-js/mermaid-cli confirms MIT license, public npm distribution (v11.16.0, ~517k weekly downloads), plus Docker images; anyone can install and run with no account."},
+    {"field": "api_breadth", "draft_value": "none", "verdict": "SUPPORTED",
+     "reason": "The GitHub README describes only a local CLI (mmdc) converting mermaid definitions to SVG/PNG/PDF and a local Node.JS API ('not covered by semver'); there is no hosted endpoint of any kind in the mermaid-js/mermaid-cli project."},
+    {"field": "api_protocols", "draft_value": ["none"], "verdict": "SUPPORTED",
+     "reason": "No network protocol is exposed by mermaid-cli itself. The draft correctly excludes mermaid.ink (a third-party service by jihchi, not the mermaid-js org) and Mermaid Chart's hosted offerings, which are distinct products."},
+    {"field": "mcp_status", "draft_value": ["official_platform_or_partner_mcp"], "verdict": "SUPPORTED",
+     "reason": "mermaid-cli itself ships no MCP. The Mermaid Chart team (mermaid.ai, the commercial product from the Mermaid maintainers) hosts an official remote MCP at https://mcp.mermaid.ai/mcp documented at mermaid.ai/docs/ai/mcp-server; core validation/rendering tools work without authentication, account-integration tools require a Mermaid Chart API token. Classifying it as an official platform/adjacent-product MCP rather than a vendor MCP for the OSS CLI is correct. Independently confirmed docs.composio.dev/toolkits/mermaid.md returns 404 - no Composio toolkit."},
+    {"field": "technical_verdict", "draft_value": "not_buildable", "verdict": "SUPPORTED",
+     "reason": "As an API-integration target, mermaid-cli offers no hosted API to build against - it is a local binary/library. Re-checked for any official mermaid-js hosted rendering API and found none: mermaid.ink is third-party (jihchi) and Mermaid Chart is a separate commercial product. The draft's not_buildable / no-hosted-API framing is right for this row."},
+    {"field": "primary_blocker", "draft_value": "local_cli_only", "verdict": "SUPPORTED",
+     "reason": "The only 'blocker' is that the tool runs locally with no remote surface, exactly as stated."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked github.com/mermaid-js/mermaid-cli and the npm package page (both opened directly, including the draft's evidence URLs): local CLI (mmdc) rendering mermaid to SVG/PNG/PDF, MIT, npm/Docker install, local Node.JS API only, no hosted service and no auth. Searched for an official hosted API: mermaid.ink is third-party open source (jihchi), and the hosted MCP at mcp.mermaid.ai/mcp belongs to Mermaid Chart (mermaid.ai), the maintainers' separate commercial product - confirmed via mermaid.ai/docs/ai/mcp-server, which matches the draft's description (core tools auth-free, account tools need a Mermaid Chart token). Composio mermaid toolkit 404 re-confirmed. All eight fields hold."
+}

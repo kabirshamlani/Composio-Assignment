@@ -1,0 +1,29 @@
+{
+  "app_id": 52,
+  "name": "SE Ranking",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "seranking.com/api/how-to-get-api/ (fetched live): single API key created self-serve in the API Dashboard, sent as 'Authorization: Token YOUR_API_KEY'; one key authenticates both Data API and Project API."},
+    {"field": "auth_methods", "draft_value": ["api_key"], "verdict": "SUPPORTED",
+     "reason": "API key is the only documented authentication scheme; no OAuth or other method appears anywhere in the API docs."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "The access class is correct: self-serve free trial, no credit card, 'API access is included in every SE Ranking plan... You can even test it in the free trial account', and the trial now includes 100K free API credits (seranking.com/mcp.html). However, the draft's access_notes claim that 'Project API endpoints require a Business/Enterprise-tier subscription (403 Subscription required otherwise)' is contradicted by the current official docs: 'The Project API is available on every current subscription plan: Essential, Pro, Business, Core, Growth, and Enterprise. There is nothing extra to buy.' The tier-gating detail is stale or wrong for current plans.",
+     "corrected_value": "self_serve_trial (note correction: Project API is included on every current plan — Essential/Pro/Core/Business/Growth/Enterprise — drawing on subscription limits, not gated to Business/Enterprise; Data API is billed in credits with monthly allowances from 10K on Essential to 100K on Business/Growth/Enterprise, PAYG packs from $50/250K credits, add-ons from $540/yr, standalone API plans from $2,148/yr)",
+     "replacement_evidence": "https://seranking.com/api/how-to-get-api/"},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Data API spans keyword research, backlinks, domain analysis, SERP data, website audits and AI visibility; Project API covers project creation, keyword/rank tracking, audits and backlink monitoring. seranking.com/api.html confirms both layers with per-product API references."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "REST is confirmed (base https://api.seranking.com/v1, JSON responses, up to 10 req/s). But the list omits MCP even though the same draft asserts an official vendor-hosted MCP server, and sibling drafts in this batch (e.g. Close) include 'mcp' in api_protocols when a vendor MCP exists; for consistency the protocol list should include it.",
+     "corrected_value": ["rest", "mcp"],
+     "replacement_evidence": "https://seranking.com/mcp.html"},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "seranking.com/mcp.html (fetched live) confirms a remote MCP server 'centrally hosted and managed by SE Ranking' with 180+ SEO/GEO tools, an official ChatGPT connector, setup docs at seranking.com/api/integrations/mcp/, and MCP included in every subscription running on plan API credits. No Composio toolkit: docs.composio.dev/toolkits/seranking returns 404 (re-confirmed today), matching the draft."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve trial with 100K free API credits and instant API-key creation; both APIs and the hosted MCP usable immediately without approval, sales contact, or partner review."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gate found: trial includes API and MCP access; sustained usage is a billing matter (credits/subscription), not an access blocker, as the draft's uncertainty notes already state."}
+  ],
+  "overall": "corrected",
+  "checked_at": "2026-08-17",
+  "notes": "Independently fetched seranking.com/api/how-to-get-api/ and seranking.com/api.html (both draft evidence URLs, live and largely matching) plus seranking.com/mcp.html, and re-confirmed the Composio 404. Auth, breadth, MCP and verdict all hold. Two corrections: (1) the claim that the Project API is gated to Business/Enterprise tiers is contradicted by the current 'Getting API access' page, which says the Project API is included on every current plan using subscription limits — likely a stale detail from an earlier doc version; (2) api_protocols should include 'mcp' alongside 'rest' for consistency with the draft's own official_vendor_mcp finding. Also newly observed: trials now ship with 100K free API credits, strengthening the self_serve_trial classification."
+}

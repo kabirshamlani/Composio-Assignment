@@ -1,0 +1,25 @@
+{
+  "app_id": 11,
+  "name": "Zendesk",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "developer.zendesk.com/api-reference/introduction/security-and-auth/ states OAuth access tokens are the supported method, API tokens are now labeled '(deprecated)', existing token users must migrate, and multi-customer apps must use global OAuth. The authorization-code flow is fully documented at /api-reference/ticketing/oauth/grant_type_tokens/."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "oauth2_client_credentials", "api_key", "basic_auth", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "All five confirmed: authorization code and client credentials grants (developer.zendesk.com/documentation/authentication/oauth-migration/ table lists both; client_credentials requires a confidential client), API tokens via Basic auth ({email}/token:{api_token}), end-user email/password Basic auth in closed instances, and Bearer access tokens. Note the security page now explicitly marks API tokens deprecated, which the draft's access_notes anticipate."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "SUPPORTED",
+     "reason": "zendesk.com/register/ is a self-serve 'Start your free 14-day trial, 100% free, no credit card required' flow defaulting to Suite Professional; no permanent free plan. API tokens and OAuth clients are created per-instance in Admin Center; only global OAuth clients need a request to Zendesk, as the draft notes."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Ticketing, users, help center, chat, webhooks, integration services and more across api/v2; the Composio toolkit alone maps 452 tools over the surface."},
+    {"field": "api_protocols", "draft_value": ["rest", "graphql", "websocket", "mcp"], "verdict": "SUPPORTED",
+     "reason": "Core Support API is REST (api/v2). The Chat Conversations API is GraphQL over HTTP + WebSocket (wss://chat-api.zopim.com/stream/0.1/graphql/...), though apis.io notes it is in maintenance mode. First-party MCP server endpoint exists per-tenant at <subdomain>.zendesk.com/api/mcp. Draft's uncertainty note correctly scopes GraphQL/websocket to specific surfaces."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit", "reputable_community_mcp"], "verdict": "SUPPORTED",
+     "reason": "Relate 2026 newsroom (draft's evidence URL, confirmed live) announces Zendesk MCP Server 'early access this summer'; third-party 2026 coverage confirms it answers per-tenant at https://<subdomain>.zendesk.com/api/mcp over OAuth with DCR and read/write scopes. docs.composio.dev/toolkits/zendesk confirms the toolkit (OAUTH2, 452 tools, 2 triggers, Composio-managed). Community servers (fruggr/zendesk-mcp-server and others) exist and are actively maintained. Separately, the Zendesk MCP *client* reached GA on 2026-08-10 (support.zendesk.com article 11105393853210); the draft correctly distinguishes client from server."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve trial with instance-level OAuth client and API token creation, broad documented REST API, webhooks, and multiple MCP options; global OAuth review only applies to multi-customer distribution."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker for building against one's own instance. Distribution-scale caveat (global OAuth request) is correctly captured in access_notes rather than as a blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Independently fetched the security-and-auth page (draft evidence URL, live and matching), the OAuth grant-types and migration docs, zendesk.com/register and free-trial pages, the Chat Conversations API (GraphQL/WebSocket) docs, the Composio toolkit page, and Zendesk's MCP client GA announcement (2026-08-10). All eight fields hold. Two freshness notes: API tokens are now formally marked deprecated (draft already flags the migration push), and the vendor MCP *client* is GA while the MCP *server* early-access status the draft describes remains the best-documented official position."
+}

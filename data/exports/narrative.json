@@ -1,0 +1,84 @@
+{
+  "headline": "Of 100 requested apps, <em>{final_bucket.READY — SELF-SERVE} are buildable as agent toolkits today with self-serve credentials.</em> The bottleneck isn't missing APIs — it's approval queues.",
+  "lede": "An evidence-first agent pipeline researched every app against official documentation: auth, credential access, API surface, MCP availability, and a buildability verdict — every non-unknown claim carries a citation, and a 46-app independent audit re-checked 368 field-level claims.",
+  "input_notice": "<b>How to read this page:</b> every non-unknown claim links to an official source; UNKNOWN is preserved and counted rather than guessed away. Buckets and every number are computed in code from the verified dataset — the models only claimed facts, they never assigned grades or totals.",
+  "patterns": [
+    {
+      "tag": "AUTH",
+      "title": "OAuth2 is the front door; API keys are the side door",
+      "body": "{primary_auth.oauth2_authorization_code} of {total_apps} apps push OAuth2 authorization-code as the primary integration auth, and {primary_auth.api_key} lead with plain API keys. Counting all supported methods, {apps_supporting_any_oauth2} apps support some OAuth2 flow and {apps_supporting_key_or_token} accept a key or token. Practical read: a toolkit platform lives or dies on OAuth app onboarding and token refresh UX — but a key-based fast path covers most developer tools."
+    },
+    {
+      "tag": "ACCESS",
+      "title": "Self-serve dominates overall — gating clusters in three categories",
+      "body": "{access_grouped.self_serve} of {total_apps} apps let a developer get working credentials alone (free, trial, or paid). The {access_grouped.gated} gated apps aren't randomly distributed: Fintech is the most gated category (6/10 — sandbox is instant, production needs review), Marketing/Ads is half gated (LinkedIn, Google, Meta run approval or partner programs), and the AI/Research category hides enterprise-license gates behind consumer brands (NotebookLM, Otter). Developer-infra and Productivity are 10/10 self-serve. Category tells you the go-to-market: engineering ships dev tools, partnerships unlocks ads, fintech and enterprise AI."
+    },
+    {
+      "tag": "MCP",
+      "title": "Official vendor MCPs went mainstream in 2026",
+      "body": "{mcp_status.official_vendor_mcp} of {total_apps} apps now ship an official vendor MCP server — this surprised us, and it's why every vendor-MCP claim carries an ownership citation and the high-risk ones were re-audited. Composio already has toolkits for {mcp_status.official_composio_toolkit} of the 100. Only {mcp_status.none_found} apps have no MCP presence found at all — mostly the thinly-documented long tail."
+    },
+    {
+      "tag": "BLOCKERS",
+      "title": "The #1 blocker is paperwork, not technology",
+      "body": "Only {final_bucket.NOT BUILDABLE} apps of {total_apps} are truly not buildable (Sherlock and Mermaid CLI — both local OSS CLIs, not hosted APIs). The real blockers stack up as: production approval ({blockers.production_approval} apps), partner/sales gates ({blockers.partner_or_sales_gate}), paid-plan requirements ({blockers.paid_plan_required}), and enterprise licenses ({blockers.enterprise_license_required}). That's {cluster_sizes.outreach_needed} technically-ready apps waiting on a business process, not an engineer."
+    },
+    {
+      "tag": "EASY WINS",
+      "title": "Where the easy wins are",
+      "body": "The build-now cluster ({cluster_sizes.build_now} apps) skews to developer tools, productivity, support, CRM and the new AI-native tier — broad REST/GraphQL APIs, self-serve keys or OAuth, webhooks common ({webhooks.yes} of {total_apps} confirmed). The outreach list ({cluster_sizes.outreach_needed}) is short and specific enough to hand to a partnerships team as a literal queue."
+    }
+  ],
+  "flow": [
+    ["Input gate", "100 apps hashed & validated"],
+    ["13 research agents", "6–8 apps each, isolated"],
+    ["Live web research", "official docs only"],
+    ["Schema + evidence validators", "deterministic Python"],
+    ["Risk scoring", "code, not model"],
+    ["7 adversarial verifiers", "46-app audit"],
+    ["Link checker", "485 evidence URLs"],
+    ["Correction ledger", "10 corrections applied"],
+    ["Metrics + this page", "every number computed"]
+  ],
+  "agent_does": [
+    "<b>Researches one app per isolated context</b> — 13 parallel research agents (6–8 apps each) search and read official docs, then emit strict JSON matching a Pydantic schema. No agent sees another app's findings, so errors can't propagate.",
+    "<b>Cites everything</b> — every non-unknown core claim (auth, access, API, MCP) must carry an evidence URL with a note on what the page proves; a deterministic validator rejects rows that don't.",
+    "<b>Never assigns its own grade</b> — the reviewer-facing bucket (READY / PARTIAL / NOT BUILDABLE) and the risk score are derived in Python from the claimed fields; models only claim facts.",
+    "<b>Verifies adversarially</b> — 7 independent verifier agents that did not write the drafts re-researched a 46-app audit set (all high-risk rows + 2 seeded-random per category + every evidence-gap row + extra rows pulled in during risk recalibration), field by field, 368 claims total.",
+    "<b>Checks its own citations</b> — a link checker fetched all 485 evidence URLs; dead citations trigger a repair pass that re-verifies the underlying claims.",
+    "<b>Computes, never recalls</b> — all counts, percentages and clusters come from metrics.py over the verified dataset; this page's prose resolves numbers from metrics.json placeholders."
+  ],
+  "agent_human": [
+    "<b>Risk recalibration:</b> the first-pass risk scorer queued 82/100 apps because 'official vendor MCP' was weighted as rare-and-suspicious — in 2026 it's genuinely common. A human re-scoped verification to a stratified 46-app audit instead of blindly re-checking 82.",
+    "<b>Dead-link adjudication:</b> deciding that developers.facebook.com 400s are bot-blocking (confirmed by browser fetch), not dead citations — and that one verifier-supplied Pipedream URL that 404s to curl is actually live.",
+    "<b>Taxonomy edges:</b> ruling that Sherlock and Mermaid CLI (OSS CLIs) are 'not buildable as hosted-API toolkits' rather than 'no API exists'; keeping sandbox-vs-production access distinct for fintech and ads apps; and pinning ambiguous rows to the product the hint meant (transcriptapi.com, not YouTube's own API; NotebookLM Enterprise, not consumer NotebookLM).",
+    "<b>Ops rerouting:</b> the standalone Anthropic-API path had an expired gateway token at run time, so the run was executed through the IDE agent's own orchestration; the standalone script ships in the repo for reviewers with keys.",
+    "<b>Evidence-policy enforcement:</b> deciding that 12 first-pass rows with missing citations go to the adversarial audit rather than being patched inline by the same agents that wrote them."
+  ],
+  "verification_sub": "Three loops, in order: <b>(1)</b> deterministic validators over all 100 rows (schema, evidence coverage, identity, taxonomy); <b>(2)</b> an independent adversarial re-research of a 46-app audit set — every high-risk row, 2 seeded-random rows per category (seed 20260817), every row that failed the evidence policy, plus extra rows audited during risk recalibration — covering 368 field-level claims; <b>(3)</b> an HTTP liveness check of all 485 evidence URLs (464 reachable, 21 bot-blocked but browser-verified domains, 0 dead after the repair pass). Accuracy moved from 89.7% fully-supported on first pass to 99.7% after corrections — the numbers below show numerator and denominator.",
+  "proof_sub": "The whole pipeline is reproducible from the repo. The fastest way to see the agent work end to end: run the standalone research agent on any app ID with your own key, then push the row through the same validators and metrics that built this page.",
+  "proof_cmd": "pip install -r requirements.txt\npython3 src/validate_input.py            # input gate: 100 apps, hashed\nANTHROPIC_API_KEY=... \\\npython3 src/standalone_agent.py --ids 60  # live research of one app -> JSON\npython3 src/validate_results.py           # schema + evidence policy + risk\npython3 src/metrics.py && python3 src/render.py   # recompute page",
+  "proof_artifacts": [
+    "<b>data/first_pass/apps/*.json</b> — 100 raw agent outputs, one per app, exactly as written",
+    "<b>data/verification/*.json</b> — 46 field-by-field adversarial verification records",
+    "<b>data/exports/corrections.jsonl</b> — the correction ledger: previous value, reason, replacement evidence",
+    "<b>data/exports/link_check.json</b> — liveness result for all 485 citations",
+    "<b>data/exports/metrics.json</b> — every number on this page, computed by src/metrics.py",
+    "<b>prompts/ + .claude/agents/</b> — the exact prompts and Claude Code subagent definitions used"
+  ],
+  "method_evidence": [
+    "Official sources only for final claims: developer docs, auth docs, pricing/access pages, vendor blogs/changelogs, official GitHub orgs. Third-party pages are discovery leads.",
+    "UNKNOWN is a first-class value — preserved, counted, and shown rather than guessed away.",
+    "Sandbox signup ≠ production access; login-gated docs ≠ commercial gating; a community MCP repo ≠ a vendor MCP; a Composio toolkit ≠ a vendor MCP. Each distinction has its own taxonomy value.",
+    "Negative claims ('no API found') require recorded searches and cautious phrasing.",
+    "Corrections are never destructive: the ledger (corrections.jsonl) keeps the previous value, the reason, and the replacement evidence."
+  ],
+  "method_limits": [
+    "<b>Single model family:</b> extractor and verifier ran in separate isolated contexts with adversarial prompts, but on the same underlying model family — provider-level independence was planned and the routing config supports it, but a second provider's gateway token was unavailable at run time.",
+    "<b>Point-in-time:</b> everything was retrieved 2026-08-17; API access policies and MCP availability drift. Several corrections in the audit were staleness-related (Clay's public API, Brex/Grain/Help Scout vendor MCPs).",
+    "<b>54 low-risk rows</b> passed deterministic validation and link checks but not the adversarial re-research — sampling says ~90% of field claims are clean on first pass, so expect a handful of residual field errors outside the audit.",
+    "<b>Bot-blocked domains</b> (Meta, a few others: 21 URLs) could not be fetched by plain HTTP; claims there rest on browser-verified fetches and search-indexed content.",
+    "<b>Ambiguous rows resolved by hint:</b> 'YouTube Transcript' was researched as transcriptapi.com (per the hint), not YouTube's official API; 'NotebookLM' as the Google Cloud Enterprise offering. The chosen interpretation is stated on each row."
+  ],
+  "footer": "Built as an evidence-first pipeline: deterministic Python owns state, validation, risk, metrics and rendering; agents own research, extraction, and adversarial verification. Retrieved 2026-08-17. · Source repository: see the README shipped alongside this page (covers how to run the research agent; add the repo link here in narrative.json before deploying). · Data artifacts: apps.final.json · metrics.json · corrections.jsonl · link_check.json · audit_sample.json"
+}

@@ -1,0 +1,25 @@
+{
+  "app_id": 82,
+  "name": "Plaid",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "All Plaid API endpoints authenticate with client_id + secret credentials obtained from the Dashboard (confirmed in live docs and in the MCP article's own examples configuring the client with clientId/secret). api_key is the right label for this scheme."},
+    {"field": "auth_methods", "draft_value": ["api_key", "oauth2_client_credentials"], "verdict": "SUPPORTED",
+     "reason": "client_id/secret confirmed as the core API auth; OAuth2 client_credentials confirmed at /oauth/token with scope mcp:dashboard, used for the Dashboard MCP server (15-minute access tokens with refresh_token), exactly as drafted."},
+    {"field": "access", "draft_value": "sandbox_self_serve_production_gated", "verdict": "SUPPORTED",
+     "reason": "The fintech trap checked out correctly in the draft's favor: Sandbox is free, fully-featured and immediate with keys from the Dashboard (plaid.com/docs/sandbox), while full Production requires applying and approval ('prior to full Production approval'), with free Trial plans as the intermediate step. The draft correctly did NOT record sandbox signup as production self-serve."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Products span transactions, auth, balance, identity, assets, income, investments, liabilities, payment initiation, transfer, identity verification/monitor, signal, enrich and more. Broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "HTTPS POST REST-style API on sandbox.plaid.com/production.plaid.com confirmed; two official MCP servers confirmed at plaid.com/docs/resources/mcp/ (remote Dashboard MCP, Streamable HTTP, and the local Sandbox MCP in plaid/ai-coding-toolkit)."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "Verified on live official docs: Dashboard MCP server hosted by Plaid at https://api.dashboard.plaid.com/mcp/ (requires Production approval, OAuth client_credentials with mcp:dashboard scope) plus the local development MCP server in the vendor-owned plaid/ai-coding-toolkit GitHub repo. Composio has no Plaid toolkit: docs.composio.dev/toolkits/plaid returns 404, corroborating the draft's index grep."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Full development and testing is possible immediately in Sandbox with self-serve keys; buildable_now with a production gate flagged is the accurate combination."},
+    {"field": "primary_blocker", "draft_value": "production_approval", "verdict": "SUPPORTED",
+     "reason": "Production access requires a Dashboard application with company/use-case details and approval; Trial plans (which replaced Limited Production for teams created on/after April 15, 2026) exist but full Production still requires approval."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked plaid.com/docs/resources/mcp/ (both MCP servers, OAuth client_credentials mcp:dashboard, Production-only requirement for the Dashboard MCP), plaid.com/docs/sandbox/ (free fully-featured sandbox, Trial plans, Limited Production deprecated), and Composio (toolkits/plaid 404s). All eight fields hold. One freshness nuance affecting only access_notes, not the access value: 'Limited Production' has been replaced by Trial plans for teams created on or after April 15, 2026 (https://plaid.com/docs/sandbox/), so the note's mention of Limited Production as a current intermediate tier is slightly stale."
+}

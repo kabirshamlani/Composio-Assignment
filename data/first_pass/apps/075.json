@@ -1,0 +1,28 @@
+{
+  "app_id": 75,
+  "name": "Asana",
+  "category": "Productivity and Project Management",
+  "official_domain": "developers.asana.com",
+  "description": "Project management: work management platform for tasks, projects, portfolios and goals across teams.",
+  "auth_methods": ["oauth2_authorization_code", "personal_access_token", "bearer_token", "service_account"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Asana has a free tier; any user can generate a personal access token from the developer console (app.asana.com/0/my-apps) and create OAuth apps self-serve. Service accounts require Enterprise plans, but PAT/OAuth do not.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official Asana MCP V2 server at https://mcp.asana.com/v2/mcp (GA, OAuth with app pre-registration in developer console; no dynamic client registration; V1 /sse endpoint deprecated). Composio has a managed ASANA toolkit (OAuth2, 153 tools, 6 triggers).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://developers.asana.com/docs/authentication", "note": "Documents PATs, OAuth (best for multi-user apps), OpenID Connect, and Service Accounts as auth options."},
+    {"claims": ["auth", "access"], "url": "https://developers.asana.com/docs/personal-access-token", "note": "PATs generated self-serve in the developer console; used as Bearer tokens against app.asana.com/api/1.0 REST API."},
+    {"claims": ["webhooks", "api"], "url": "https://developers.asana.com/reference/createwebhook", "note": "POST /webhooks establishes webhooks with X-Hook-Secret handshake and HMAC signature verification."},
+    {"claims": ["mcp"], "url": "https://developers.asana.com/docs/mcp-server", "note": "Vendor docs for the official Asana MCP server accessing the Asana Work Graph."},
+    {"claims": ["mcp"], "url": "https://developers.asana.com/docs/integrating-with-asanas-mcp-server", "note": "V2 MCP server at mcp.asana.com/v2/mcp is generally available; OAuth with pre-registered MCP apps; no DCR."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/asana", "note": "Composio managed ASANA toolkit: OAuth2, 153 tools, 6 triggers."}
+  ]
+}

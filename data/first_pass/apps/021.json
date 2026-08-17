@@ -1,0 +1,27 @@
+{
+  "app_id": 21,
+  "name": "Slack",
+  "category": "Communications and Messaging",
+  "official_domain": "slack.com",
+  "description": "Communications and messaging: team messaging platform with channels, DMs, canvases and an extensive app platform.",
+  "auth_methods": ["oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Anyone can create a Slack app self-serve at api.slack.com/apps and install it to a free workspace to get bot/user tokens; some workspaces require admin approval for installs.",
+  "api_protocols": ["rest", "websocket", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official Slack MCP server at https://mcp.slack.com/mcp (JSON-RPC over Streamable HTTP, OAuth, requires a registered Slack app). Composio SLACK toolkit: 167 tools, 9 triggers, Composio-managed OAuth2.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://docs.slack.dev/authentication/installing-with-oauth", "note": "Slack apps are installed with a v2 OAuth 2.0 flow yielding bot/user access tokens with scopes."},
+    {"claims": ["api", "access"], "url": "https://docs.slack.dev/apis/web-api/", "note": "Web API authenticated via bearer token; 'Register your application' at api.slack.com/apps is self-serve."},
+    {"claims": ["mcp"], "url": "https://docs.slack.dev/ai/slack-mcp-server/", "note": "Official Slack MCP server at https://mcp.slack.com/mcp with OAuth and tools for search, messaging, canvases, users."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/slack", "note": "Composio SLACK toolkit: OAuth2, Composio-managed app, 167 tools, 9 triggers."},
+    {"claims": ["webhooks", "api"], "url": "https://docs.slack.dev/apis/events-api/", "note": "Events API delivers workspace events to an app's request URL (webhook-style); Socket Mode offers WebSocket delivery."}
+  ]
+}

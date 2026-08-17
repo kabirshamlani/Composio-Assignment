@@ -1,0 +1,25 @@
+{
+  "app_id": 64,
+  "name": "Cloudflare",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "bearer_token", "verdict": "SUPPORTED",
+     "reason": "Official Fundamentals docs (fetched live via search index): 'Cloudflare uses the RFC standard Authorization: Bearer <token> interface' for API tokens, created self-serve under My Profile > API Tokens or Manage Account > API Tokens."},
+    {"field": "auth_methods", "draft_value": ["bearer_token", "api_key", "oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "All three confirmed: scoped API tokens as Bearer (recommended), legacy Global API Key via X-Auth-Key/X-Auth-Email ('less secure than API tokens', per the draft's exact evidence page developers.cloudflare.com/fundamentals/api/get-started/), and OAuth for the managed MCP servers (cloudflare/mcp repo: OAuth recommended, API token bearer for CI/CD)."},
+    {"field": "access", "draft_value": "self_serve_free", "verdict": "SUPPORTED",
+     "reason": "Free self-serve accounts; user and account-owned API tokens are created instantly in the dashboard or via the token-creation API — confirmed on the live Create API token and Account API tokens docs pages."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "The v4 REST API (api.cloudflare.com/client/v4) spans the whole platform; Cloudflare's own MCP repo describes covering 'over 2,500 endpoints' of the Cloudflare API, plus the separate GraphQL Analytics API."},
+    {"field": "api_protocols", "draft_value": ["rest", "graphql", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST v4 confirmed live; GraphQL Analytics API documented (API-token Bearer auth per the docs source the draft cited); managed MCP servers at mcp.cloudflare.com confirmed via the official cloudflare/mcp repo."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "Repo ownership verified: github.com/cloudflare/mcp exists under the cloudflare org ('MCP server for the Cloudflare API', ~737 stars), backing the managed server at mcp.cloudflare.com/mcp. Composio catalog listing of Cloudflare toolkits matches the draft's citation."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Free account + instant scoped tokens + broad documented API; nothing gates building today."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No blocker; API access is fully self-serve on the free tier."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "The draft noted developers.cloudflare.com fetches timed out during first-pass research; this pass reached the live Fundamentals pages (get-started, create-token, account-owned-tokens, make-api-calls, dated Apr 2026) through search and they say exactly what the draft claimed: Bearer API tokens recommended, legacy Global API Key discouraged, self-serve creation. Also opened the draft's cloudflare/mcp evidence repo directly to verify vendor ownership. All eight fields stand as drafted."
+}

@@ -1,0 +1,25 @@
+{
+  "app_id": 97,
+  "name": "higgsfield",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "api_key", "verdict": "SUPPORTED",
+     "reason": "docs.higgsfield.ai shows every request authenticated with header 'Authorization: Key ${HF_API_KEY_ID}:${HF_API_KEY_SECRET}' - key-pair credentials created in Higgsfield Cloud."},
+    {"field": "auth_methods", "draft_value": ["api_key", "custom"], "verdict": "SUPPORTED",
+     "reason": "The 'Authorization: Key id:secret' scheme is a non-standard API-key variant, so api_key plus custom is a fair classification. The MCP path authenticates via the Higgsfield account instead of keys ('No API keys to manage'), which the draft covers under MCP rather than API auth."},
+    {"field": "access", "draft_value": "self_serve_paid", "verdict": "SUPPORTED",
+     "reason": "Official help center (higgsfield.ai/creator-hub/help-center/business/team-and-business-higgsfield): 'Register at cloud.higgsfield.ai: you can generate an API key immediately' and 'No sales call is required for standard access'; also 'Credits from your regular Higgsfield plan can't be transferred to the API: API credits are separate.' The plans FAQ states there is no trial period, so paid API credits are effectively required for generation - self_serve_paid fits."},
+    {"field": "api_breadth", "draft_value": "medium", "verdict": "SUPPORTED",
+     "reason": "One asynchronous generation API spanning images, video, audio, and 3D at platform.higgsfield.ai (30+ models), plus file upload/storage and request status/cancel - generation-focused, single-domain, write-heavy; medium is reasonable."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "Hosted REST API at platform.higgsfield.ai documented at docs.higgsfield.ai; vendor-hosted MCP server promoted on higgsfield.ai/cli and higgsfield.ai/mcp. Both the hosted API and the CLI/MCP are official: the API is the documented developer product, and the CLI (@higgsfield/cli, github.com/higgsfield-ai/cli) plus MCP are official vendor tooling layered on the same account."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp"], "verdict": "SUPPORTED",
+     "reason": "higgsfield.ai/cli (vendor domain) instructs adding 'the Higgsfield MCP server URL in your agent's settings' with account-based auth and no API keys; FAQ confirms MCP is the official connection mechanism for Claude/OpenClaw/Hermes etc. Independently confirmed docs.composio.dev/toolkits/higgsfield.md returns 404 - no Composio toolkit."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Immediate self-serve key generation at cloud.higgsfield.ai, public docs with cURL/SDK examples, async polling and webhooks - an integration can be built right away (paying for API credits to generate)."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No approval, partner, or sales gate for standard API access per the official help center; cost of API credits is captured in access=self_serve_paid rather than as a blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Adversarial focus per hint (CLI vs hosted API): both are official and vendor-owned - the hosted asynchronous REST API at platform.higgsfield.ai (docs.higgsfield.ai, auth 'Authorization: Key id:secret', self-serve keys from cloud.higgsfield.ai) is the developer product, and the @higgsfield/cli npm CLI plus the hosted MCP server (higgsfield.ai/cli, account-based auth) are official companion tooling. Opened the draft's docs.higgsfield.ai, help-center, and /cli evidence URLs; all exist and match. API credits are separate from consumer plan credits and there is no trial period per the official plans FAQ, supporting self_serve_paid. Composio 404 re-confirmed. All eight fields hold."
+}

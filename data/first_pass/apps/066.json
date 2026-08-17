@@ -1,0 +1,26 @@
+{
+  "app_id": 66,
+  "name": "Neo4j",
+  "category": "Developer, Infra and Data platforms",
+  "official_domain": "neo4j.com",
+  "description": "Developer/data platform: graph database with the Aura cloud service, an Aura management REST API and Cypher query interfaces.",
+  "auth_methods": ["oauth2_client_credentials", "bearer_token", "basic_auth"],
+  "primary_auth": "oauth2_client_credentials",
+  "access": "self_serve_free",
+  "access_notes": "AuraDB has a free tier and the docs state 'All tiers can create Aura API credentials' - client ID/secret are self-generated from the Aura Console account settings.",
+  "api_protocols": ["rest", "mcp"],
+  "api_breadth": "medium",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Official Neo4j MCP server (github.com/neo4j/mcp, docs at neo4j.com/docs/mcp) - a local binary/PyPI server that connects to any Neo4j deployment; additional Labs MCP servers under neo4j-contrib. Composio NEO4J toolkit exists (21 tools, mostly Aura management; no Composio managed auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Aura API is management-focused (instances, snapshots, projects); data-plane access is via Bolt drivers or the Query API (HTTP, basic auth) rather than a single broad REST surface. No outbound webhooks found in Aura API docs; not conclusively determined. Official MCP is local (stdio/http self-run), not a hosted remote endpoint.",
+  "evidence": [
+    {"claims": ["auth", "access"], "url": "https://neo4j.com/docs/aura/api/authentication/", "note": "'The Aura API uses OAuth 2.0' with client_credentials grant at https://api.neo4j.io/oauth/token (HTTP Basic with client ID/secret); 'All tiers can create Aura API credentials' from the console."},
+    {"claims": ["api", "description"], "url": "https://neo4j.com/docs/aura/api/overview/", "note": "Aura API lets you 'programmatically perform actions on your Aura instances'; REST base URL https://api.neo4j.io."},
+    {"claims": ["mcp"], "url": "https://neo4j.com/docs/mcp/current/", "note": "Official Neo4j MCP documentation; vendor-owned repo github.com/neo4j/mcp described as 'Neo4j official MCP Server'."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/neo4j", "note": "Composio NEO4J toolkit: 21 tools (Aura instance/snapshot/project management), auth OAUTH2/BASIC/API_KEY, no Composio managed app."}
+  ]
+}

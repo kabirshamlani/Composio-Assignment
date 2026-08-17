@@ -1,0 +1,26 @@
+{
+  "app_id": 98,
+  "name": "Mermaid CLI",
+  "category": "AI, Research and Media-native",
+  "official_domain": "github.com/mermaid-js/mermaid-cli",
+  "description": "Open-source local command-line tool (mmdc) that renders Mermaid diagram definitions to SVG/PNG/PDF; not a hosted API service.",
+  "auth_methods": ["none"],
+  "primary_auth": "none",
+  "access": "no_credentials_required",
+  "access_notes": "MIT-licensed npm package (@mermaid-js/mermaid-cli); install and run locally with no account or credentials. It also exposes a local Node.js API, but no hosted endpoint.",
+  "api_protocols": ["none"],
+  "api_breadth": "none",
+  "supports_webhooks": false,
+  "mcp_status": ["official_platform_or_partner_mcp"],
+  "mcp_notes": "mermaid-cli itself has no MCP. Mermaid Chart (the commercial product from the Mermaid team, a distinct product from this OSS CLI) hosts an official remote MCP at https://mcp.mermaid.ai/mcp whose core validate/render tools work without auth. No Composio toolkit found (docs.composio.dev/toolkits/mermaid returns 404).",
+  "technical_verdict": "not_buildable",
+  "primary_blocker": "local_cli_only",
+  "confidence": "high",
+  "uncertainty_notes": "Row evaluated as the mermaid-js/mermaid-cli OSS tool per the assignment hint. Hosted alternatives exist but are different products: mermaid.ink is a third-party open-source rendering service (github.com/jihchi/mermaid.ink, not the mermaid-js org), and Mermaid Chart offers a hosted MCP and account API tokens. Neither makes mermaid-cli itself a remote API.",
+  "evidence": [
+    {"claims": ["description", "api", "verdict"], "url": "https://github.com/mermaid-js/mermaid-cli", "note": "'a command-line interface (CLI) for mermaid. It takes a mermaid definition file as input and generates an SVG/PNG/PDF file as output'; only local CLI and Node.JS API"},
+    {"claims": ["access"], "url": "https://www.npmjs.com/package/@mermaid-js/mermaid-cli", "note": "MIT-licensed npm package, installed and run locally; no credentials or hosted service involved"},
+    {"claims": ["api"], "url": "https://mermaid.ink/", "note": "mermaid.ink is a separate hosted image-rendering service (third-party open source, jihchi/mermaid.ink), not an official mermaid-js hosted API"},
+    {"claims": ["mcp"], "url": "https://mermaid.ai/docs/ai/mcp-server", "note": "Mermaid Chart's official hosted MCP server (https://mcp.mermaid.ai/mcp); core validation/rendering tools need no auth, account tools need a Mermaid Chart API token — a different product from mermaid-cli"}
+  ]
+}

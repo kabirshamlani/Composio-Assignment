@@ -1,0 +1,26 @@
+{
+  "app_id": 67,
+  "name": "Snowflake",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "OAuth is a first-class documented auth method for the SQL API and REST APIs and the recommended method for the Snowflake-managed MCP server ('Snowflake OAuth by default, with optional External OAuth'). Key-pair JWT and PATs are equally documented, so 'primary' is somewhat a convention call, but OAuth is defensible and the docs support it."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "jwt", "personal_access_token", "bearer_token"], "verdict": "SUPPORTED",
+     "reason": "SQL API authentication docs (draft evidence, confirmed) list OAuth, key-pair JWT, and programmatic access tokens, all sent as Authorization: Bearer with X-Snowflake-Authorization-Token-Type; REST API docs add workload identity federation. All draft-listed methods are real."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "PARTIALLY_SUPPORTED",
+     "reason": "Correct but the draft attached no evidence URL to the access claim. Official Trial Accounts docs confirm: self-service signup form at signup.snowflake.com, only a valid email required ('no payment information or other qualifying information'), 30-day trial (or until free credits deplete), account suspended afterward unless converted to paid via credit card — matching 'self-serve trial, no permanent free tier' exactly.",
+     "replacement_evidence": "https://docs.snowflake.com/en/user-guide/admin-trial-account"},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "SQL API executes arbitrary SQL over REST and the Snowflake REST APIs manage account objects (databases, warehouses, users, etc.) — effectively full-platform programmatic coverage."},
+    {"field": "api_protocols", "draft_value": ["rest", "mcp"], "verdict": "SUPPORTED",
+     "reason": "REST (SQL API + REST APIs) confirmed in live docs; MCP via the Snowflake-managed MCP server (CREATE MCP SERVER object, standards-based interface) confirmed on the live cortex-agents-mcp docs page."},
+    {"field": "mcp_status", "draft_value": ["official_vendor_mcp", "official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "The Snowflake-managed MCP server is unambiguously first-party: documented at docs.snowflake.com, created as an in-account object, Snowflake OAuth by default, serving Cortex Analyst/Search/Agents and SQL execution as tools. Composio SNOWFLAKE toolkit listing matches the draft's citation (own-credentials auth category)."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-service trial gives immediate account access; key-pair, PAT, and OAuth integrations are all user/admin-configurable without vendor approval — buildable today (ongoing use requires converting to paid)."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No access blocker for building and testing; the trial-to-paid conversion is a cost consideration rather than a gate, consistent with sibling drafts treating self_serve_trial with null blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-fetched the SQL API authentication docs (draft evidence URL, live and matching), the Snowflake-managed MCP server page (first-party, OAuth default, Cortex + SQL execution tools — verifying the vendor MCP claim), and independently found the missing access evidence: the official Trial Accounts page documenting self-service 30-day signup with no payment info. All values stand; access moved to PARTIALLY_SUPPORTED only because the draft lacked an evidence URL for it."
+}

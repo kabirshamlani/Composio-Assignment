@@ -1,0 +1,25 @@
+{
+  "app_id": 38,
+  "name": "Pinterest",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Pinterest API v5 requires an OAuth 2.0 authorization-code flow with token refresh; the Standard-access upgrade review explicitly verifies 'you are sending users through the OAuth flow appropriately'."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code"], "verdict": "SUPPORTED",
+     "reason": "OAuth 2.0 authorization code is the only documented auth for API v5; no API-key or client-credentials alternative found on developers.pinterest.com."},
+    {"field": "access", "draft_value": "sandbox_self_serve_production_gated", "verdict": "SUPPORTED",
+     "reason": "Two-tier model confirmed live at developers.pinterest.com/docs/key-concepts/access-tiers/: Trial access (granted after a routine business-day review) includes sandbox entities (Pins/boards visible only to creator), 1,000 req/day cap and api-sandbox.pinterest.com; Standard (production) requires a manual upgrade review with a video recording demonstrating the OAuth flow. Both tiers free. The trap of recording sandbox as production was checked: the draft correctly separates the tiers and correctly notes Trial itself needs a lightweight review."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "v5 covers pins, boards, ads, audiences, catalogs, analytics and trends per the access-tiers capability table - broad is accurate."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "SUPPORTED",
+     "reason": "API v5 is REST-only; no GraphQL or vendor MCP endpoint found on developers.pinterest.com."},
+    {"field": "mcp_status", "draft_value": ["official_composio_toolkit"], "verdict": "SUPPORTED",
+     "reason": "Composio PINTEREST_ADS toolkit confirmed in the live docs.composio.dev/toolkits catalog (10 tools, OAUTH2, not Composio-managed) and at composio.dev/toolkits/pinterest_ads; no general-purpose Pinterest toolkit and no official Pinterest vendor MCP found in independent searches."},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Trial access with sandbox is obtainable within about a business day and supports full development; only production rollout waits on the Standard review."},
+    {"field": "primary_blocker", "draft_value": "production_approval", "verdict": "SUPPORTED",
+     "reason": "Standard (production) access requires a manual video-demo review; community reports confirm rejections for not demonstrating the full OAuth flow, so this is the correct primary blocker."}
+  ],
+  "overall": "verified",
+  "checked_at": "2026-08-17",
+  "notes": "Re-checked access tiers with special attention to the sandbox-vs-production trap: draft's sandbox_self_serve_production_gated is accurate - Trial is near-self-serve (routine daily review) with sandboxed Pins, Standard is a gated manual review requiring an OAuth video demo. Draft evidence URL developers.pinterest.com/docs/key-concepts/access-tiers/ confirmed live and matching. Composio PINTEREST_ADS toolkit independently confirmed in the catalog."
+}

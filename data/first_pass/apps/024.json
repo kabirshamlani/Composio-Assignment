@@ -1,0 +1,27 @@
+{
+  "app_id": 24,
+  "name": "Lark (Larksuite)",
+  "category": "Communications and Messaging",
+  "official_domain": "open.larksuite.com",
+  "description": "Communications and messaging: Lark's collaboration suite (messaging, docs, calendar, Base) with a large Open Platform API.",
+  "auth_methods": ["custom", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "custom",
+  "access": "self_serve_free",
+  "access_notes": "Developers create a custom app self-serve in the Lark Developer Console (free Lark account) and get App ID + App Secret. Server calls use tenant_access_token obtained by exchanging app credentials (client-credentials-like but non-standard endpoint); user_access_token uses an OAuth/OIDC login flow. Store (marketplace) apps require review and app_ticket handling.",
+  "api_protocols": ["rest", "websocket", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_vendor_mcp"],
+  "mcp_notes": "Official vendor MCP: larksuite/lark-openapi-mcp (@larksuiteoapi npm tool) documented on open.larksuite.com, wrapping OpenAPI as MCP tools with tenant/user token auth. No Composio Lark toolkit found (docs.composio.dev/toolkits/lark.md, /larksuite.md and composio.dev/toolkits/lark all 404).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Token acquisition (app_id + app_secret -> tenant_access_token) resembles OAuth2 client credentials but uses Lark-specific endpoints, so it is tagged 'custom'. Tokens are presented as 'Authorization: Bearer <token>'. Event subscriptions can use either webhook POSTs or a WebSocket persistent connection (custom apps only).",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://open.larksuite.com/document/server-docs/getting-started/terminology", "note": "Three access token types: app_access_token, tenant_access_token, user_access_token; obtained via auth-v3 endpoints with App ID/Secret."},
+    {"claims": ["auth", "api"], "url": "https://open.larksuite.com/document/server-docs/getting-started/api-access-token/app-access-token-development-guide", "note": "Tokens passed as 'Bearer' in Authorization header; tenant_access_token recommended for app-identity calls; user_access_token obtained via OIDC flow."},
+    {"claims": ["mcp", "access"], "url": "https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/mcp_integration/mcp_introduction", "note": "Official 'OpenAPI MCP Tool' covering messages, groups, calendar, Base; supports tenant and user access tokens."},
+    {"claims": ["mcp"], "url": "https://github.com/larksuite/lark-openapi-mcp", "note": "'Feishu/Lark official OpenAPI MCP tool' in the official larksuite GitHub org."},
+    {"claims": ["webhooks"], "url": "https://open.feishu.cn/document/server-docs/event-subscription-guide/overview?lang=en-US", "note": "Event subscriptions via traditional webhook (HTTP POST to your server) or WebSocket persistent connection."}
+  ]
+}

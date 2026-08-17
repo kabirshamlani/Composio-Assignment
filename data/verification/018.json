@@ -1,0 +1,29 @@
+{
+  "app_id": 18,
+  "name": "Help Scout",
+  "field_reviews": [
+    {"field": "primary_auth", "draft_value": "oauth2_authorization_code", "verdict": "SUPPORTED",
+     "reason": "Live developer.helpscout.com authentication page: Inbox API 2.0 is OAuth 2.0 with Authorization Code (redirection-based, for integrations used by other Help Scout users) and Client Credentials flows."},
+    {"field": "auth_methods", "draft_value": ["oauth2_authorization_code", "oauth2_client_credentials", "api_key", "basic_auth"], "verdict": "SUPPORTED",
+     "reason": "Inbox API confirms both OAuth2 flows; the separate Docs API uses an API key sent as the Basic auth username, matching the draft's api_key/basic_auth entries."},
+    {"field": "access", "draft_value": "self_serve_trial", "verdict": "SUPPORTED",
+     "reason": "Help Scout is a paid product with self-serve trial signup; OAuth2 apps are created self-serve under Your Profile > My Apps in any account, and API access is included in Standard/Plus/Pro plans per the vendor's MCP support article."},
+    {"field": "api_breadth", "draft_value": "broad", "verdict": "SUPPORTED",
+     "reason": "Inbox API 2.0 covers conversations, customers, mailboxes, users, reports, webhooks; Docs API covers the knowledge base."},
+    {"field": "api_protocols", "draft_value": ["rest"], "verdict": "CONTRADICTED",
+     "reason": "Help Scout now also operates a hosted MCP endpoint (https://mcp.helpscout.net/mcp), generally available; per the batch's own convention (Podio/Pylon/Slack drafts list mcp when an official server exists) the protocols list should include mcp.",
+     "corrected_value": ["rest", "mcp"],
+     "replacement_evidence": "https://docs.helpscout.com/article/1779-connect-your-ai-agent-with-help-scout-to-search-conversations-and-pull-reports"},
+    {"field": "mcp_status", "draft_value": ["official_composio_toolkit", "reputable_community_mcp", "none_found"], "verdict": "CONTRADICTED",
+     "reason": "The draft's 'none_found' for a vendor MCP is wrong: Help Scout's own blog announced its MCP server is out of beta and generally available, hosted at https://mcp.helpscout.net/mcp (read-only, per-user OAuth, Standard/Plus/Pro plans). The draft missed it because it is documented in the help center (docs.helpscout.com), not the developer portal it searched. Composio HELP_SCOUT toolkit (129 tools, OAuth2) and the drewburchfield community server both re-confirmed.",
+     "corrected_value": ["official_vendor_mcp", "official_composio_toolkit", "reputable_community_mcp"],
+     "replacement_evidence": "https://articles.helpscout.com/blog/introducing-help-scout-mcp/"},
+    {"field": "technical_verdict", "draft_value": "buildable_now", "verdict": "SUPPORTED",
+     "reason": "Self-serve trial signup plus self-serve OAuth2 app creation; API fully documented and open."},
+    {"field": "primary_blocker", "draft_value": null, "verdict": "SUPPORTED",
+     "reason": "No gate beyond being a (trialable) paid product; no partner approval required for API access."}
+  ],
+  "overall": "corrected",
+  "checked_at": "2026-08-17",
+  "notes": "Auth, access, breadth and Composio toolkit (129 tools, OAuth2) all re-verified live. Major correction: Help Scout ships an official vendor MCP server, GA at mcp.helpscout.net/mcp (vendor blog + help-center article updated Aug 6, 2026; read-only, per-user credentials, plans with API access). Corrected mcp_status (removed none_found, added official_vendor_mcp) and api_protocols (added mcp). The vendor documents MCP only in its help center, not on developer.helpscout.com, which is why the draft's developer-portal search found nothing."
+}

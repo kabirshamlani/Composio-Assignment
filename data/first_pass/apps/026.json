@@ -1,0 +1,26 @@
+{
+  "app_id": 26,
+  "name": "Discord",
+  "category": "Communications and Messaging",
+  "official_domain": "discord.com",
+  "description": "Community chat platform with servers (guilds), channels, voice, and a rich bot/app platform.",
+  "auth_methods": ["api_key", "oauth2_authorization_code", "bearer_token"],
+  "primary_auth": "api_key",
+  "access": "self_serve_free",
+  "access_notes": "Anyone can create an app for free in the Discord Developer Portal and generate a bot token immediately. OAuth2 (authorization code) is used to install apps to servers/users and to get user bearer tokens. Scaling caveat: privileged intents (e.g. message content) and bot verification are required once a bot exceeds ~100 servers, but small-scale/production use is fully self-serve.",
+  "api_protocols": ["rest", "websocket"],
+  "api_breadth": "broad",
+  "supports_webhooks": true,
+  "mcp_status": ["official_composio_toolkit", "reputable_community_mcp"],
+  "mcp_notes": "Composio catalog lists both a 'Discord' (OAuth2) and a 'Discord Bot' (165 tools) toolkit. Discord ships no first-party MCP server; ecosystem is community implementations (e.g. discord-agent-mcp, @pasympa/discord-mcp) plus Anthropic's narrow official Discord plugin for Claude Code.",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "Bot token is a static token sent as 'Authorization: Bot <token>' — recorded as api_key since it is a long-lived generated credential rather than an OAuth-issued bearer token. Gateway (websocket) needed for real-time events; interaction webhooks and incoming webhooks cover HTTP push.",
+  "evidence": [
+    {"claims": ["auth", "api"], "url": "https://docs.discord.com/developers/reference", "note": "'Authenticating with the Discord API can be done in one of two ways: bot token ... or an OAuth2 bearer token'; REST API at discord.com/api/v10."},
+    {"claims": ["auth"], "url": "https://docs.discord.com/developers/platform/oauth2-and-permissions", "note": "'Discord uses OAuth2 as the standard authorization framework'; bot tokens used for Gateway connections and most REST calls."},
+    {"claims": ["access", "webhooks"], "url": "https://docs.discord.com/developers/quick-start/getting-started", "note": "Self-serve app creation and bot token generation in the Developer Portal; covers gateway intents and interaction endpoints (HTTP webhooks) for receiving events."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits", "note": "Catalog lists 'Discord' (DISCORD, 28 tools, OAUTH2) and 'Discord Bot' (DISCORDBOT, 165 tools) toolkits."}
+  ]
+}

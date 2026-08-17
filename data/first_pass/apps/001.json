@@ -1,0 +1,27 @@
+{
+  "app_id": 1,
+  "name": "Salesforce",
+  "category": "CRM and Sales",
+  "official_domain": "salesforce.com",
+  "description": "CRM and Sales: the leading enterprise CRM platform covering sales, service, marketing and analytics with a broad API surface.",
+  "auth_methods": ["oauth2_authorization_code", "oauth2_client_credentials", "jwt"],
+  "primary_auth": "oauth2_authorization_code",
+  "access": "self_serve_free",
+  "access_notes": "Free Developer Edition org is self-serve at developer.salesforce.com/signup and never expires with periodic login. Note: creation of new Connected Apps is restricted as of Spring '26; new integrations self-serve via External Client Apps instead, which remain creatable in Dev Edition orgs.",
+  "api_protocols": ["rest", "graphql", "grpc", "mcp"],
+  "api_breadth": "broad",
+  "supports_webhooks": null,
+  "mcp_status": ["official_vendor_mcp", "official_composio_toolkit"],
+  "mcp_notes": "Salesforce Hosted MCP Servers went GA on April 29, 2026 (Enterprise Edition and above, plus Developer Edition); auth via External Client App with mcp_api scope and OAuth+PKCE. Composio also has a SALESFORCE toolkit (223 tools, 7 triggers, OAuth2 managed auth).",
+  "technical_verdict": "buildable_now",
+  "primary_blocker": null,
+  "confidence": "high",
+  "uncertainty_notes": "No generic HTTP webhooks product; event push is via Outbound Messages, Platform Events/Streaming, and the gRPC Pub/Sub API, so supports_webhooks left null. GraphQL API and Pub/Sub (gRPC) API are documented in the developer portal but I did not capture dedicated evidence URLs for them.",
+  "evidence": [
+    {"claims": ["auth"], "url": "https://help.salesforce.com/s/articleView?id=connected_app_create_api_integration.htm&language=en_US", "note": "Enable OAuth Settings for API Integration: OAuth 2.0 authorization code (with PKCE), client credentials flow, and other flows configured on connected/external client apps."},
+    {"claims": ["auth", "api"], "url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm", "note": "REST API developer guide intro ties REST API access to OAuth and connected apps."},
+    {"claims": ["access"], "url": "https://help.salesforce.com/s/articleView?id=005298906&language=en_US&type=1", "note": "'It's a free Salesforce org... sign up at developer.salesforce.com/signup' — free self-serve Developer Edition that does not expire with 6-monthly login."},
+    {"claims": ["mcp"], "url": "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available", "note": "Official Salesforce blog: hosted MCP servers generally available, fully managed, OAuth + PKCE via External Client Apps."},
+    {"claims": ["mcp"], "url": "https://docs.composio.dev/toolkits/salesforce", "note": "Composio SALESFORCE toolkit page: OAUTH2/S2S_OAUTH2, 223 tools, 7 triggers, Composio managed app available."}
+  ]
+}

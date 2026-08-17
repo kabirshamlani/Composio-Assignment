@@ -1,0 +1,25 @@
+{
+  "app_id": 58,
+  "name": "Sherlock",
+  "category": "Data, SEO and Scraping",
+  "official_domain": "github.com/sherlock-project/sherlock",
+  "description": "Open-source OSINT CLI tool that hunts for social media accounts by username across 400+ sites; no hosted API or vendor service.",
+  "auth_methods": ["none"],
+  "primary_auth": "none",
+  "access": "no_credentials_required",
+  "access_notes": "Free open-source Python CLI installed via pipx/pip/Docker (sherlock-project on PyPI, sherlock/sherlock on Docker Hub). No account, no credentials, no hosted endpoint. Runs entirely locally against target sites.",
+  "api_protocols": ["none"],
+  "api_breadth": "none",
+  "supports_webhooks": false,
+  "mcp_status": ["none_found"],
+  "mcp_notes": "No vendor MCP (there is no vendor/hosted service at all) and no Composio toolkit in the docs.composio.dev/toolkits catalog. A third-party Apify Actor (netmilk/sherlock) wraps it as a paid-platform cloud API, but that is not official Sherlock infrastructure.",
+  "technical_verdict": "not_buildable",
+  "primary_blocker": "local_cli_only",
+  "confidence": "high",
+  "uncertainty_notes": "Searches tried: 'sherlock project API', 'sherlock username search API github CLI', Composio toolkit catalog grep. Bellingcat's tool review confirms 'There is no official Sherlock API' (an experimental REST API has been unmaintained since 2021). Could be wrapped as a local MCP/CLI tool by an integrator, but there is no remote interface to integrate against.",
+  "evidence": [
+    {"claims": ["description", "api", "access"], "url": "https://github.com/sherlock-project/sherlock", "note": "Official repo: CLI usage only ('sherlock USERNAMES ...'), install via pipx/pip/Docker; no hosted API documented."},
+    {"claims": ["api", "verdict"], "url": "https://github.com/bellingcat/toolkit/blob/main/gitbook/tools/sherlock/README.md", "note": "Bellingcat review: 'There is no official Sherlock API. An experimental REST API exists but has not been maintained since 2021... running Sherlock locally... remains the recommended method.'"},
+    {"claims": ["access", "auth"], "url": "https://raw.githubusercontent.com/sherlock-project/sherlock/master/docs/README.md", "note": "Official docs show local CLI flags only; no authentication or credential concept exists."}
+  ]
+}
