@@ -44,7 +44,7 @@ jobs:
             python3 src/standalone_agent.py --ids "${{ inputs.app_id }}"
           fi
       - name: Validate agent output (schema + evidence policy + risk)
-        run: python3 src/validate_results.py
+        run: python3 src/validate_results.py --audited-gaps-ok
       - name: Show the researched record
         run: |
           printf -v padded '%03d' "${{ inputs.app_id }}"

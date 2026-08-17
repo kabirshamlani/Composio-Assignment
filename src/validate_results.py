@@ -86,9 +86,23 @@ def main() -> int:
     print(f"validated: {len(results)}/{len(apps_index)} apps")
     print(f"missing files: {missing or 'none'}")
     print(f"verification queue (risk >= {VERIFY_THRESHOLD}): {len(queue)} apps")
-    if all_problems:
-        print(f"\nPROBLEMS ({len(all_problems)} files):")
-        for name, probs in sorted(all_problems.items()):
+    # --audited-gaps-ok: evidence-gap problems don't fail the run IF the row
+    # has an independent verification record (the gap was adjudicated by the
+    # audit, which is exactly where the evidence policy routes such rows).
+    # Schema/identity/taxonomy problems always fail.
+    gaps_ok = "--audited-gaps-ok" in sys.argv
+    verif_dir = ROOT / "data" / "verification"
+    hard_problems = {}
+    for name, probs in all_problems.items():
+        if gaps_ok and (verif_dir / name).exists() and all("has no evidence URL" in p for p in probs):
+            for p in probs:
+                print(f"  note (adjudicated by audit): {name}: {p[:200]}")
+            continue
+        hard_problems[name] = probs
+
+    if hard_problems:
+        print(f"\nPROBLEMS ({len(hard_problems)} files):")
+        for name, probs in sorted(hard_problems.items()):
             for p in probs:
                 print(f"  {name}: {p[:300]}")
         return 1

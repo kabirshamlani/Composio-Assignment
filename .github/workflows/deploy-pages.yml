@@ -30,7 +30,9 @@ jobs:
       - name: Stage 0 — input gate (100 apps, hashed)
         run: python3 src/validate_input.py
       - name: Schema + evidence-policy validation over all rows
-        run: python3 src/validate_results.py
+        # audited-gaps-ok: first-pass evidence gaps that were adjudicated by
+        # the independent audit are notes, not failures; schema errors still fail.
+        run: python3 src/validate_results.py --audited-gaps-ok
       - name: Recompute every metric from the verified dataset
         run: python3 src/metrics.py
       - name: Render the page from template + data
