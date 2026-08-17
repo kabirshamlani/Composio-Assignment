@@ -198,6 +198,7 @@ footer{padding:34px 0 60px;border-top:1px solid var(--line);color:var(--faint);f
   <p class="sub" id="verif-sub"></p>
   <div class="accuracy" id="acc-cards"></div>
   <h3 style="margin-top:28px">Honest misses — what the first pass got wrong</h3>
+  <p class="sub" style="font-size:13.5px;margin-top:6px">Every miss below was caught and fixed by the pipeline itself — an independent adversarial verifier agent (stage 3 of the architecture, a different context that never saw the draft's reasoning) re-researched the claim against live official docs, contradicted it, and supplied replacement evidence; the correction ledger then applied the fix in code, preserving the previous value. No row was hand-edited.</p>
   <div class="misses" id="misses"></div>
 </section>
 
